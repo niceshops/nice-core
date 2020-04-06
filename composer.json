@@ -17,5 +17,8 @@
         "psr-4": {
             "NiceshopsCom\\CoreComponents\\": "test/"
         }
+    },
+    "scripts": {
+        "test" : "vendor/bin/phpunit"
     }
 }
