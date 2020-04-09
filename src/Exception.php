@@ -1,14 +1,14 @@
 <?php
 /**
- * @see       https://github.com/niceshops-com/CoreComponents for the canonical source repository
- * @license   https://github.com/niceshops-com/CoreComponents/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/niceshops-dev/NiceCore for the canonical source repository
+ * @license   https://github.com/niceshops-dev/NiceCore/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsCom\CoreComponents;
+namespace NiceshopsDev\NiceCore;
 
 /**
  * Class Exception
- * @package NiceshopsCom\CoreComponents
+ * @package NiceshopsDev\NiceCore
  */
 class Exception extends \Exception
 {

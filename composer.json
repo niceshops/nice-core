@@ -1,5 +1,5 @@
 {
-    "name": "niceshops-com/core-components",
+    "name": "niceshops-dev/nice-core",
     "description": "Niceshops Core Components",
     "license" : "BSD-3-Clause",
     "require": {
@@ -10,12 +10,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NiceshopsCom\\CoreComponents\\": "src/"
+            "NiceshopsDev\\NiceCore\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NiceshopsCom\\CoreComponents\\": "test/"
+            "NiceshopsDev\\NiceCore\\": "test/"
         }
     },
     "scripts": {

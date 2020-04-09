@@ -7,7 +7,7 @@
          beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
-        <testsuite name="core-components">
+        <testsuite name="nice-core">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>

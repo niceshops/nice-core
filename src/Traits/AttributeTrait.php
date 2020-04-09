@@ -1,17 +1,17 @@
 <?php
 /**
- * @see       https://github.com/niceshops-com/CoreComponents for the canonical source repository
- * @license   https://github.com/niceshops-com/CoreComponents/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/niceshops-dev/NiceCore for the canonical source repository
+ * @license   https://github.com/niceshops-dev/NiceCore/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsCom\CoreComponents\Traits;
+namespace NiceshopsDev\NiceCore\Traits;
 
-use NiceshopsCom\CoreComponents\Exception;
-use NiceshopsCom\CoreComponents\StrictAttributeAwareInterface;
+use NiceshopsDev\NiceCore\Exception;
+use NiceshopsDev\NiceCore\StrictAttributeAwareInterface;
 
 /**
  * Trait AttributeTrait
- * @package NiceshopsCom\CoreComponents
+ * @package NiceshopsDev\NiceCore
  */
 trait AttributeTrait
 {

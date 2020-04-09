@@ -1,1 +1,1 @@
-# CoreComponents
+# NiceCore
