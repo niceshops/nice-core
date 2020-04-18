@@ -1,5 +1,5 @@
 {
-    "name": "niceshops-dev/nice-core",
+    "name": "niceshops/nice-core",
     "description": "Niceshops Core Components",
     "license" : "BSD-3-Clause",
     "require": {
