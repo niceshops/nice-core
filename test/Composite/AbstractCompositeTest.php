@@ -9,7 +9,7 @@ namespace NiceshopsDev\NiceCore\Composite;
 
 use ArrayObject;
 use Countable;
-use PHPUnit\Framework\TestCase;
+use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;
 use stdClass;
@@ -20,7 +20,7 @@ use stdClass;
  * @uses               \NiceshopsDev\NiceCore\Composite\AbstractComposite
  * @package            Niceshops\Library\Core
  */
-class AbstractCompositeTest extends TestCase
+class AbstractCompositeTest extends DefaultTestCase
 {
     
     /**

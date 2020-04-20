@@ -6,14 +6,14 @@
 
 namespace NiceshopsDev\NiceCore;
 
+use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Class ExceptionTest
  * @package Core
  */
-class ExceptionTest extends TestCase
+class ExceptionTest extends DefaultTestCase
 {
     
     

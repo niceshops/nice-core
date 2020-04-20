@@ -9,9 +9,9 @@ namespace NiceshopsDev\NiceCore\Traits;
 
 use NiceshopsDev\NiceCore\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Exception;
+use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use NiceshopsDev\NiceCore\StrictAttributeAwareInterface;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use ReflectionException;
 use ReflectionMethod;
 use ReflectionProperty;
@@ -23,7 +23,7 @@ use stdClass;
  * @uses               \NiceshopsDev\NiceCore\Traits\AttributeTrait
  * @package            Niceshops\Library\Core\Traits
  */
-class AttributeTraitTest extends TestCase
+class AttributeTraitTest extends DefaultTestCase
 {
     
     

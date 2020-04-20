@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace NiceshopsDev\NiceCore\Traits;
 
 use NiceshopsDev\NiceCore\OptionAwareInterface;
-use PHPUnit\Framework\TestCase;
+use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;
 
@@ -18,7 +18,7 @@ use ReflectionMethod;
  * @uses               \NiceshopsDev\NiceCore\Traits\OptionTrait
  * @package            Niceshops\Library\Core\Traits
  */
-class OptionTraitTest extends TestCase
+class OptionTraitTest extends DefaultTestCase
 {
     
     
