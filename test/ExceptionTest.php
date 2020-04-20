@@ -44,6 +44,17 @@ class ExceptionTest extends DefaultTestCase
     
     
     /**
+     * @group integration
+     * @small
+     */
+    public function testTestClassExists()
+    {
+        $this->assertTrue(class_exists(Exception::class), "Class Exists");
+        $this->assertTrue(is_a($this->object, Exception::class), "Mock Object is set");
+    }
+    
+    
+    /**
      * @group  unit
      * @small
      *

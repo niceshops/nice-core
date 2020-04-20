@@ -53,6 +53,17 @@ class AttributeTraitTest extends DefaultTestCase
     
     
     /**
+     * @group integration
+     * @small
+     */
+    public function testTestClassExists()
+    {
+        $this->assertTrue(trait_exists(AttributeTrait::class), "Class Exists");
+        $this->assertUseTrait(AttributeTrait::class, $this->object, "Mock Object uses " . AttributeTrait::class);
+    }
+    
+    
+    /**
      * @return array    ( <KEY>, <EXPECTED_KEY> )
      */
     public function normalizeAttributeKeyDataProvider()

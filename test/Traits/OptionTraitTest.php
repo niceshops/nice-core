@@ -48,6 +48,17 @@ class OptionTraitTest extends DefaultTestCase
     
     
     /**
+     * @group integration
+     * @small
+     */
+    public function testTestClassExists()
+    {
+        $this->assertTrue(trait_exists(OptionTrait::class), "Class Exists");
+        $this->assertUseTrait(OptionTrait::class, $this->object, "Mock Object uses " . OptionTrait::class);
+    }
+    
+    
+    /**
      * @return array    ( <KEY>, <EXPECTED_KEY> )
      */
     public function normalizeAttributeKeyDataProvider()

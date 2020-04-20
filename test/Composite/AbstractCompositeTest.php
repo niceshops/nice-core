@@ -49,6 +49,17 @@ class AbstractCompositeTest extends DefaultTestCase
     
     
     /**
+     * @group integration
+     * @small
+     */
+    public function testTestClassExists()
+    {
+        $this->assertTrue(class_exists(AbstractComposite::class), "Class Exists");
+        $this->assertTrue(is_a($this->object, AbstractComposite::class), "Mock Object is set");
+    }
+    
+    
+    /**
      * @group  unit
      * @small
      *
