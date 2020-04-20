@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 /**
  * @see       https://github.com/niceshops/NiceCore for the canonical source repository
  * @license   https://github.com/niceshops/NiceCore/blob/master/LICENSE BSD 3-Clause License
@@ -166,40 +167,39 @@ class AttributeTraitTest extends TestCase
                 ],
                 null,
             ],
+    
+            [
+                [
+                    ["key" => "123", "value" => "bar"],
+                ],
+                [
+                    "123" => "bar",
+                ],
+                null,
+            ],
             
             [
                 [
                     ["key" => 123, "value" => "bar"],
-                    ["key" => "123", "value" => "bar2"],
                 ],
-                [
-                    "123" => "bar2",
-                ],
-                null,
+                [],
+                ["Error", "#setAttribute\(\) must be of the type string#"],
             ],
             
             [
                 [
                     ["key" => true, "value" => "bar"],
                 ],
-                [
-                    "1" => "bar",
-                    "true" => null,
-                ],
-                null,
+                [],
+                ["Error", "#setAttribute\(\) must be of the type string#"],
             ],
             
             [
                 [
                     ["key" => false, "value" => "bar"],
                 ],
-                [
-                    "" => "bar",
-                    " " => "bar",
-                    "false" => null,
-                    "0" => null,
-                ],
-                null,
+                [],
+                ["Error", "#setAttribute\(\) must be of the type string#"],
             ],
             
             [
@@ -234,7 +234,7 @@ class AttributeTraitTest extends TestCase
                 [
                     "foo" => "bar2",
                 ],
-                [ Exception::class, "#Try to set the attribute.*#" ]
+                [Exception::class, "#Try to set the attribute.*#"]
             ],
         ];
     }
@@ -275,6 +275,9 @@ class AttributeTraitTest extends TestCase
         }
         
         foreach ($arrExpectedValue as $key => $expectedValue) {
+            if ((string)(int)$key === (string)$key) {
+                $key = (string)$key;
+            }
             $curValue = $this->object->getAttribute($key);
             if ($curValue === null) {
                 $messageValue = "NULL";
