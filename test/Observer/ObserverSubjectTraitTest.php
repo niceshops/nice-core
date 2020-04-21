@@ -9,6 +9,8 @@ namespace NiceshopsDev\NiceCore\Observer;
 
 use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use SplObserver;
+use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
@@ -55,4 +57,95 @@ class ObserverSubjectTraitTest extends DefaultTestCase
         $this->assertUseTrait(ObserverSubjectTrait::class, $this->object, "Mock Object uses " . ObserverSubjectTrait::class);
     }
     
+    
+    /**
+     * @group  unit
+     * @small
+     *
+     * @covers ObserverSubjectTrait::getObserverStorage
+     */
+    public function testGetObserverStorage()
+    {
+        $observerStorage = $this->invokeMethod($this->object, "getObserverStorage");
+        $this->assertInstanceOf(ObserverStorage::class, $observerStorage);
+        $this->assertSame($observerStorage, $this->invokeMethod($this->object, "getObserverStorage"));
+    }
+    
+    
+    /**
+     * @group  unit
+     * @small
+     *
+     * @covers ObserverSubjectTrait::attach
+     */
+    public function testAttach()
+    {
+        $observerStorage = $this->getMockBuilder(ObserverStorage::class)->disableOriginalConstructor()->setMethods(["addObserver"])->getMock();
+        
+        /**
+         * @var SplObserver $observer
+         */
+        $observer = $this->getMockBuilder(SplObserver::class)->getMock();
+        
+        $this->invokeSetProperty($this->object, "observerStorage", $observerStorage);
+        $observerStorage->expects($this->once())->method("addObserver")->with(...[$observer]);
+        
+        $this->assertSame($this->object, $this->object->attach($observer));
+    }
+    
+    
+    /**
+     * @group  unit
+     * @small
+     *
+     * @covers ObserverSubjectTrait::c
+     */
+    public function testDetach()
+    {
+        $observerStorage = $this->getMockBuilder(ObserverStorage::class)->disableOriginalConstructor()->setMethods(["removeObserver"])->getMock();
+        
+        /**
+         * @var SplObserver|MockObject $observer
+         */
+        $observer = $this->getMockBuilder(SplObserver::class)->getMock();
+        
+        $this->invokeSetProperty($this->object, "observerStorage", $observerStorage);
+        $observerStorage->expects($this->once())->method("removeObserver")->with(...[$observer]);
+        
+        $this->assertSame($this->object, $this->object->detach($observer));
+    }
+    
+    
+    /**
+     * @group  unit
+     * @small
+     *
+     * @covers ObserverSubjectTrait::notify
+     */
+    public function testNotify()
+    {
+        $observerStorage = $this->getMockBuilder(ObserverStorage::class)->disableOriginalConstructor()->setMethods(["runObserver"])->getMock();
+        
+        $this->object = new class implements SplSubject {
+            use ObserverSubjectTrait;
+        };
+        $this->invokeSetProperty($this->object, "observerStorage", $observerStorage);
+        
+        /**
+         * @var SplObserver[]|MockObject[] $arrObserver
+         */
+        $arrObserver = [
+            $this->getMockBuilder(SplObserver::class)->setMethods(["update"])->getMock(),
+            $this->getMockBuilder(SplObserver::class)->setMethods(["update"])->getMock(),
+            $this->getMockBuilder(SplObserver::class)->setMethods(["update"])->getMock(),
+        ];
+        
+        foreach ($arrObserver as $observer) {
+            $observer->expects($this->once())->method("update")->with(...[$this->object]);
+        }
+        
+        $observerStorage->expects($this->once())->method("runObserver")->willReturn($arrObserver);
+        
+        $this->assertSame($this->object, $this->object->notify());
+    }
 }
