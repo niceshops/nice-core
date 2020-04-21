@@ -9,8 +9,6 @@ namespace NiceshopsDev\NiceCore\Traits;
 
 use NiceshopsDev\NiceCore\OptionAwareInterface;
 use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
-use ReflectionException;
-use ReflectionMethod;
 
 /**
  * Class OptionTraitTest
@@ -100,14 +98,10 @@ class OptionTraitTest extends DefaultTestCase
      * @param string $option
      * @param string $expectedOption
      *
-     * @throws ReflectionException
      */
     public function testNormalizeAttributeKey(string $option, string $expectedOption)
     {
-        $method = new ReflectionMethod(get_class($this->object), "normalizeOption");
-        $method->setAccessible(true);
-        
-        $this->assertSame($expectedOption, $method->invoke($this->object, $option));
+        $this->assertSame($expectedOption, $this->invokeMethod($this->object, "normalizeOption", $option));
     }
     
     

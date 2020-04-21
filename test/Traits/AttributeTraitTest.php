@@ -13,8 +13,6 @@ use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use NiceshopsDev\NiceCore\StrictAttributeAwareInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
-use ReflectionMethod;
-use ReflectionProperty;
 use stdClass;
 
 /**
@@ -104,15 +102,10 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @param string $key
      * @param string $expectedKey
-     *
-     * @throws ReflectionException
      */
     public function testNormalizeAttributeKey(string $key, string $expectedKey)
     {
-        $method = new ReflectionMethod(get_class($this->object), "normalizeAttributeKey");
-        $method->setAccessible(true);
-        
-        $this->assertSame($expectedKey, $method->invoke($this->object, $key));
+        $this->assertSame($expectedKey, $this->invokeMethod($this->object, "normalizeAttributeKey", $key));
     }
     
     
@@ -178,7 +171,7 @@ class AttributeTraitTest extends DefaultTestCase
                 ],
                 null,
             ],
-    
+            
             [
                 [
                     ["key" => "123", "value" => "bar"],
@@ -433,10 +426,10 @@ class AttributeTraitTest extends DefaultTestCase
      */
     public function testMagicAttributeAccess_with_Call()
     {
-        $allowMagicGetAttribute = new ReflectionProperty(get_class($this->object), "allowMagicGetAttribute");
+        $allowMagicGetAttribute = $this->getReflectionProperty_for_Object($this->object, "allowMagicGetAttribute");
         $allowMagicGetAttribute->setAccessible(true);
-        
-        $allowMagicSetAttribute = new ReflectionProperty(get_class($this->object), "allowMagicSetAttribute");
+    
+        $allowMagicSetAttribute = $this->getReflectionProperty_for_Object($this->object, "allowMagicSetAttribute");
         $allowMagicSetAttribute->setAccessible(true);
         
         $allowMagicGetAttribute->setValue($this->object, true);
@@ -463,22 +456,18 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__get()
      * @throws Exception
-     * @throws ReflectionException
      * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
      * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Get()
     {
-        $allowMagicGetAttribute = new ReflectionProperty(get_class($this->object), "allowMagicGetAttribute");
-        $allowMagicGetAttribute->setAccessible(true);
-        
-        $allowMagicGetAttribute->setValue($this->object, true);
+        $this->invokeSetProperty($this->object, "allowMagicGetAttribute", true);
         $this->object->setAttribute("foo", "bar");
         $this->assertSame("bar", $this->object->getAttribute("foo"));
         $this->assertSame("bar", $this->object->foo);
         
-        $allowMagicGetAttribute->setValue($this->object, false);
+        $this->invokeSetProperty($this->object, "allowMagicGetAttribute", false);
         $this->assertSame("bar", $this->object->getAttribute("foo"));
         $this->assertSame(null, $this->object->foo);
     }
@@ -490,20 +479,16 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__set()
      * @throws Exception
-     * @throws ReflectionException
      * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Set()
     {
-        $allowMagicSetAttribute = new ReflectionProperty(get_class($this->object), "allowMagicSetAttribute");
-        $allowMagicSetAttribute->setAccessible(true);
-        
-        $allowMagicSetAttribute->setValue($this->object, true);
+        $this->invokeSetProperty($this->object, "allowMagicSetAttribute", true);
         $this->object->foo = "bar";
         $this->assertSame("bar", $this->object->getAttribute("foo"));
-        
-        $allowMagicSetAttribute->setValue($this->object, false);
+    
+        $this->invokeSetProperty($this->object, "allowMagicSetAttribute", false);
         $this->object->foo = "baz";
         $this->assertSame("bar", $this->object->getAttribute("foo"));
     }

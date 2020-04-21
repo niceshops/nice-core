@@ -64,15 +64,11 @@ class AbstractCompositeTest extends DefaultTestCase
      * @small
      *
      * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
-     * @throws ReflectionException
      */
     public function testGetComponent_List()
     {
-        $getComponent_List = new ReflectionMethod(get_class($this->object), "getComponent_List");
-        $getComponent_List->setAccessible(true);
-        
-        $this->assertInstanceOf(ArrayObject::class, $getComponent_List->invoke($this->object));
-        $this->assertSame(0, count($getComponent_List->invoke($this->object)));
+        $this->assertInstanceOf(ArrayObject::class, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
     }
     
     
@@ -86,9 +82,6 @@ class AbstractCompositeTest extends DefaultTestCase
      */
     public function testHasComponent()
     {
-        $getComponent_List = new ReflectionMethod(get_class($this->object), "getComponent_List");
-        $getComponent_List->setAccessible(true);
-        
         $hasComponent = new ReflectionMethod(get_class($this->object), "hasComponent");
         $hasComponent->setAccessible(true);
         
@@ -96,8 +89,8 @@ class AbstractCompositeTest extends DefaultTestCase
         $component->foo = "bar";
         
         $this->assertFalse($hasComponent->invoke($this->object, $component));
-        $getComponent_List->invoke($this->object)->append($component);
-        $this->assertTrue($hasComponent->invoke($this->object, $component));
+        $this->invokeMethod($this->object, "getComponent_List")->append($component);
+        $this->assertTrue($this->invokeMethod($this->object, "hasComponent", $component));
     }
     
     
@@ -106,28 +99,20 @@ class AbstractCompositeTest extends DefaultTestCase
      * @small
      *
      * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::addComponent()
-     * @throws ReflectionException
      * @uses   \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
      */
     public function testAddComponent()
     {
-        $getComponent_List = new ReflectionMethod(get_class($this->object), "getComponent_List");
-        $getComponent_List->setAccessible(true);
-        
-        $addComponent = new ReflectionMethod(get_class($this->object), "addComponent");
-        $addComponent->setAccessible(true);
-        
-        
         $component = new stdClass();
         $component->foo = "bar";
         
-        $this->assertSame(0, count($getComponent_List->invoke($this->object)));
-        $addComponent->invoke($this->object, $component);
-        $this->assertSame(1, count($getComponent_List->invoke($this->object)));
-        $addComponent->invoke($this->object, $component);
-        $this->assertSame(1, count($getComponent_List->invoke($this->object)));
-        $addComponent->invoke($this->object, clone $component);
-        $this->assertSame(2, count($getComponent_List->invoke($this->object)));
+        $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->invokeMethod($this->object, "addComponent", $component);
+        $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->invokeMethod($this->object, "addComponent", $component);
+        $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->invokeMethod($this->object, "addComponent", clone $component);
+        $this->assertSame(2, count($this->invokeMethod($this->object, "getComponent_List")));
     }
     
     
@@ -136,46 +121,39 @@ class AbstractCompositeTest extends DefaultTestCase
      * @small
      *
      * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::removeComponent()
-     * @throws ReflectionException
      * @uses   \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
      */
     public function testRemoveComponent()
     {
-        $getComponent_List = new ReflectionMethod(get_class($this->object), "getComponent_List");
-        $getComponent_List->setAccessible(true);
-        
-        $removeComponent = new ReflectionMethod(get_class($this->object), "removeComponent");
-        $removeComponent->setAccessible(true);
-        
         $component = new stdClass();
         $component->foo = "bar";
         
         $component2 = new stdClass();
         $component2->bar = "baz";
         
-        $this->assertSame(0, count($getComponent_List->invoke($this->object)));
-        $getComponent_List->invoke($this->object)->append($component);
-        $getComponent_List->invoke($this->object)->append($component2);
-        $this->assertSame(2, count($getComponent_List->invoke($this->object)));
-        $this->assertSame($component, $getComponent_List->invoke($this->object)->offsetGet(0));
-        $this->assertSame($component2, $getComponent_List->invoke($this->object)->offsetGet(1));
+        $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->invokeMethod($this->object, "getComponent_List")->append($component);
+        $this->invokeMethod($this->object, "getComponent_List")->append($component2);
+        $this->assertSame(2, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->assertSame($component, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(0));
+        $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
         
-        $removeComponent->invoke($this->object, $component);
-        $this->assertSame(1, count($getComponent_List->invoke($this->object)));
-        $this->assertArrayNotHasKey(0, $getComponent_List->invoke($this->object));
-        $this->assertArrayHasKey(1, $getComponent_List->invoke($this->object));
-        $this->assertSame($component2, $getComponent_List->invoke($this->object)->offsetGet(1));
-        
-        $removeComponent->invoke($this->object, $component);
-        $this->assertSame(1, count($getComponent_List->invoke($this->object)));
-        $this->assertArrayNotHasKey(0, $getComponent_List->invoke($this->object));
-        $this->assertArrayHasKey(1, $getComponent_List->invoke($this->object));
-        $this->assertSame($component2, $getComponent_List->invoke($this->object)->offsetGet(1));
-        
-        $removeComponent->invoke($this->object, $component2);
-        $this->assertSame(0, count($getComponent_List->invoke($this->object)));
-        $this->assertArrayNotHasKey(0, $getComponent_List->invoke($this->object));
-        $this->assertArrayNotHasKey(1, $getComponent_List->invoke($this->object));
+        $this->invokeMethod($this->object, "removeComponent", $component);
+        $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertArrayHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
+    
+        $this->invokeMethod($this->object, "removeComponent", $component);
+        $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertArrayHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
+    
+        $this->invokeMethod($this->object, "removeComponent", $component2);
+        $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
+        $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
+        $this->assertArrayNotHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
     }
     
     

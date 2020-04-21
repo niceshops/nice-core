@@ -12,6 +12,8 @@ use PHPUnit\Framework\TestCase;
 class DefaultTestCase extends TestCase
 {
     
+    use TestCaseClassMemberInvokerTrait;
+    
     
     /**
      * @param        $object

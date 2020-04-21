@@ -11,7 +11,6 @@ use NiceshopsDev\NiceCore\Traits\AttributeTrait;
 use NiceshopsDev\NiceCore\Traits\OptionTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use ReflectionMethod;
 
 /**
  * Class DefaultTestCaseTest
@@ -19,6 +18,8 @@ use ReflectionMethod;
  */
 class DefaultTestCaseTest extends TestCase
 {
+    
+    use TestCaseClassMemberInvokerTrait;
     
     
     /**
@@ -78,12 +79,10 @@ class DefaultTestCaseTest extends TestCase
         $objUseNoTrait = new class() {
         };
         
-        $classUseTrait = new ReflectionMethod(DefaultTestCase::class, "classUseTrait");
-        $classUseTrait->setAccessible(true);
-        $this->assertTrue($classUseTrait->invoke($this->object, $objUseAttributeTrait, AttributeTrait::class));
-        $this->assertFalse($classUseTrait->invoke($this->object, $objUseAttributeTrait, OptionTrait::class));
-        $this->assertTrue($classUseTrait->invoke($this->object, $objUseOptionAndAttributeTrait, OptionTrait::class));
-        $this->assertFalse($classUseTrait->invoke($this->object, $objUseNoTrait, AttributeTrait::class));
+        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, AttributeTrait::class));
+        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, OptionTrait::class));
+        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseOptionAndAttributeTrait, OptionTrait::class));
+        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseNoTrait, AttributeTrait::class));
     }
     
 }
