@@ -5,16 +5,15 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Traits;
+namespace NiceshopsDev\NiceCore\Option;
 
-use NiceshopsDev\NiceCore\OptionAwareInterface;
 use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 
 /**
  * Class OptionTraitTest
  * @coversDefaultClass OptionTrait
- * @uses               \NiceshopsDev\NiceCore\Traits\OptionTrait
- * @package            Niceshops\Library\Core\Traits
+ * @uses               \NiceshopsDev\NiceCore\Option\OptionTrait
+ * @package            NiceshopsDev\NiceCore
  */
 class OptionTraitTest extends DefaultTestCase
 {
@@ -93,7 +92,7 @@ class OptionTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\OptionTrait::normalizeOption()
+     * @covers       \NiceshopsDev\NiceCore\Option\OptionTrait::normalizeOption()
      *
      * @param string $option
      * @param string $expectedOption
@@ -109,11 +108,11 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::getOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::getOptions()
      *
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::removeOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::unsetOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::removeOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::unsetOption()
      */
     public function testGetOptions()
     {
@@ -135,11 +134,11 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::getRemovedOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::getRemovedOptions()
      *
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::removeOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::unsetOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::removeOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::unsetOption()
      */
     public function testGetRemovedOptions()
     {
@@ -164,8 +163,8 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::clearOptions()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::clearOptions()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
      */
     public function testClearOptions()
     {
@@ -254,13 +253,13 @@ class OptionTraitTest extends DefaultTestCase
      *
      * @dataProvider addOptionDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
+     * @covers       \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
      *
      * @param array  $arrOption
      * @param        $expectedCount
      * @param null   $expectedException
      *
-     * @uses         \NiceshopsDev\NiceCore\Traits\OptionTrait::getOptions()
+     * @uses         \NiceshopsDev\NiceCore\Option\OptionTrait::getOptions()
      */
     public function testAddOption(array $arrOption, $expectedCount, $expectedException = null)
     {
@@ -281,9 +280,9 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::removeOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::getOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::removeOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::getOptions()
      */
     public function testRemoveOption()
     {
@@ -313,9 +312,9 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::unsetOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::getOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::unsetOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::getOptions()
      */
     public function testResetOption()
     {
@@ -345,10 +344,10 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::hasOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::removeOption()
-     * @uses   \NiceshopsDev\NiceCore\Traits\OptionTrait::unsetOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::hasOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::removeOption()
+     * @uses   \NiceshopsDev\NiceCore\Option\OptionTrait::unsetOption()
      */
     public function testHasOption()
     {
@@ -395,13 +394,13 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::clearOptions()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::getOptions()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::getRemovedOptions()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::addOption()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::removeOption()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::unsetOption()
-     * @covers \NiceshopsDev\NiceCore\Traits\OptionTrait::hasOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::clearOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::getOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::getRemovedOptions()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::addOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::removeOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::unsetOption()
+     * @covers \NiceshopsDev\NiceCore\Option\OptionTrait::hasOption()
      */
     public function testOptionTraitAwareInterface()
     {

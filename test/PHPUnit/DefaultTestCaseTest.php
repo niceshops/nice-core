@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace NiceshopsDev\NiceCore\PHPUnit;
 
 use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Traits\OptionTrait;
+use NiceshopsDev\NiceCore\Option\OptionTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
