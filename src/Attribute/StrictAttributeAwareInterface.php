@@ -4,7 +4,7 @@
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore;
+namespace NiceshopsDev\NiceCore\Attribute;
 
 /**
  * Interface StrictAttributeAwareInterface

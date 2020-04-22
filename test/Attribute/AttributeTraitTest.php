@@ -5,12 +5,10 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Traits;
+namespace NiceshopsDev\NiceCore\Attribute;
 
-use NiceshopsDev\NiceCore\AttributeAwareInterface;
 use NiceshopsDev\NiceCore\Exception;
 use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
-use NiceshopsDev\NiceCore\StrictAttributeAwareInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 use stdClass;
@@ -18,8 +16,8 @@ use stdClass;
 /**
  * Class AttributeTraitTest
  * @coversDefaultClass AttributeTrait
- * @uses               \NiceshopsDev\NiceCore\Traits\AttributeTrait
- * @package            Niceshops\Library\Core\Traits
+ * @uses               \NiceshopsDev\NiceCore\Attribute\AttributeTrait
+ * @package            NiceshopsDev\NiceCore
  */
 class AttributeTraitTest extends DefaultTestCase
 {
@@ -98,7 +96,7 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::normalizeAttributeKey()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::normalizeAttributeKey()
      *
      * @param string $key
      * @param string $expectedKey
@@ -250,9 +248,9 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider getSetUnsetDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::unsetAttribute()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::unsetAttribute()
      *
      * @param array $arrAttribute
      * @param array $arrExpectedValue
@@ -306,11 +304,11 @@ class AttributeTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\AttributeTrait::lockAttribute()
-     * @covers \NiceshopsDev\NiceCore\Traits\AttributeTrait::unlockAttribute()
+     * @covers \NiceshopsDev\NiceCore\Attribute\AttributeTrait::lockAttribute()
+     * @covers \NiceshopsDev\NiceCore\Attribute\AttributeTrait::unlockAttribute()
      * @throws Exception
-     * @uses   \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
-     * @uses   \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
+     * @uses   \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
+     * @uses   \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
      */
     public function testLockUnlockAttribute()
     {
@@ -386,8 +384,8 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider getAttributeListDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute_List()
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttributes()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute_List()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttributes()
      *
      * @param array       $arrAttribute
      * @param array       $expectedValue
@@ -395,7 +393,7 @@ class AttributeTraitTest extends DefaultTestCase
      * @param string|null $expectecException
      *
      * @throws Exception
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
      */
     public function testGetAttributeList(array $arrAttribute, array $expectedValue, string $expectecException = null)
     {
@@ -418,10 +416,10 @@ class AttributeTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__call()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__call()
      * @throws ReflectionException
      * @throws Exception
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
      * @noinspection PhpUndefinedMethodInspection
      */
     public function testMagicAttributeAccess_with_Call()
@@ -454,10 +452,10 @@ class AttributeTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__get()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__get()
      * @throws Exception
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Get()
@@ -477,9 +475,9 @@ class AttributeTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__set()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__set()
      * @throws Exception
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Set()
@@ -498,11 +496,11 @@ class AttributeTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__set()
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__get()
-     * @covers       \NiceshopsDev\NiceCore\Traits\AttributeTrait::__call()
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
-     * @uses         \NiceshopsDev\NiceCore\Traits\AttributeTrait::getAttribute()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__set()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__get()
+     * @covers       \NiceshopsDev\NiceCore\Attribute\AttributeTrait::__call()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
+     * @uses         \NiceshopsDev\NiceCore\Attribute\AttributeTrait::getAttribute()
      * @noinspection PhpUndefinedFieldInspection
      * @noinspection PhpUndefinedMethodInspection
      */
@@ -560,9 +558,9 @@ class AttributeTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Traits\AttributeTrait::hasAttribute()
+     * @covers \NiceshopsDev\NiceCore\Attribute\AttributeTrait::hasAttribute()
      * @throws Exception
-     * @uses   \NiceshopsDev\NiceCore\Traits\AttributeTrait::setAttribute()
+     * @uses   \NiceshopsDev\NiceCore\Attribute\AttributeTrait::setAttribute()
      */
     public function testHasAttribute()
     {

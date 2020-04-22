@@ -5,10 +5,9 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Traits;
+namespace NiceshopsDev\NiceCore\Attribute;
 
 use NiceshopsDev\NiceCore\Exception;
-use NiceshopsDev\NiceCore\StrictAttributeAwareInterface;
 
 /**
  * Trait AttributeTrait
@@ -245,7 +244,7 @@ trait AttributeTrait
      * @param $name
      * @param $value
      *
-     * @return self|static
+     * @return self
      * @throws Exception
      */
     public function __set($name, $value)
