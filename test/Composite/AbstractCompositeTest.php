@@ -18,7 +18,7 @@ use stdClass;
  * Class AbstractCompositeTest
  * @coversDefaultClass AbstractComposite
  * @uses               \NiceshopsDev\NiceCore\Composite\AbstractComposite
- * @package            Niceshops\Library\Core
+ * @package            NiceshopsDev\NiceCore
  */
 class AbstractCompositeTest extends DefaultTestCase
 {

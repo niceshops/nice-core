@@ -14,7 +14,7 @@ use SplSubject;
 
 /**
  * Class SubjectModifiedObserver
- * @package Niceshops\Library\Core
+ * @package NiceshopsDev\NiceCore
  */
 abstract class AbstractSubjectModifiedObserver implements SplObserver
 {

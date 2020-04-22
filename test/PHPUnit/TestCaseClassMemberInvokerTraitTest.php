@@ -17,7 +17,7 @@ use ReflectionProperty;
  * Class TestCaseClassMemberInvokerTraitTest
  * @coversDefaultClass TestCaseClassMemberInvokerTrait
  * @uses               \NiceshopsDev\NiceCore\PHPUnit\TestCaseClassMemberInvokerTrait
- * @package            Niceshops\Library\Core\Traits
+ * @package            NiceshopsDev\NiceCore
  */
 class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
 {
