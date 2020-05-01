@@ -124,4 +124,45 @@ class ObjectPropertyFinder
         
         return get_object_vars($object)[$key] ?? $defaultValue;
     }
+    
+    
+    /**
+     * @param null $key
+     * @param null $defaultValue
+     *
+     * @return mixed
+     */
+    public function __invoke($key = null, $defaultValue = null)
+    {
+        if (null === $key) {
+            return $this->getValues();
+        }
+        
+        return $this->getValue($key, $defaultValue);
+    }
+    
+    
+    /**
+     * @param array $arr
+     *
+     * @return ObjectPropertyFinder
+     * @throws Exception
+     */
+    public static function createFromArray(array $arr)
+    {
+        return new self($arr);
+    }
+    
+    
+    /**
+     * @param object $object
+     *
+     * @return ObjectPropertyFinder
+     * @throws Exception
+     */
+    public static function createFromObject(object $object)
+    {
+        return new self($object);
+    }
+    
 }

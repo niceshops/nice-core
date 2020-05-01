@@ -10,6 +10,7 @@ namespace NiceshopsDev\NiceCore\Helper\Object;
 use ArrayAccess;
 use ArrayObject;
 use Generator;
+use NiceshopsDev\NiceCore\Exception;
 use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -318,5 +319,60 @@ class ObjectPropertyFinderTest extends DefaultTestCase
         $this->object->expects($this->exactly(count($arrData)))->method("getValue")->withConsecutive(...$arrGetValue_Param)->willReturn(...$arrGetValue_Return);
         
         $this->assertSame($arrData, $this->object->getValues());
+    }
+    
+    
+    /**
+     * @group unit
+     * @small
+     */
+    public function testCreateInstanceWithWrongObject()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage("Passed value is not an object or array!");
+        /** @noinspection PhpParamsInspection */
+        new ObjectPropertyFinder("foo");
+    }
+    
+    
+    /**
+     * @group integration
+     * @small
+     * @uses \NiceshopsDev\NiceCore\Helper\Object\ObjectPropertyFinder::getValues()
+     * @uses \NiceshopsDev\NiceCore\Helper\Object\ObjectPropertyFinder::getValue()
+     * @throws Exception
+     */
+    public function testInvokable()
+    {
+        $object = ["foo" => "bar", "baz" => null];
+        
+        $finder = new ObjectPropertyFinder($object);
+        
+        $this->assertSame($object, $finder());
+        $this->assertSame("bar", $finder("foo"));
+        $this->assertSame("bar", $finder("foo", "baz"));
+        $this->assertSame(null, $finder("baz"));
+        $this->assertSame("baz", $finder("baz", "baz"));
+    }
+    
+    
+    /**
+     * @group integration
+     * @small
+     * @throws Exception
+     * @uses  \NiceshopsDev\NiceCore\Helper\Object\ObjectPropertyFinder::getValues()
+     */
+    public function testStaticFactoryMethods()
+    {
+        $arr = ["foo" => "bar", "baz" => null];
+        $object = new ArrayObject($arr);
+        
+        $finder = ObjectPropertyFinder::createFromArray($arr);
+        $this->assertInstanceOf(ObjectPropertyFinder::class, $finder);
+        $this->assertSame($arr, $finder->getValues());
+    
+        $finder = ObjectPropertyFinder::createFromObject($object);
+        $this->assertInstanceOf(ObjectPropertyFinder::class, $finder);
+        $this->assertSame($arr, $finder->getValues());
     }
 }
