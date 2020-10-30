@@ -14,8 +14,8 @@ use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  AbstractSubjectModifiedObserver
- * @uses                AbstractSubjectModifiedObserver
+ * @coversDefaultClass  \Niceshops\Core\Observer\AbstractSubjectModifiedObserver
+ * @uses                \Niceshops\Core\Observer\AbstractSubjectModifiedObserver
  * @package             Niceshops\Core
  */
 class AbstractSubjectModifiedObserverTest extends DefaultTestCase

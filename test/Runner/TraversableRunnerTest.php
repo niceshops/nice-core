@@ -13,8 +13,8 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  TraversableRunner
- * @uses                TraversableRunner
+ * @coversDefaultClass  \Niceshops\Core\Runner\TraversableRunner
+ * @uses                \Niceshops\Core\Runner\TraversableRunner
  * @package             Niceshops\Core
  */
 class TraversableRunnerTest extends DefaultTestCase

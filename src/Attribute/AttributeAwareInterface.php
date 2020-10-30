@@ -34,9 +34,11 @@ interface AttributeAwareInterface
     /**
      * @param string $key
      *
+     * @param bool $hasDefault
+     * @param null $default
      * @return mixed
      */
-    public function getAttribute(string $key);
+    public function getAttribute(string $key,  bool $hasDefault = false, $default = null);
 
 
     /**

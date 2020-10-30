@@ -14,8 +14,8 @@ use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  ObserverSubjectTrait
- * @uses                ObserverSubjectTrait
+ * @coversDefaultClass  \Niceshops\Core\Observer\ObserverSubjectTrait
+ * @uses                \Niceshops\Core\Observer\ObserverSubjectTrait
  * @package             Niceshops\Core
  */
 class ObserverSubjectTraitTest extends DefaultTestCase
@@ -62,7 +62,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers ObserverSubjectTrait::getObserverStorage
+     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::getObserverStorage
      */
     public function testGetObserverStorage()
     {
@@ -76,7 +76,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers ObserverSubjectTrait::attach
+     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::attach
      */
     public function testAttach()
     {
@@ -98,7 +98,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers ObserverSubjectTrait::c
+     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::detach
      */
     public function testDetach()
     {
@@ -120,7 +120,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers ObserverSubjectTrait::notify
+     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::notify
      */
     public function testNotify()
     {

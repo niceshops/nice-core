@@ -7,16 +7,17 @@ declare(strict_types=1);
 
 namespace Niceshops\Core\Attribute;
 
-use Niceshops\Core\Exception;
+use Niceshops\Core\Exception\AttributeLockException;
+use Niceshops\Core\Exception\AttributeNotFoundException;
+use Niceshops\Core\Exception\CoreException;
 use Niceshops\Core\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use stdClass;
 
 /**
  * Class AttributeTraitTest
- * @coversDefaultClass AttributeTrait
- * @uses               \Niceshops\Core\Attribute\AttributeTrait
+ * @coversDefaultClass AttributeAwareTrait
+ * @uses               \Niceshops\Core\Attribute\AttributeAwareTrait
  * @package            Niceshops\Core
  */
 class AttributeTraitTest extends DefaultTestCase
@@ -24,7 +25,7 @@ class AttributeTraitTest extends DefaultTestCase
 
 
     /**
-     * @var AttributeTrait|MockObject
+     * @var AttributeAwareTrait|MockObject
      */
     protected $object;
 
@@ -35,7 +36,7 @@ class AttributeTraitTest extends DefaultTestCase
      */
     protected function setUp()
     {
-        $this->object = $this->getMockBuilder(AttributeTrait::class)->getMockForTrait();
+        $this->object = $this->getMockBuilder(AttributeAwareTrait::class)->getMockForTrait();
     }
 
 
@@ -54,8 +55,8 @@ class AttributeTraitTest extends DefaultTestCase
      */
     public function testTestClassExists()
     {
-        $this->assertTrue(trait_exists(AttributeTrait::class), "Class Exists");
-        $this->assertUseTrait(AttributeTrait::class, $this->object, "Mock Object uses " . AttributeTrait::class);
+        $this->assertTrue(trait_exists(AttributeAwareTrait::class), "Class Exists");
+        $this->assertUseTrait(AttributeAwareTrait::class, $this->object, "Mock Object uses " . AttributeAwareTrait::class);
     }
 
 
@@ -96,7 +97,7 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::normalizeAttributeKey()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::normalizeAttributeKey()
      *
      * @param string $key
      * @param string $expectedKey
@@ -236,7 +237,7 @@ class AttributeTraitTest extends DefaultTestCase
                 [
                     "foo" => "bar2",
                 ],
-                [Exception::class, "#Try to set the attribute.*#"]
+                [CoreException::class, "#Try to set the attribute.*#"]
             ],
         ];
     }
@@ -248,16 +249,16 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider getSetUnsetDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::unsetAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::unsetAttribute()
      *
      * @param array $arrAttribute
      * @param array $arrExpectedValue
      *
      * @param null  $arrException
      *
-     * @throws Exception
+     * @throws CoreException
      */
     public function testGetSetUnsetAttribute(array $arrAttribute, array $arrExpectedValue, $arrException = null)
     {
@@ -280,7 +281,7 @@ class AttributeTraitTest extends DefaultTestCase
             if ((string)(int)$key === (string)$key) {
                 $key = (string)$key;
             }
-            $curValue = $this->object->getAttribute($key);
+            $curValue = $this->object->getAttribute($key, true);
             if ($curValue === null) {
                 $messageValue = "NULL";
             } else {
@@ -295,7 +296,7 @@ class AttributeTraitTest extends DefaultTestCase
         foreach ($arrAttribute as $arrVal) {
             $key = $arrVal["key"];
             $this->object->unsetAttribute($key);
-            $this->assertNull($this->object->getAttribute($key));
+            $this->assertNull($this->object->getAttribute($key, true));
         }
     }
 
@@ -304,20 +305,21 @@ class AttributeTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Attribute\AttributeTrait::lockAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeTrait::unlockAttribute()
-     * @throws Exception
-     * @uses   \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
-     * @uses   \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::lockAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::unlockAttribute()
+     * @throws CoreException
+     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
      */
     public function testLockUnlockAttribute()
     {
-        $this->assertNull($this->object->getAttribute("foo"));
+        $this->assertNull($this->object->getAttribute("foo", true));
 
         $this->object->setAttribute("foo", "bar");
         $this->assertSame("bar", $this->object->getAttribute("foo"));
 
         $this->object->lockAttribute("foo");
+        $this->expectException(AttributeLockException::class);
         $this->object->setAttribute("foo", "baz");
         $this->assertSame("bar", $this->object->getAttribute("foo"));
 
@@ -367,7 +369,7 @@ class AttributeTraitTest extends DefaultTestCase
                 [
                     "bar" => "baz",
                 ],
-                Exception::class
+                CoreException::class
             ],
             [
                 [],
@@ -384,16 +386,16 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider getAttributeListDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::getAttribute_List()
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::getAttributes()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute_List()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttributes()
      *
      * @param array       $arrAttribute
      * @param array       $expectedValue
      *
      * @param string|null $expectecException
      *
-     * @throws Exception
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
+     * @throws CoreException
+     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
      */
     public function testGetAttributeList(array $arrAttribute, array $expectedValue, string $expectecException = null)
     {
@@ -413,154 +415,12 @@ class AttributeTraitTest extends DefaultTestCase
 
 
     /**
-     * @group        unit
-     * @small
-     *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__call()
-     * @throws ReflectionException
-     * @throws Exception
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
-     * @noinspection PhpUndefinedMethodInspection
-     */
-    public function testMagicAttributeAccess_with_Call()
-    {
-        $allowMagicGetAttribute = $this->getReflectionProperty_for_Object($this->object, "allowMagicGetAttribute");
-        $allowMagicGetAttribute->setAccessible(true);
-
-        $allowMagicSetAttribute = $this->getReflectionProperty_for_Object($this->object, "allowMagicSetAttribute");
-        $allowMagicSetAttribute->setAccessible(true);
-
-        $allowMagicGetAttribute->setValue($this->object, true);
-        $allowMagicSetAttribute->setValue($this->object, true);
-
-        $this->object->setFoo("bar");
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-        $this->assertSame("bar", $this->object->getFoo());
-
-        $allowMagicGetAttribute->setValue($this->object, false);
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-        $this->assertSame(null, $this->object->getFoo());
-
-
-        $allowMagicSetAttribute->setValue($this->object, false);
-        $this->object->setFoo("baz");
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-    }
-
-
-    /**
-     * @group        unit
-     * @small
-     *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__get()
-     * @throws Exception
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
-     * @noinspection PhpUndefinedFieldInspection
-     */
-    public function testMagicAttributeAccess_with_Get()
-    {
-        $this->invokeSetProperty($this->object, "allowMagicGetAttribute", true);
-        $this->object->setAttribute("foo", "bar");
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-        $this->assertSame("bar", $this->object->foo);
-
-        $this->invokeSetProperty($this->object, "allowMagicGetAttribute", false);
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-        $this->assertSame(null, $this->object->foo);
-    }
-
-
-    /**
-     * @group        unit
-     * @small
-     *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__set()
-     * @throws Exception
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
-     * @noinspection PhpUndefinedFieldInspection
-     */
-    public function testMagicAttributeAccess_with_Set()
-    {
-        $this->invokeSetProperty($this->object, "allowMagicSetAttribute", true);
-        $this->object->foo = "bar";
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-
-        $this->invokeSetProperty($this->object, "allowMagicSetAttribute", false);
-        $this->object->foo = "baz";
-        $this->assertSame("bar", $this->object->getAttribute("foo"));
-    }
-
-
-    /**
-     * @group        unit
-     * @small
-     *
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__set()
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__get()
-     * @covers       \Niceshops\Core\Attribute\AttributeTrait::__call()
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
-     * @uses         \Niceshops\Core\Attribute\AttributeTrait::getAttribute()
-     * @noinspection PhpUndefinedFieldInspection
-     * @noinspection PhpUndefinedMethodInspection
-     */
-    public function testMagicAttributeAccess()
-    {
-        $magic = new class {
-            use AttributeTrait;
-
-
-            /**
-             *  constructor.
-             */
-            public function __construct()
-            {
-                $this->allowMagicGetAttribute = true;
-                $this->allowMagicSetAttribute = true;
-            }
-        };
-
-        $notMagic = new class {
-            use AttributeTrait;
-
-
-            /**
-             *  constructor.
-             */
-            public function __construct()
-            {
-                $this->allowMagicGetAttribute = false;
-                $this->allowMagicSetAttribute = false;
-            }
-        };
-
-
-        $this->assertNull($magic->foo);
-        $this->assertNull($notMagic->foo);
-
-        $magic->foo = "bar";
-        $notMagic->foo = "bar";
-        $this->assertSame("bar", $magic->foo);
-        $this->assertSame("bar", $magic->getFoo());
-        $this->assertNull($notMagic->foo);
-        $this->assertNull($notMagic->getFoo());
-
-        $magic->setFoo("baz");
-        $notMagic->setFoo("baz");
-        $this->assertSame("baz", $magic->foo);
-        $this->assertSame("baz", $magic->getFoo());
-        $this->assertNull($notMagic->foo);
-        $this->assertNull($notMagic->getFoo());
-    }
-
-
-    /**
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Attribute\AttributeTrait::hasAttribute()
-     * @throws Exception
-     * @uses   \Niceshops\Core\Attribute\AttributeTrait::setAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::hasAttribute()
+     * @throws CoreException
+     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
      */
     public function testHasAttribute()
     {
@@ -578,17 +438,17 @@ class AttributeTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\AttributeAwareInterface::setAttribute()
-     * @covers \Niceshops\Core\AttributeAwareInterface::hasAttribute()
-     * @covers \Niceshops\Core\AttributeAwareInterface::getAttribute()
-     * @covers \Niceshops\Core\AttributeAwareInterface::unsetAttribute()
-     * @covers \Niceshops\Core\AttributeAwareInterface::getAttribute_List()
-     * @throws Exception
+     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::setAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::hasAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::unsetAttribute()
+     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute_List()
+     * @throws CoreException
      */
     public function testAttributeAwareInterface()
     {
         $this->object = new class implements AttributeAwareInterface {
-            use AttributeTrait;
+            use AttributeAwareTrait;
         };
 
         $this->assertSame([], $this->object->getAttribute_List());
@@ -608,7 +468,7 @@ class AttributeTraitTest extends DefaultTestCase
         $this->assertSame("bar", $this->object->getAttribute("foo"));
         $this->assertSame("baz", $this->object->getAttribute("bar"));
         $this->assertSame("bat", $this->object->getAttribute("baz"));
-        $this->assertSame(null, $this->object->getAttribute("bat"));
+        $this->assertSame(null, $this->object->getAttribute("bat", true));
 
 
         $this->object->unsetAttribute("foo");
@@ -621,10 +481,10 @@ class AttributeTraitTest extends DefaultTestCase
         $this->assertTrue($this->object->hasAttribute("baz"));
         $this->assertFalse($this->object->hasAttribute("bat"));
 
-        $this->assertSame(null, $this->object->getAttribute("foo"));
+        $this->assertSame(null, $this->object->getAttribute("foo", true));
         $this->assertSame("baz", $this->object->getAttribute("bar"));
         $this->assertSame("bat", $this->object->getAttribute("baz"));
-        $this->assertSame(null, $this->object->getAttribute("bat"));
+        $this->assertSame(null, $this->object->getAttribute("bat", true));
     }
 
 
@@ -639,18 +499,14 @@ class AttributeTraitTest extends DefaultTestCase
                 ["foo" => "bar"],
             ],
             [
-                ["foo" => null],
-                ["foo" => null],
-            ],
-            [
                 [],
                 ["foo" => null],
-                Exception::class,
+                AttributeNotFoundException::class,
             ],
             [
                 ["foo" => "bar"],
                 ["bar" => null],
-                Exception::class,
+                AttributeNotFoundException::class,
             ],
         ];
     }
@@ -662,28 +518,24 @@ class AttributeTraitTest extends DefaultTestCase
      *
      * @dataProvider strictAttributeAwareInterfaceDataProvider
      *
-     * @covers       \Niceshops\Core\StrictAttributeAwareInterface::setAttribute()
-     * @covers       \Niceshops\Core\StrictAttributeAwareInterface::getAttribute()
-     * @covers       \Niceshops\Core\StrictAttributeAwareInterface::hasAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::setAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute()
+     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::hasAttribute()
      *
      * @param array       $arrAttribute
      * @param array       $arrExpectedValue
      * @param string|null $expectedException
      *
-     * @throws Exception
+     * @throws CoreException
      */
-    public function testStrictAttributeAwareInterface(array $arrAttribute, array $arrExpectedValue, string $expectedException = null)
+    public function testStrictAttribute(array $arrAttribute, array $arrExpectedValue, string $expectedException = null)
     {
-        $this->object = new class implements StrictAttributeAwareInterface {
-            use AttributeTrait;
-        };
-
         foreach ($arrExpectedValue as $key => $expectedValue) {
             $this->assertSame(false, $this->object->hasAttribute($key), "attribute: $key");
         }
 
         if ($expectedException) {
-            $this->expectException(Exception::class);
+            $this->expectException($expectedException);
         }
 
         foreach ($arrAttribute as $key => $value) {

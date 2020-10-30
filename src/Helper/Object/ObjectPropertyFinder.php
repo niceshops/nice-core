@@ -10,7 +10,8 @@ namespace Niceshops\Core\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
-use Niceshops\Core\Exception;
+use InvalidArgumentException;
+use Niceshops\Core\Exception\CoreException;
 use stdClass;
 
 class ObjectPropertyFinder
@@ -27,12 +28,12 @@ class ObjectPropertyFinder
      *
      * @param array|object $object
      *
-     * @throws Exception    passed value is not an object or array
+     * @throws CoreException    passed value is not an object or array
      */
     public function __construct($object)
     {
         if (!is_object($object) && !is_array($object)) {
-            throw new Exception("Passed value is not an object or array!");
+            throw new InvalidArgumentException("Passed value is not an object or array!");
         }
 
         $this->object = $object;
@@ -146,7 +147,7 @@ class ObjectPropertyFinder
      * @param array $arr
      *
      * @return ObjectPropertyFinder
-     * @throws Exception
+     * @throws CoreException
      */
     public static function createFromArray(array $arr)
     {
@@ -158,7 +159,7 @@ class ObjectPropertyFinder
      * @param object $object
      *
      * @return ObjectPropertyFinder
-     * @throws Exception
+     * @throws CoreException
      */
     public static function createFromObject(object $object)
     {

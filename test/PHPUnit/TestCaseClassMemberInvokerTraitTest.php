@@ -15,7 +15,7 @@ use ReflectionProperty;
 
 /**
  * Class TestCaseClassMemberInvokerTraitTest
- * @coversDefaultClass TestCaseClassMemberInvokerTrait
+ * @coversDefaultClass \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait
  * @uses               \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait
  * @package            Niceshops\Core
  */
@@ -101,7 +101,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @small
      * @dataProvider invokeMethodDataProvider
      *
-     * @covers       Datenkraft_Developer_Phpunit_TestCase::invokeMethod
+     * @covers       \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeMethod
      *
      * @param        $obj
      * @param string $methodName
@@ -128,7 +128,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_invalidObject()
@@ -155,7 +155,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_propertyNotFound()
@@ -184,7 +184,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty()
@@ -215,7 +215,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_invalidObject()
@@ -242,7 +242,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_propertyNotFound()
@@ -272,7 +272,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty()

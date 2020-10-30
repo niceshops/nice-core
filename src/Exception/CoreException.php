@@ -5,41 +5,39 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core;
+namespace Niceshops\Core\Exception;
+
+use Throwable;
 
 /**
  * Class Exception
  * @package Niceshops\Core
  */
-class Exception extends \Exception
+class CoreException extends \Exception
 {
-    const BASIC_EXCEPTION_CODE = 1;
-    const BADFUNCTIONCALL_EXCEPTION_CODE = 2;
-    const DOMAIN_EXCEPTION_CODE = 3;
-    const INVALIDARGUMENT_EXCEPTION_CODE = 4;
-    const LENGTH_EXCEPTION_CODE = 5;
-    const LOGIC_EXCEPTION_CODE = 6;
-    const OUTOFBOUNDS_EXCEPTION_CODE = 7;
-    const OUTOFRANGE_EXCEPTION_CODE = 8;
-    const OVERFLOW_EXCEPTION_CODE = 9;
-    const RANGE_EXCEPTION_CODE = 10;
-    const RUNTIME_EXCEPTION_CODE = 11;
-    const UNDERFLOW_EXCEPTION_CODE = 12;
-    const UNEXPECTEDVALUE_EXCEPTION_CODE = 13;
-    const BADMETHODCALL_EXCEPTION_CODE = 14;
-    const API_EXCEPTION_CODE = 15;
-    const LOCK_EXCEPTION_CODE = 16;
-    const DATABASE_EXCEPTION_CODE = 17;
-    const FILE_EXISTS_EXCEPTION_CODE = 18;
+    const BASIC_EXCEPTION_CODE = 1000;
+    const API_EXCEPTION_CODE = 2000;
+    const LOCK_EXCEPTION_CODE = 3000;
+    const DATABASE_EXCEPTION_CODE = 4000;
+    const EXISTS_EXCEPTION_CODE = 5000;
+    const NOT_FOUND_EXCEPTION_CODE = 6000;
 
-
-    const METHOD_NOT_FOUND = 404;
+    /**
+     * CoreException constructor.
+     * @param string $message
+     * @param int $code
+     * @param Throwable|null $previous
+     */
+    public function __construct($message = "", $code = self::BASIC_EXCEPTION_CODE, Throwable $previous = null)
+    {
+        parent::__construct($message, $code, $previous);
+    }
 
 
     /**
      * @param string $message
      *
-     * @return Exception
+     * @return CoreException
      */
     public function setMessage(string $message): self
     {
@@ -52,7 +50,7 @@ class Exception extends \Exception
      * @param string $appendMessage
      * @param string $separator
      *
-     * @return Exception
+     * @return CoreException
      */
     public function appendToMessage(string $appendMessage, string $separator = " "): self
     {
@@ -68,7 +66,7 @@ class Exception extends \Exception
      * @param string $prependMessage
      * @param string $separator
      *
-     * @return Exception
+     * @return CoreException
      */
     public function prependToMessage(string $prependMessage, string $separator = " "): self
     {

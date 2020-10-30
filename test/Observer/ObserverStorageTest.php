@@ -14,8 +14,8 @@ use SplObserver;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  ObserverStorage
- * @uses                ObserverStorage
+ * @coversDefaultClass  \Niceshops\Core\Observer\ObserverStorage
+ * @uses                \Niceshops\Core\Observer\ObserverStorage
  * @package             Niceshops\Core
  */
 class ObserverStorageTest extends DefaultTestCase

@@ -10,7 +10,7 @@ namespace Niceshops\Core\Helper\Object;
 use ArrayAccess;
 use ArrayObject;
 use Generator;
-use Niceshops\Core\Exception;
+use Niceshops\Core\Exception\CoreException;
 use Niceshops\Core\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -328,7 +328,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      */
     public function testCreateInstanceWithWrongObject()
     {
-        $this->expectException(Exception::class);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage("Passed value is not an object or array!");
         /** @noinspection PhpParamsInspection */
         new ObjectPropertyFinder("foo");
@@ -338,9 +338,9 @@ class ObjectPropertyFinderTest extends DefaultTestCase
     /**
      * @group integration
      * @small
+     * @throws CoreException
+     *@uses \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue()
      * @uses \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValues()
-     * @uses \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue()
-     * @throws Exception
      */
     public function testInvokable()
     {
@@ -359,7 +359,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
     /**
      * @group integration
      * @small
-     * @throws Exception
+     * @throws CoreException
      * @uses  \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValues()
      */
     public function testStaticFactoryMethods()

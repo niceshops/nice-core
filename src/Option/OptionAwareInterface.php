@@ -23,13 +23,13 @@ interface OptionAwareInterface
     /**
      * @return array
      */
-    public function getOptions(): array;
+    public function getOption_List(): array;
 
 
     /**
      * @return array
      */
-    public function getRemovedOptions(): array;
+    public function getRemovedOption_List(): array;
 
 
     /**

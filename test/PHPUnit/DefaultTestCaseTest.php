@@ -7,8 +7,8 @@ declare(strict_types=1);
 
 namespace Niceshops\Core\PHPUnit;
 
-use Niceshops\Core\Attribute\AttributeTrait;
-use Niceshops\Core\Option\OptionTrait;
+use Niceshops\Core\Attribute\AttributeAwareTrait;
+use Niceshops\Core\Option\OptionAwareTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -63,26 +63,26 @@ class DefaultTestCaseTest extends TestCase
      * @group  unit
      * @small
      *
-     * @covers DefaultTestCase::classUseTrait
+     * @covers \Niceshops\Core\PHPUnit\DefaultTestCase::classUseTrait
      */
     public function testAssertUseTrait()
     {
         $objUseAttributeTrait = new class {
-            use AttributeTrait;
+            use AttributeAwareTrait;
         };
 
         $objUseOptionAndAttributeTrait = new class {
-            use AttributeTrait;
-            use OptionTrait;
+            use AttributeAwareTrait;
+            use OptionAwareTrait;
         };
 
         $objUseNoTrait = new class() {
         };
 
-        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, AttributeTrait::class));
-        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, OptionTrait::class));
-        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseOptionAndAttributeTrait, OptionTrait::class));
-        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseNoTrait, AttributeTrait::class));
+        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, AttributeAwareTrait::class));
+        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, OptionAwareTrait::class));
+        $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseOptionAndAttributeTrait, OptionAwareTrait::class));
+        $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseNoTrait, AttributeAwareTrait::class));
     }
 
 }

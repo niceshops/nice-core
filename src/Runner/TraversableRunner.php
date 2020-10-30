@@ -9,7 +9,7 @@ namespace Niceshops\Core\Runner;
 
 use Countable;
 use Generator;
-use Niceshops\Core\Exception;
+use Niceshops\Core\Exception\CoreException;
 use Traversable;
 
 /**
@@ -30,12 +30,12 @@ class TraversableRunner implements RunnerInterface
      *
      * @param Traversable|array $traversable
      *
-     * @throws Exception    passed parameter is not an array nor Traversable
+     * @throws CoreException    passed parameter is not an array nor Traversable
      */
     public function __construct(&$traversable)
     {
         if (!is_array($traversable) && (!$traversable instanceof Traversable)) {
-            throw new Exception("Passed object is not traversable (Array or instance implements the 'Traversable' interface required)!");
+            throw new CoreException("Passed object is not traversable (Array or instance implements the 'Traversable' interface required)!");
         }
         $this->traversable =& $traversable;
     }

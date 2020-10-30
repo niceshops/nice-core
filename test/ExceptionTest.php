@@ -6,6 +6,7 @@
 
 namespace Niceshops\Core;
 
+use Niceshops\Core\Exception\CoreException;
 use Niceshops\Core\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -18,7 +19,7 @@ class ExceptionTest extends DefaultTestCase
 
 
     /**
-     * @var Exception|MockObject
+     * @var CoreException|MockObject
      */
     protected $object;
 
@@ -30,7 +31,7 @@ class ExceptionTest extends DefaultTestCase
      */
     protected function setUp()
     {
-        $this->object = $this->getMockBuilder(Exception::class)->disableOriginalConstructor()->getMockForAbstractClass();
+        $this->object = $this->getMockBuilder(CoreException::class)->disableOriginalConstructor()->getMockForAbstractClass();
     }
 
 
@@ -49,8 +50,8 @@ class ExceptionTest extends DefaultTestCase
      */
     public function testTestClassExists()
     {
-        $this->assertTrue(class_exists(Exception::class), "Class Exists");
-        $this->assertTrue(is_a($this->object, Exception::class), "Mock Object is set");
+        $this->assertTrue(class_exists(CoreException::class), "Class Exists");
+        $this->assertTrue(is_a($this->object, CoreException::class), "Mock Object is set");
     }
 
 
@@ -58,8 +59,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception::setMessage()
-     * @uses   \Niceshops\Core\Exception::getMessage()
+     * @covers \Niceshops\Core\Exception\CoreException::setMessage()
+     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
      */
     public function testSetMessage()
     {
@@ -72,7 +73,7 @@ class ExceptionTest extends DefaultTestCase
 
         try {
             throw $this->object;
-        } catch (Exception $e) {
+        } catch (CoreException $e) {
             $this->assertSame($message, $e->getMessage());
         }
     }
@@ -82,8 +83,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception::appendToMessage()
-     * @uses   \Niceshops\Core\Exception::getMessage()
+     * @covers \Niceshops\Core\Exception\CoreException::appendToMessage()
+     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
      */
     public function testAppendToMessage()
     {
@@ -104,8 +105,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception::prependToMessage()
-     * @uses   \Niceshops\Core\Exception::getMessage()
+     * @covers \Niceshops\Core\Exception\CoreException::prependToMessage()
+     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
      */
     public function testPrependToMessage()
     {

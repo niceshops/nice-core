@@ -11,8 +11,8 @@ use Niceshops\Core\PHPUnit\DefaultTestCase;
 
 /**
  * Class OptionTraitTest
- * @coversDefaultClass OptionTrait
- * @uses               \Niceshops\Core\Option\OptionTrait
+ * @coversDefaultClass OptionAwareTrait
+ * @uses               \Niceshops\Core\Option\OptionAwareTrait
  * @package            Niceshops\Core
  */
 class OptionTraitTest extends DefaultTestCase
@@ -20,7 +20,7 @@ class OptionTraitTest extends DefaultTestCase
 
 
     /**
-     * @var OptionTrait
+     * @var OptionAwareTrait
      */
     protected $object;
 
@@ -31,7 +31,7 @@ class OptionTraitTest extends DefaultTestCase
      */
     protected function setUp()
     {
-        $this->object = $this->getMockBuilder(OptionTrait::class)->getMockForTrait();
+        $this->object = $this->getMockBuilder(OptionAwareTrait::class)->getMockForTrait();
     }
 
 
@@ -50,8 +50,8 @@ class OptionTraitTest extends DefaultTestCase
      */
     public function testTestClassExists()
     {
-        $this->assertTrue(trait_exists(OptionTrait::class), "Class Exists");
-        $this->assertUseTrait(OptionTrait::class, $this->object, "Mock Object uses " . OptionTrait::class);
+        $this->assertTrue(trait_exists(OptionAwareTrait::class), "Class Exists");
+        $this->assertUseTrait(OptionAwareTrait::class, $this->object, "Mock Object uses " . OptionAwareTrait::class);
     }
 
 
@@ -92,7 +92,7 @@ class OptionTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \Niceshops\Core\Option\OptionTrait::normalizeOption()
+     * @covers       \Niceshops\Core\Option\OptionAwareTrait::normalizeOption()
      *
      * @param string $option
      * @param string $expectedOption
@@ -108,25 +108,25 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::getOptions()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
      *
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::unsetOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
      */
     public function testGetOptions()
     {
-        $this->assertEquals([], $this->object->getOptions());
+        $this->assertEquals([], $this->object->getOption_List());
 
         $this->object->addOption("foo");
         $this->object->addOption("bar");
-        $this->assertEquals(["foo", "bar"], $this->object->getOptions());
+        $this->assertEquals(["foo", "bar"], $this->object->getOption_List());
 
         $this->object->removeOption("foo");
-        $this->assertEquals(["bar"], $this->object->getOptions());
+        $this->assertEquals(["bar"], $this->object->getOption_List());
 
         $this->object->unsetOption("bar");
-        $this->assertEquals([], $this->object->getOptions());
+        $this->assertEquals([], $this->object->getOption_List());
     }
 
 
@@ -134,28 +134,28 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::getRemovedOptions()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::getRemovedOption_List()
      *
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::unsetOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
      */
     public function testGetRemovedOptions()
     {
-        $this->assertEquals([], $this->object->getRemovedOptions());
+        $this->assertEquals([], $this->object->getRemovedOption_List());
 
         $this->object->addOption("foo");
         $this->object->addOption("bar");
-        $this->assertEquals([], $this->object->getRemovedOptions());
+        $this->assertEquals([], $this->object->getRemovedOption_List());
 
         $this->object->removeOption("foo");
-        $this->assertEquals(["foo"], $this->object->getRemovedOptions());
+        $this->assertEquals(["foo"], $this->object->getRemovedOption_List());
 
         $this->object->unsetOption("bar");
-        $this->assertEquals(["foo"], $this->object->getRemovedOptions());
+        $this->assertEquals(["foo"], $this->object->getRemovedOption_List());
 
         $this->object->unsetOption("foo");
-        $this->assertEquals([], $this->object->getRemovedOptions());
+        $this->assertEquals([], $this->object->getRemovedOption_List());
     }
 
 
@@ -163,19 +163,19 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::clearOptions()
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::clearOptions()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
      */
     public function testClearOptions()
     {
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->addOption("foo");
         $this->object->addOption("bar");
-        $this->assertCount(2, $this->object->getOptions());
+        $this->assertCount(2, $this->object->getOption_List());
 
         $this->object->clearOptions();
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
     }
 
 
@@ -207,7 +207,7 @@ class OptionTraitTest extends DefaultTestCase
             ],
             [
                 ["  ", " ", ""],
-                1,
+                0,
             ],
             [
                 ["123", " 123", "123 "],
@@ -253,26 +253,55 @@ class OptionTraitTest extends DefaultTestCase
      *
      * @dataProvider addOptionDataProvider
      *
-     * @covers       \Niceshops\Core\Option\OptionTrait::addOption()
+     * @covers       \Niceshops\Core\Option\OptionAwareTrait::addOption()
      *
      * @param array  $arrOption
      * @param        $expectedCount
      * @param null   $expectedException
      *
-     * @uses         \Niceshops\Core\Option\OptionTrait::getOptions()
+     * @uses         \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
      */
     public function testAddOption(array $arrOption, $expectedCount, $expectedException = null)
     {
         if ($expectedException) {
             $this->expectException($expectedException);
         }
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         foreach ($arrOption as $option) {
             $this->object->addOption($option);
         }
 
-        $this->assertCount($expectedCount, $this->object->getOptions());
+        $this->assertCount($expectedCount, $this->object->getOption_List());
+    }
+
+    /**
+     * @group        unit
+     * @small
+     *
+     * @dataProvider addOptionDataProvider
+     *
+     * @covers       \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     *
+     * @param array  $arrOption
+     * @param        $expectedCount
+     * @param null   $expectedException
+     *
+     * @uses         \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     */
+    public function testAddOption_List(array $arrOption, $expectedCount, $expectedException = null)
+    {
+        if ($expectedException) {
+            $this->expectException($expectedException);
+        }
+        $this->assertCount(0, $this->object->getOption_List());
+        $this->object->addOption_List($arrOption);
+        $this->assertCount($expectedCount, $this->object->getOption_List());
+        foreach ($arrOption as $item) {
+            if (strlen(trim($item)) > 0) {
+                $this->assertTrue($this->object->hasOption($item));
+            }
+        }
     }
 
 
@@ -280,31 +309,31 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::getOptions()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::removeOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
      */
     public function testRemoveOption()
     {
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->addOption("foo");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->removeOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->addOption("foo");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->removeOption("bar");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->removeOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->removeOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
     }
 
 
@@ -312,31 +341,31 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::unsetOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::getOptions()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
      */
     public function testResetOption()
     {
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->addOption("foo");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->unsetOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->addOption("foo");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->unsetOption("bar");
-        $this->assertCount(1, $this->object->getOptions());
+        $this->assertCount(1, $this->object->getOption_List());
 
         $this->object->unsetOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
 
         $this->object->unsetOption("foo");
-        $this->assertCount(0, $this->object->getOptions());
+        $this->assertCount(0, $this->object->getOption_List());
     }
 
 
@@ -344,10 +373,10 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::hasOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionTrait::unsetOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::hasOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
+     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
      */
     public function testHasOption()
     {
@@ -394,22 +423,22 @@ class OptionTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionTrait::clearOptions()
-     * @covers \Niceshops\Core\Option\OptionTrait::getOptions()
-     * @covers \Niceshops\Core\Option\OptionTrait::getRemovedOptions()
-     * @covers \Niceshops\Core\Option\OptionTrait::addOption()
-     * @covers \Niceshops\Core\Option\OptionTrait::removeOption()
-     * @covers \Niceshops\Core\Option\OptionTrait::unsetOption()
-     * @covers \Niceshops\Core\Option\OptionTrait::hasOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::clearOptions()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::getRemovedOption_List()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::removeOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
+     * @covers \Niceshops\Core\Option\OptionAwareTrait::hasOption()
      */
     public function testOptionTraitAwareInterface()
     {
         $this->object = new class implements OptionAwareInterface {
-            use OptionTrait;
+            use OptionAwareTrait;
         };
 
-        $this->assertSame([], $this->object->getOptions());
-        $this->assertSame([], $this->object->getRemovedOptions());
+        $this->assertSame([], $this->object->getOption_List());
+        $this->assertSame([], $this->object->getRemovedOption_List());
         $this->assertFalse($this->object->hasOption("foo"));
         $this->assertFalse($this->object->hasOption("bar"));
         $this->assertFalse($this->object->hasOption("baz"));
@@ -421,8 +450,8 @@ class OptionTraitTest extends DefaultTestCase
         $this->object->addOption("foo");
         $this->object->addOption("bar");
         $this->object->addOption("baz");
-        $this->assertSame(["foo", "bar", "baz"], $this->object->getOptions());
-        $this->assertSame([], $this->object->getRemovedOptions());
+        $this->assertSame(["foo", "bar", "baz"], $this->object->getOption_List());
+        $this->assertSame([], $this->object->getRemovedOption_List());
         $this->assertTrue($this->object->hasOption("foo"));
         $this->assertTrue($this->object->hasOption("bar"));
         $this->assertTrue($this->object->hasOption("baz"));
@@ -433,8 +462,8 @@ class OptionTraitTest extends DefaultTestCase
          */
         $this->object->removeOption("foo");
         $this->object->unsetOption("bar");
-        $this->assertSame(["baz"], $this->object->getOptions());
-        $this->assertSame(["foo"], $this->object->getRemovedOptions());
+        $this->assertSame(["baz"], $this->object->getOption_List());
+        $this->assertSame(["foo"], $this->object->getRemovedOption_List());
         $this->assertFalse($this->object->hasOption("foo"));
         $this->assertFalse($this->object->hasOption("bar"));
         $this->assertTrue($this->object->hasOption("baz"));
@@ -444,10 +473,11 @@ class OptionTraitTest extends DefaultTestCase
          * clear all options
          */
         $this->object->clearOptions();
-        $this->assertSame([], $this->object->getOptions());
-        $this->assertSame([], $this->object->getRemovedOptions());
+        $this->assertSame([], $this->object->getOption_List());
+        $this->assertSame([], $this->object->getRemovedOption_List());
         $this->assertFalse($this->object->hasOption("foo"));
         $this->assertFalse($this->object->hasOption("bar"));
         $this->assertFalse($this->object->hasOption("baz"));
     }
+
 }
