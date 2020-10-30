@@ -5,21 +5,21 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Option;
+namespace Niceshops\Core\Option;
 
 /**
  * Trait OptionTrait
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 trait OptionTrait
 {
-    
+
     /**
      * @var array
      */
     private $arrOption = [];
-    
-    
+
+
     /**
      * @param string $option
      *
@@ -29,11 +29,11 @@ trait OptionTrait
     {
         // TODO use https://docs.laminas.dev/laminas-filter/word/#camelcasetounderscore
         $option = preg_replace(['#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'], ['_' . '\1', '_' . '\1'], trim($option));
-        
+
         return strtolower($option);
     }
-    
-    
+
+
     /**
      * May be overwritten by class using this trait for customized validation.
      *
@@ -45,8 +45,8 @@ trait OptionTrait
     {
         return strlen($option) > 0;
     }
-    
-    
+
+
     /**
      * @return $this
      */
@@ -55,8 +55,8 @@ trait OptionTrait
         $this->arrOption = [];
         return $this;
     }
-    
-    
+
+
     /**
      * @return array
      */
@@ -70,8 +70,8 @@ trait OptionTrait
             )
         );
     }
-    
-    
+
+
     /**
      * @return array
      */
@@ -85,8 +85,8 @@ trait OptionTrait
             )
         );
     }
-    
-    
+
+
     /**
      * @param string $option
      *
@@ -99,8 +99,8 @@ trait OptionTrait
         }
         return $this;
     }
-    
-    
+
+
     /**
      * @param array $arrOption
      *
@@ -111,11 +111,11 @@ trait OptionTrait
         foreach ($arrOption as $option) {
             $this->addOption($option);
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $option
      *
@@ -126,11 +126,11 @@ trait OptionTrait
         if ($this->validateOption($option)) {
             $this->arrOption[$this->normalizeOption($option)] = false;
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $option
      *
@@ -141,11 +141,11 @@ trait OptionTrait
         if ($this->validateOption($option)) {
             unset($this->arrOption[$this->normalizeOption($option)]);
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $normalizedOption
      *
@@ -155,8 +155,8 @@ trait OptionTrait
     {
         return array_key_exists($normalizedOption, $this->arrOption) && $this->arrOption[$normalizedOption] === true;
     }
-    
-    
+
+
     /**
      * @param string $option
      *
@@ -166,7 +166,7 @@ trait OptionTrait
     {
         return $this->hasNormalizedOption($this->normalizeOption($option));
     }
-    
-    
+
+
 }
 

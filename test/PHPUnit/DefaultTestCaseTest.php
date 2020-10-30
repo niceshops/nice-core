@@ -5,10 +5,10 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\PHPUnit;
+namespace Niceshops\Core\PHPUnit;
 
-use NiceshopsDev\NiceCore\Attribute\AttributeTrait;
-use NiceshopsDev\NiceCore\Option\OptionTrait;
+use Niceshops\Core\Attribute\AttributeTrait;
+use Niceshops\Core\Option\OptionTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -18,16 +18,16 @@ use PHPUnit\Framework\TestCase;
  */
 class DefaultTestCaseTest extends TestCase
 {
-    
+
     use TestCaseClassMemberInvokerTrait;
-    
-    
+
+
     /**
      * @var DefaultTestCase|MockObject
      */
     protected $object;
-    
-    
+
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -37,8 +37,8 @@ class DefaultTestCaseTest extends TestCase
     {
         $this->object = $this->getMockBuilder(DefaultTestCase::class)->disableOriginalConstructor()->getMockForAbstractClass();
     }
-    
-    
+
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -46,8 +46,8 @@ class DefaultTestCaseTest extends TestCase
     protected function tearDown()
     {
     }
-    
-    
+
+
     /**
      * @group integration
      * @small
@@ -57,8 +57,8 @@ class DefaultTestCaseTest extends TestCase
         $this->assertTrue(class_exists(DefaultTestCase::class), "Class Exists");
         $this->assertTrue(is_a($this->object, DefaultTestCase::class), "Mock Object is set");
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -70,19 +70,19 @@ class DefaultTestCaseTest extends TestCase
         $objUseAttributeTrait = new class {
             use AttributeTrait;
         };
-        
+
         $objUseOptionAndAttributeTrait = new class {
             use AttributeTrait;
             use OptionTrait;
         };
-        
+
         $objUseNoTrait = new class() {
         };
-        
+
         $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, AttributeTrait::class));
         $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, OptionTrait::class));
         $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseOptionAndAttributeTrait, OptionTrait::class));
         $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseNoTrait, AttributeTrait::class));
     }
-    
+
 }

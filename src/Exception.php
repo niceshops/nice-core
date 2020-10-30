@@ -5,11 +5,11 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore;
+namespace Niceshops\Core;
 
 /**
  * Class Exception
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 class Exception extends \Exception
 {
@@ -31,11 +31,11 @@ class Exception extends \Exception
     const LOCK_EXCEPTION_CODE = 16;
     const DATABASE_EXCEPTION_CODE = 17;
     const FILE_EXISTS_EXCEPTION_CODE = 18;
-    
-    
+
+
     const METHOD_NOT_FOUND = 404;
-    
-    
+
+
     /**
      * @param string $message
      *
@@ -46,8 +46,8 @@ class Exception extends \Exception
         $this->message = $message;
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $appendMessage
      * @param string $separator
@@ -62,8 +62,8 @@ class Exception extends \Exception
         $this->message .= $separator . $appendMessage;
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $prependMessage
      * @param string $separator

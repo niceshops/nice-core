@@ -5,54 +5,54 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Attribute;
+namespace Niceshops\Core\Attribute;
 
-use NiceshopsDev\NiceCore\Exception;
+use Niceshops\Core\Exception;
 
 /**
  * Trait AttributeTrait
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 trait AttributeTrait
 {
-    
-    
+
+
     /**
      * @var bool
      */
     protected $allowMagicSetAttribute = false;
-    
-    
+
+
     /**
      * @var bool
      */
     protected $allowMagicGetAttribute = false;
-    
-    
+
+
     /**
      * @var array
      */
     private $arrAttribute = [];
-    
-    
+
+
     /**
      * @var array
      */
     private $arrLockedAttribute = [];
-    
-    
+
+
     /**
      * @var array
      */
     private $arrAttributeKeyMap = [];
-    
-    
+
+
     /**
      * @var array
      */
     private $arrAttributeNormalizedKeyCount = [];
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -62,11 +62,11 @@ trait AttributeTrait
     {
         // TODO use https://docs.laminas.dev/laminas-filter/word/#camelcasetounderscore
         $key = preg_replace(['#(?<=(?:\p{Lu}))(\p{Lu}\p{Ll})#', '#(?<=(?:\p{Ll}|\p{Nd}))(\p{Lu})#'], ['_' . '\1', '_' . '\1'], trim($key));
-        
+
         return strtolower($key);
     }
-    
-    
+
+
     /**
      * @param $normalizedKey
      *
@@ -76,11 +76,11 @@ trait AttributeTrait
     {
         return isset($this->arrLockedAttribute[$normalizedKey]);
     }
-    
-    
+
+
     /**
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return self
      * @throws Exception
@@ -90,21 +90,21 @@ trait AttributeTrait
         $normalizedKey = $this->normalizeAttributeKey($key);
         if (!$this->isAttributeLocked($normalizedKey)) {
             $this->arrAttributeKeyMap[$key] = $normalizedKey;
-            
+
             if ($key !== $normalizedKey && array_key_exists($normalizedKey, $this->arrAttribute)) {
                 if (array_count_values($this->arrAttributeKeyMap)[$normalizedKey] > 1) {
                     $message = "Try to set the attribute '$normalizedKey' with ambiguous keys ('$key', ...)!";
                     throw new Exception($message);
                 }
             }
-            
+
             $this->arrAttribute[$normalizedKey] = $value;
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -115,8 +115,8 @@ trait AttributeTrait
         $normalizedKey = array_key_exists($key, $this->arrAttributeKeyMap) ? $this->arrAttributeKeyMap[$key] : $this->normalizeAttributeKey($key);
         return $this->hasAttributeByNormalizedKey($normalizedKey);
     }
-    
-    
+
+
     /**
      * @param string $normalizedKey
      *
@@ -126,8 +126,8 @@ trait AttributeTrait
     {
         return array_key_exists($normalizedKey, $this->arrAttribute);
     }
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -145,8 +145,8 @@ trait AttributeTrait
         }
         return $result;
     }
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -162,8 +162,8 @@ trait AttributeTrait
         }
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -172,11 +172,11 @@ trait AttributeTrait
     public function lockAttribute(string $key): self
     {
         $this->arrLockedAttribute[$this->normalizeAttributeKey($key)] = true;
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param string $key
      *
@@ -185,11 +185,11 @@ trait AttributeTrait
     public function unlockAttribute(string $key): self
     {
         unset($this->arrLockedAttribute[$this->normalizeAttributeKey($key)]);
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @return array
      */
@@ -199,11 +199,11 @@ trait AttributeTrait
         foreach ($this->arrAttributeKeyMap as $key => $normalizedKey) {
             $arrAttribute[$key] = $this->arrAttribute[$normalizedKey];
         }
-        
+
         return $arrAttribute;
     }
-    
-    
+
+
     /**
      * Alias for AttributeTrait::getAttribute_List()
      *
@@ -214,8 +214,8 @@ trait AttributeTrait
     {
         return $this->getAttribute_List();
     }
-    
-    
+
+
     /**
      * @param $name
      * @param $arguments
@@ -230,16 +230,16 @@ trait AttributeTrait
         } elseif ($this->allowMagicGetAttribute && substr($name, 0, 3) === "get" && is_array($arguments) && count($arguments) == 0) {
             return $this->getAttribute(lcfirst(substr($name, 3)));
         }
-        
+
         if (get_parent_class()) {
             /** @noinspection PhpUndefinedClassInspection */
             return parent::__call($name, $arguments);
         }
-        
+
         return null;
     }
-    
-    
+
+
     /**
      * @param $name
      * @param $value
@@ -252,16 +252,16 @@ trait AttributeTrait
         if ($this->allowMagicSetAttribute) {
             return $this->setAttribute($name, $value);
         }
-        
+
         if (get_parent_class()) {
             /** @noinspection PhpUndefinedClassInspection */
             return parent::__set($name, $value);
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param $name
      *
@@ -273,14 +273,14 @@ trait AttributeTrait
         if ($this->allowMagicGetAttribute) {
             return $this->getAttribute($name);
         }
-        
+
         if (get_parent_class()) {
             /** @noinspection PhpUndefinedClassInspection */
             return parent::__get($name);
         }
-        
+
         return null;
     }
-    
-    
+
+
 }

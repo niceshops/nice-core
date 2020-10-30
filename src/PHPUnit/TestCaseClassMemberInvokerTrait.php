@@ -5,7 +5,7 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\PHPUnit;
+namespace Niceshops\Core\PHPUnit;
 
 
 use PHPUnit\Framework\MockObject\MockObject;
@@ -15,8 +15,8 @@ use ReflectionProperty;
 
 trait TestCaseClassMemberInvokerTrait
 {
-    
-    
+
+
     /**
      * @param object $object
      * @param string $methodName Private or protected method
@@ -31,14 +31,14 @@ trait TestCaseClassMemberInvokerTrait
         if (!is_object($object)) {
             $this->fail('Can not invoke method on an invalid object');
         }
-        
+
         if (count($anotherParams)) {
             array_unshift($anotherParams, $parameter);
             $parameter = $anotherParams;
         } elseif (!is_array($parameter)) {
             $parameter = [$parameter];
         }
-        
+
         try {
             $reflection = new ReflectionClass($object);
             if (!$reflection->hasMethod($methodName)) {
@@ -46,15 +46,15 @@ trait TestCaseClassMemberInvokerTrait
             }
             $method = $reflection->getMethod($methodName);
             $method->setAccessible(true);
-            
+
             return $method->invokeArgs($object, $parameter);
         } catch (ReflectionException $e) {
             $this->fail('ReflectionException is thrown on invoking method: ' . $e->getMessage());
         }
         return null;
     }
-    
-    
+
+
     /**
      * @param object $object
      *
@@ -70,11 +70,11 @@ trait TestCaseClassMemberInvokerTrait
         } else {
             $property = new ReflectionProperty($object, $name);
         }
-        
+
         return $property;
     }
-    
-    
+
+
     /**
      * @param        $object
      * @param string $name
@@ -85,18 +85,18 @@ trait TestCaseClassMemberInvokerTrait
         if (!is_object($object)) {
             $this->fail('Can not invoke set property on an invalid object');
         }
-        
+
         try {
             $property = $this->getReflectionProperty_for_Object($object, $name);
-            
+
             $property->setAccessible(true);
             $property->setValue($object, $value);
         } catch (ReflectionException $e) {
             $this->fail(sprintf('ReflectionException is thrown on invoking property set - %s', $e->getMessage()));
         }
     }
-    
-    
+
+
     /**
      * @param        $object
      * @param string $name
@@ -108,17 +108,17 @@ trait TestCaseClassMemberInvokerTrait
         if (!is_object($object)) {
             $this->fail('Can not invoke get property on an invalid object');
         }
-        
+
         try {
             $property = $this->getReflectionProperty_for_Object($object, $name);
-            
+
             $property->setAccessible(true);
-            
+
             return $property->getValue($object);
         } catch (ReflectionException $e) {
             $this->fail(sprintf('ReflectionException is thrown on invoking property get - %s', $e->getMessage()));
         }
-        
+
         return null;
     }
 }

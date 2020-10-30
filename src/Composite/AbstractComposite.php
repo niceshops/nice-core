@@ -5,11 +5,11 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Composite;
+namespace Niceshops\Core\Composite;
 
 /**
  * Class AbstractComposite
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 abstract class AbstractComposite implements CompositeInterface
 {

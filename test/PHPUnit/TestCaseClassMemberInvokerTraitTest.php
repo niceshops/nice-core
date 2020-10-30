@@ -5,7 +5,7 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\PHPUnit;
+namespace Niceshops\Core\PHPUnit;
 
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
@@ -16,19 +16,19 @@ use ReflectionProperty;
 /**
  * Class TestCaseClassMemberInvokerTraitTest
  * @coversDefaultClass TestCaseClassMemberInvokerTrait
- * @uses               \NiceshopsDev\NiceCore\PHPUnit\TestCaseClassMemberInvokerTrait
- * @package            NiceshopsDev\NiceCore
+ * @uses               \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait
+ * @package            Niceshops\Core
  */
 class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
 {
-    
-    
+
+
     /**
      * @var TestCaseClassMemberInvokerTrait
      */
     protected $object;
-    
-    
+
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -37,8 +37,8 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
     {
         $this->object = $this->getMockBuilder(TestCaseClassMemberInvokerTrait::class)->getMockForTrait();
     }
-    
-    
+
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -46,8 +46,8 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
     protected function tearDown()
     {
     }
-    
-    
+
+
     /**
      * @group integration
      * @small
@@ -57,15 +57,15 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $this->assertTrue(trait_exists(TestCaseClassMemberInvokerTrait::class), "Class Exists");
         $this->assertUseTrait(TestCaseClassMemberInvokerTrait::class, $this->object, "Mock Object uses " . TestCaseClassMemberInvokerTrait::class);
     }
-    
-    
+
+
     /**
      * @return Generator
      */
     public function invokeMethodDataProvider()
     {
         $obj = new class {
-            
+
             /**
              * @param string $message
              *
@@ -80,11 +80,11 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
                     $message = implode(" ", $message);
                 }
                 $message = strtoupper($message);
-                
+
                 return "hello" . (strlen($message) ? " " . $message : "") . ($tails ? " " . implode(" ", $tails) : "");
             }
         };
-        
+
         yield[$obj, "hello", [], "hello"];
         yield[$obj, "hello", [["world"]], "hello WORLD"];
         yield[$obj, "hello", [["world", "!"]], "hello WORLD !"];
@@ -94,8 +94,8 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         yield[$obj, "hello", [["world"], "foo", "bar", "baz", "!"], "hello WORLD foo bar baz !"];
         yield[$obj, "hello", [["world"], "!"], "hello WORLD !"];
     }
-    
-    
+
+
     /**
      * @group        unit
      * @small
@@ -114,16 +114,16 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
     {
         $invokeMethod = new ReflectionMethod($this->object, "invokeMethod");
         $invokeMethod->setAccessible(true);
-        
+
         $arrInvokeArgParam = [&$obj, $methodName];
         foreach ($arrParam as $param) {
             $arrInvokeArgParam[] = $param;
         }
-        
+
         $this->assertSame($expectedValue, $invokeMethod->invokeArgs($this->object, $arrInvokeArgParam));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -136,21 +136,21 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $this->object = new class extends DefaultTestCase {
             use TestCaseClassMemberInvokerTrait;
         };
-        
+
         $object = 'notAnObject';
         $name = "foo";
         $value = "bar";
         $message = 'Can not invoke set property on an invalid object';
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage($message);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeSetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $invokeMethod->invoke($this->object, $object, $name, $value);
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -163,23 +163,23 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $this->object = new class extends DefaultTestCase {
             use TestCaseClassMemberInvokerTrait;
         };
-        
+
         $object = new class {
         };
-        
+
         $name = "foo";
         $value = "bar";
         $message = '/ReflectionException is thrown on invoking property set \- Property .+::\$foo does not exist/i';
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageRegExp($message);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeSetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $invokeMethod->invoke($this->object, $object, $name, $value);
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -193,24 +193,24 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
             ["getReflectionProperty_for_Object"]
         )->getMockForTrait();
         $property = $this->getMockBuilder(ReflectionProperty::class)->disableOriginalConstructor()->setMethods(["setAccessible", "setValue"])->getMock();
-        
+
         $object = new class {
             protected $foo;
         };
         $name = "foo";
         $value = "bar";
-        
+
         $this->object->expects($this->once())->method("getReflectionProperty_for_Object")->with(...[$object, $name])->willReturn($property);
         $property->expects($this->once())->method("setAccessible")->with(...[true]);
         $property->expects($this->once())->method("setValue")->with(...[$object, $value]);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeSetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $invokeMethod->invoke($this->object, $object, $name, $value);
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -223,21 +223,21 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $this->object = new class extends DefaultTestCase {
             use TestCaseClassMemberInvokerTrait;
         };
-        
+
         $object = 'notAnObject';
         $name = "foo";
         $value = "bar";
         $message = 'Can not invoke get property on an invalid object';
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessage($message);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeGetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $invokeMethod->invoke($this->object, $object, $name, $value);
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -250,24 +250,24 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $this->object = new class extends DefaultTestCase {
             use TestCaseClassMemberInvokerTrait;
         };
-        
+
         $object = new class {
         };
-        
+
         $name = "foo";
         $value = "bar";
         $message = '/ReflectionException is thrown on invoking property get \- Property .+::\$foo does not exist/i';
-        
+
         $this->expectException(AssertionFailedError::class);
         $this->expectExceptionMessageRegExp($message);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeGetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $invokeMethod->invoke($this->object, $object, $name, $value);
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
@@ -281,22 +281,22 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
             ["getReflectionProperty_for_Object"]
         )->getMockForTrait();
         $property = $this->getMockBuilder(ReflectionProperty::class)->disableOriginalConstructor()->setMethods(["setAccessible", "getValue"])->getMock();
-        
+
         $object = new class {
             protected $foo = "bar";
         };
         $name = "foo";
         $value = "bar";
-        
+
         $this->object->expects($this->once())->method("getReflectionProperty_for_Object")->with(...[$object, $name])->willReturn($property);
         $property->expects($this->once())->method("setAccessible")->with(...[true]);
         $property->expects($this->once())->method("getValue")->with(...[$object])->willReturn($value);
-        
+
         $invokeMethod = new ReflectionMethod($this->object, "invokeGetProperty");
         $invokeMethod->setAccessible(true);
-        
+
         $this->assertSame($value, $invokeMethod->invoke($this->object, $object, $name));
     }
-    
-    
+
+
 }

@@ -5,26 +5,26 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Runner;
+namespace Niceshops\Core\Runner;
 
 use Countable;
 use Generator;
-use NiceshopsDev\NiceCore\Exception;
+use Niceshops\Core\Exception;
 use Traversable;
 
 /**
  * Class TraversableRunner
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 class TraversableRunner implements RunnerInterface
 {
-    
+
     /**
      * @var Traversable|array
      */
     protected $traversable;
-    
-    
+
+
     /**
      * TraversableRunner constructor.
      *
@@ -39,8 +39,8 @@ class TraversableRunner implements RunnerInterface
         }
         $this->traversable =& $traversable;
     }
-    
-    
+
+
     /**
      * @return int
      */
@@ -63,11 +63,11 @@ class TraversableRunner implements RunnerInterface
                 }
             }
         }
-        
+
         return $count;
     }
-    
-    
+
+
     /**
      * @param $from
      *
@@ -76,7 +76,7 @@ class TraversableRunner implements RunnerInterface
     protected function normalizeRunFrom($from)
     {
         $count = $this->getCount();
-        
+
         if (is_null($from)) {
             $from = 0;
         } else {
@@ -84,7 +84,7 @@ class TraversableRunner implements RunnerInterface
                 $from = $from % $count;
             }
         }
-        
+
         if ($from < 0) {
             $from = $count + $from;
         } else {
@@ -92,11 +92,11 @@ class TraversableRunner implements RunnerInterface
                 $from = $count - 1;
             }
         }
-        
+
         return $from;
     }
-    
-    
+
+
     /**
      * @param int $from
      * @param int $to
@@ -107,13 +107,13 @@ class TraversableRunner implements RunnerInterface
     public function runFromTo($from = 0, $to = null, $stepWidth = 1)
     {
         $count = $this->getCount();
-        
+
         $from = $this->normalizeRunFrom($from);
-        
+
         if ($stepWidth < 1) {
             $stepWidth = 1;
         }
-        
+
         if (is_null($to)) {
             $to = $count - 1;
         } else {
@@ -121,7 +121,7 @@ class TraversableRunner implements RunnerInterface
                 $to = $to % $count;
             }
         }
-        
+
         if ($to < 0) {
             $to = ($count + $to) - 1;
         } else {
@@ -129,13 +129,13 @@ class TraversableRunner implements RunnerInterface
                 $to = $count - 1;
             }
         }
-        
+
         if ($to < $from) {
             $_from = $from;
             $from = $to;
             $to = $_from;
         }
-        
+
         foreach ($this->traversable as $key => $val) {
             if ($key < $from) {
                 continue;
@@ -146,12 +146,12 @@ class TraversableRunner implements RunnerInterface
             if ($stepWidth > 1 && ($key - $from) % $stepWidth != 0) {
                 continue;
             }
-            
+
             yield $val;
         }
     }
-    
-    
+
+
     /**
      * @param int $from
      * @param int $length
@@ -166,7 +166,7 @@ class TraversableRunner implements RunnerInterface
         if ($stepWidth < 1) {
             $stepWidth = 1;
         }
-        
+
         if (is_null($length)) {
             $length = $count;
         } else {
@@ -177,12 +177,12 @@ class TraversableRunner implements RunnerInterface
         if ($length > $count - $from) {
             $length = $count - $from;
         }
-        
+
         $to = $from + ($length * $stepWidth - 1);
         if ($stepWidth > 1 && $to > $count - 1) {
             $to = null;
         }
-        
+
         return $this->runFromTo($from, $to, $stepWidth);
     }
 }

@@ -5,16 +5,16 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Runner;
+namespace Niceshops\Core\Runner;
 
 /**
  * Interface RunnableInterface
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 interface RunnableInterface
 {
-    
-    
+
+
     /**
      * @return RunnerInterface
      */

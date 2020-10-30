@@ -5,21 +5,21 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Observer;
+namespace Niceshops\Core\Observer;
 
 
 use Generator;
-use NiceshopsDev\NiceCore\Composite\AbstractComposite;
+use Niceshops\Core\Composite\AbstractComposite;
 use SplObserver;
 
 /**
  * Class ObserverStorage
- * @package NiceshopsDev\NiceCore\Observer
+ * @package Niceshops\Core\Observer
  */
 class ObserverStorage extends AbstractComposite
 {
-    
-    
+
+
     /**
      * @param SplObserver $observer
      *
@@ -29,8 +29,8 @@ class ObserverStorage extends AbstractComposite
     {
         return $this->addComponent($observer);
     }
-    
-    
+
+
     /**
      * @param SplObserver $observer
      *
@@ -40,8 +40,8 @@ class ObserverStorage extends AbstractComposite
     {
         return $this->removeComponent($observer);
     }
-    
-    
+
+
     /**
      * @return Generator   for all \SplObserver instances
      */

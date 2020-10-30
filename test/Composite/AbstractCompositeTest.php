@@ -5,11 +5,11 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Composite;
+namespace Niceshops\Core\Composite;
 
 use ArrayObject;
 use Countable;
-use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
+use Niceshops\Core\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;
 use stdClass;
@@ -17,18 +17,18 @@ use stdClass;
 /**
  * Class AbstractCompositeTest
  * @coversDefaultClass AbstractComposite
- * @uses               \NiceshopsDev\NiceCore\Composite\AbstractComposite
- * @package            NiceshopsDev\NiceCore
+ * @uses               \Niceshops\Core\Composite\AbstractComposite
+ * @package            Niceshops\Core
  */
 class AbstractCompositeTest extends DefaultTestCase
 {
-    
+
     /**
      * @var AbstractComposite
      */
     protected $object;
-    
-    
+
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -37,8 +37,8 @@ class AbstractCompositeTest extends DefaultTestCase
     {
         $this->object = $this->getMockBuilder(AbstractComposite::class)->disableOriginalConstructor()->getMockForAbstractClass();
     }
-    
-    
+
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
@@ -46,8 +46,8 @@ class AbstractCompositeTest extends DefaultTestCase
     protected function tearDown()
     {
     }
-    
-    
+
+
     /**
      * @group integration
      * @small
@@ -57,55 +57,55 @@ class AbstractCompositeTest extends DefaultTestCase
         $this->assertTrue(class_exists(AbstractComposite::class), "Class Exists");
         $this->assertTrue(is_a($this->object, AbstractComposite::class), "Mock Object is set");
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
      */
     public function testGetComponent_List()
     {
         $this->assertInstanceOf(ArrayObject::class, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::hasComponent()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::hasComponent()
      * @throws ReflectionException
-     * @uses   \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
+     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
      */
     public function testHasComponent()
     {
         $hasComponent = new ReflectionMethod(get_class($this->object), "hasComponent");
         $hasComponent->setAccessible(true);
-        
+
         $component = new stdClass();
         $component->foo = "bar";
-        
+
         $this->assertFalse($hasComponent->invoke($this->object, $component));
         $this->invokeMethod($this->object, "getComponent_List")->append($component);
         $this->assertTrue($this->invokeMethod($this->object, "hasComponent", $component));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::addComponent()
-     * @uses   \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::addComponent()
+     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
      */
     public function testAddComponent()
     {
         $component = new stdClass();
         $component->foo = "bar";
-        
+
         $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->invokeMethod($this->object, "addComponent", $component);
         $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
@@ -114,67 +114,67 @@ class AbstractCompositeTest extends DefaultTestCase
         $this->invokeMethod($this->object, "addComponent", clone $component);
         $this->assertSame(2, count($this->invokeMethod($this->object, "getComponent_List")));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::removeComponent()
-     * @uses   \NiceshopsDev\NiceCore\Composite\AbstractComposite::getComponent_List()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::removeComponent()
+     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
      */
     public function testRemoveComponent()
     {
         $component = new stdClass();
         $component->foo = "bar";
-        
+
         $component2 = new stdClass();
         $component2->bar = "baz";
-        
+
         $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->invokeMethod($this->object, "getComponent_List")->append($component);
         $this->invokeMethod($this->object, "getComponent_List")->append($component2);
         $this->assertSame(2, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->assertSame($component, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(0));
         $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
-        
+
         $this->invokeMethod($this->object, "removeComponent", $component);
         $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertArrayHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
-    
+
         $this->invokeMethod($this->object, "removeComponent", $component);
         $this->assertSame(1, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertArrayHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertSame($component2, $this->invokeMethod($this->object, "getComponent_List")->offsetGet(1));
-    
+
         $this->invokeMethod($this->object, "removeComponent", $component2);
         $this->assertSame(0, count($this->invokeMethod($this->object, "getComponent_List")));
         $this->assertArrayNotHasKey(0, $this->invokeMethod($this->object, "getComponent_List"));
         $this->assertArrayNotHasKey(1, $this->invokeMethod($this->object, "getComponent_List"));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::addComponent()
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::hasComponent()
-     * @covers \NiceshopsDev\NiceCore\Composite\AbstractComposite::removeComponent()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::addComponent()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::hasComponent()
+     * @covers \Niceshops\Core\Composite\AbstractComposite::removeComponent()
      */
     public function testConcreteImplementation()
     {
         $defaultBean = new class() implements Countable {
-            
+
             /**
              * @var array
              */
             private $arrData = [];
-            
-            
+
+
             /**
              * @param string $key
              * @param        $value
@@ -183,8 +183,8 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 $this->arrData[$key] = $value;
             }
-            
-            
+
+
             /**
              * @return int
              */
@@ -192,11 +192,11 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 return count($this->arrData);
             }
-            
-            
+
+
         };
-        
-        
+
+
         $beanComposite = new class extends AbstractComposite implements Countable {
             /**
              * @return Countable[]
@@ -205,8 +205,8 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 return parent::getComponent_List();
             }
-            
-            
+
+
             /**
              * @param Countable $bean
              *
@@ -216,8 +216,8 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 return $this->addComponent($bean);
             }
-            
-            
+
+
             /**
              * @param Countable $bean
              *
@@ -227,8 +227,8 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 return $this->hasComponent($bean);
             }
-            
-            
+
+
             /**
              * @param Countable $bean
              *
@@ -238,8 +238,8 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 return $this->removeComponent($bean);
             }
-            
-            
+
+
             /**
              * @param string $name
              * @param mixed  $value
@@ -253,11 +253,11 @@ class AbstractCompositeTest extends DefaultTestCase
                         $bean->setData($name, $value);
                     }
                 }
-                
+
                 return $this;
             }
-            
-            
+
+
             /**
              * @return int
              */
@@ -270,58 +270,58 @@ class AbstractCompositeTest extends DefaultTestCase
                 return $count;
             }
         };
-        
-        
+
+
         $bean = clone $defaultBean;
         $bean->setData("foo", "bar");
-        
+
         $bean2 = clone $bean;
         $bean2->setData("foo", "baz");
         $bean2->setData("bar", "bat");
-        
+
         $this->assertFalse($beanComposite->hasBean($bean));
         $this->assertFalse($beanComposite->hasBean($bean2));
-        
+
         $beanComposite->addBean($bean);
         $this->assertTrue($beanComposite->hasBean($bean));
         $this->assertFalse($beanComposite->hasBean($bean2));
-        
+
         $beanComposite->addBean($bean2);
         $this->assertTrue($beanComposite->hasBean($bean));
         $this->assertTrue($beanComposite->hasBean($bean2));
-        
+
         //  Countable interface
         $this->assertCount(3, $beanComposite);
-        
+
         $beanComposite->removeBean($bean);
         $this->assertFalse($beanComposite->hasBean($bean));
         $this->assertTrue($beanComposite->hasBean($bean2));
-        
+
         //  Countable interface
         $this->assertCount(2, $beanComposite);
-        
+
         $beanComposite->removeBean($bean2);
         $this->assertFalse($beanComposite->hasBean($bean));
         $this->assertFalse($beanComposite->hasBean($bean2));
-        
+
         //  Countable interface
         $this->assertCount(0, $beanComposite);
-        
-        
+
+
         $bean2->setData("baz", "bak");
         $beanComposite->addBean($bean);
         $beanComposite->addBean($bean2);
-        
+
         //  Countable interface
         $this->assertCount(4, $beanComposite);
-        
+
         $beanComposite->setData("bar", "baz");
-        
+
         //  Countable interface
         $this->assertCount(5, $beanComposite);
-        
+
         $beanComposite->removeBean($bean2);
-        
+
         //  Countable interface
         $this->assertCount(2, $beanComposite);
     }

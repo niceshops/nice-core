@@ -5,23 +5,23 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Helper\Object;
+namespace Niceshops\Core\Helper\Object;
 
 
 use ArrayAccess;
 use ArrayObject;
-use NiceshopsDev\NiceCore\Exception;
+use Niceshops\Core\Exception;
 use stdClass;
 
 class ObjectPropertyFinder
 {
-    
+
     /**
      * @var array|object
      */
     private $object;
-    
-    
+
+
     /**
      * ObjectPropertyFinder constructor.
      *
@@ -34,11 +34,11 @@ class ObjectPropertyFinder
         if (!is_object($object) && !is_array($object)) {
             throw new Exception("Passed value is not an object or array!");
         }
-        
+
         $this->object = $object;
     }
-    
-    
+
+
     /**
      * @return array|object
      */
@@ -46,8 +46,8 @@ class ObjectPropertyFinder
     {
         return $this->object;
     }
-    
-    
+
+
     /**
      * @return array
      */
@@ -65,26 +65,26 @@ class ObjectPropertyFinder
         } else {
             $arrKey = array_keys(get_object_vars($object));
         }
-        
+
         return $arrKey;
     }
-    
-    
+
+
     /**
      * @return array
      */
     public function getValues(): array
     {
         $arrValue = [];
-        
+
         foreach ($this->getKeys() as $key) {
             $arrValue[$key] = $this->getValue($key);
         }
-        
+
         return $arrValue;
     }
-    
-    
+
+
     /**
      * @param int|string $key
      *
@@ -94,8 +94,8 @@ class ObjectPropertyFinder
     {
         return in_array($key, $this->getKeys(), true);
     }
-    
-    
+
+
     /**
      * @param int|string $key
      * @param null       $defaultValue
@@ -105,27 +105,27 @@ class ObjectPropertyFinder
     public function getValue($key, $defaultValue = null)
     {
         $object = $this->getObject();
-        
+
         if (!$this->hasKey($key)) {
             return $defaultValue;
         }
-        
+
         if ((is_array($object) || $object instanceof ArrayObject || $object instanceof stdClass)) {
             return ((array)$object)[$key] ?? $defaultValue;
         }
-        
+
         if ($object instanceof ArrayAccess) {
             return $object->offsetGet($key) ?? $defaultValue;
         }
-        
+
         if (method_exists($object, "getData")) {
             return $object->getData($key) ?? $defaultValue;
         }
-        
+
         return get_object_vars($object)[$key] ?? $defaultValue;
     }
-    
-    
+
+
     /**
      * @param null $key
      * @param null $defaultValue
@@ -137,11 +137,11 @@ class ObjectPropertyFinder
         if (null === $key) {
             return $this->getValues();
         }
-        
+
         return $this->getValue($key, $defaultValue);
     }
-    
-    
+
+
     /**
      * @param array $arr
      *
@@ -152,8 +152,8 @@ class ObjectPropertyFinder
     {
         return new self($arr);
     }
-    
-    
+
+
     /**
      * @param object $object
      *
@@ -164,5 +164,5 @@ class ObjectPropertyFinder
     {
         return new self($object);
     }
-    
+
 }

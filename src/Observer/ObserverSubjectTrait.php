@@ -5,35 +5,35 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Observer;
+namespace Niceshops\Core\Observer;
 
 
-use NiceshopsDev\NiceCore\Composite\AbstractComposite;
+use Niceshops\Core\Composite\AbstractComposite;
 use SplObserver;
 
 /**
  * Trait ObserverSubjectTrait
- * @package NiceshopsDev\NiceCore\Observer
+ * @package Niceshops\Core\Observer
  */
 trait ObserverSubjectTrait
 {
-    
+
     /**
      * @var AbstractComposite
      */
     private $observerStorage;
-    
-    
+
+
     private function getObserverStorage()
     {
         if (!$this->observerStorage) {
             $this->observerStorage = new ObserverStorage();
         }
-        
+
         return $this->observerStorage;
     }
-    
-    
+
+
     /**
      * @param SplObserver $observer
      *
@@ -42,11 +42,11 @@ trait ObserverSubjectTrait
     public function attach(SplObserver $observer)
     {
         $this->getObserverStorage()->addObserver($observer);
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param SplObserver $observer
      *
@@ -55,11 +55,11 @@ trait ObserverSubjectTrait
     public function detach(SplObserver $observer)
     {
         $this->getObserverStorage()->removeObserver($observer);
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @return $this
      */
@@ -72,7 +72,7 @@ trait ObserverSubjectTrait
             /** @noinspection PhpParamsInspection */
             $observer->update($this);
         }
-        
+
         return $this;
     }
 }

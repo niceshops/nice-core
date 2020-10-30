@@ -5,16 +5,16 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\PHPUnit;
+namespace Niceshops\Core\PHPUnit;
 
 use PHPUnit\Framework\TestCase;
 
 class DefaultTestCase extends TestCase
 {
-    
+
     use TestCaseClassMemberInvokerTrait;
-    
-    
+
+
     /**
      * @param        $object
      * @param string $trait
@@ -33,11 +33,11 @@ class DefaultTestCase extends TestCase
                 break;
             }
         }
-        
+
         return $classUseTrait;
     }
-    
-    
+
+
     /**
      * @param string        $expected trait classname
      * @param string|object $actual   object or classname

@@ -5,24 +5,24 @@ declare(strict_types=1);
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Composite;
+namespace Niceshops\Core\Composite;
 
 use ArrayObject;
 
 /**
  * Trait CompositeComponentTrait
- * @package NiceshopsDev\NiceCore
+ * @package Niceshops\Core
  */
 trait CompositeComponentTrait
 {
-    
-    
+
+
     /**
      * @var ArrayObject
      */
     private $arrComponent;
-    
-    
+
+
     /**
      * @return ArrayObject
      */
@@ -31,11 +31,11 @@ trait CompositeComponentTrait
         if (is_null($this->arrComponent)) {
             $this->arrComponent = new ArrayObject();
         }
-        
+
         return $this->arrComponent;
     }
-    
-    
+
+
     /**
      * @param $component
      *
@@ -48,11 +48,11 @@ trait CompositeComponentTrait
                 return true;
             }
         }
-        
+
         return false;
     }
-    
-    
+
+
     /**
      * @param $component
      *
@@ -63,11 +63,11 @@ trait CompositeComponentTrait
         if (!$this->hasComponent($component)) {
             $this->getComponent_List()->append($component);
         }
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @param $component
      *
@@ -81,8 +81,8 @@ trait CompositeComponentTrait
                 break;
             }
         }
-        
+
         return $this;
     }
-    
+
 }
