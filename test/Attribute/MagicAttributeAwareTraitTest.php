@@ -11,7 +11,6 @@ use Niceshops\Core\Exception\CoreException;
 use Niceshops\Core\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
-use stdClass;
 
 /**
  * Class AttributeTraitTest
@@ -19,7 +18,7 @@ use stdClass;
  * @uses               \Niceshops\Core\Attribute\AttributeAwareTrait
  * @package            Niceshops\Core
  */
-class MagicAttributeTraitTest extends DefaultTestCase
+class MagicAttributeAwareTraitTest extends DefaultTestCase
 {
 
 

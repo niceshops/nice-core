@@ -15,7 +15,7 @@ use Niceshops\Core\PHPUnit\DefaultTestCase;
  * @uses               \Niceshops\Core\Option\OptionAwareTrait
  * @package            Niceshops\Core
  */
-class OptionTraitTest extends DefaultTestCase
+class OptionAwareTraitTest extends DefaultTestCase
 {
 
 

@@ -20,7 +20,7 @@ use stdClass;
  * @uses               \Niceshops\Core\Attribute\AttributeAwareTrait
  * @package            Niceshops\Core
  */
-class AttributeTraitTest extends DefaultTestCase
+class AttributeAwareTraitTest extends DefaultTestCase
 {
 
 
