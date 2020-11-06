@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * @see       https://github.com/niceshops/nice-core for the canonical source repository
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
@@ -151,7 +153,9 @@ trait OptionAwareTrait
      */
     public function addOption_List(array $arrOption): self
     {
-        $arrOption = array_filter($arrOption, function($value) {return $this->validateOption($value);});
+        $arrOption = array_filter($arrOption, function ($value) {
+            return $this->validateOption($value);
+        });
         $arrNormOptions = (new Normalizer())->normalize($arrOption);
 
         $this->arrOptionKeyMap = $this->arrOptionKeyMap + array_combine($arrOption, $arrNormOptions);
@@ -211,7 +215,4 @@ trait OptionAwareTrait
     {
         return $this->hasNormalizedOption($this->getNormalizedOptionKey($option));
     }
-
-
 }
-

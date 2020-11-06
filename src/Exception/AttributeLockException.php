@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Niceshops\Core\Exception;
-
 
 use Throwable;
 
@@ -12,5 +10,4 @@ class AttributeLockException extends LockException
     {
         parent::__construct($message, $code, $previous);
     }
-
 }

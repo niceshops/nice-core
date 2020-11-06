@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @see       https://github.com/niceshops/nice-core for the canonical source repository
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
@@ -38,7 +39,7 @@ interface AttributeAwareInterface
      * @param null $default
      * @return mixed
      */
-    public function getAttribute(string $key,  bool $hasDefault = false, $default = null);
+    public function getAttribute(string $key, bool $hasDefault = false, $default = null);
 
 
     /**

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Niceshops\Core\Attribute;
-
 
 use Niceshops\Core\Exception\CoreException;
 
@@ -52,4 +50,3 @@ trait MagicAttributeAwareTrait
         return $this->getAttribute($name);
     }
 }
-

@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * @see       https://github.com/niceshops/nice-core for the canonical source repository
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
@@ -18,7 +20,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DefaultTestCaseTest extends TestCase
 {
-
     use TestCaseClassMemberInvokerTrait;
 
 
@@ -76,7 +77,7 @@ class DefaultTestCaseTest extends TestCase
             use OptionAwareTrait;
         };
 
-        $objUseNoTrait = new class() {
+        $objUseNoTrait = new class () {
         };
 
         $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseAttributeTrait, AttributeAwareTrait::class));
@@ -84,5 +85,4 @@ class DefaultTestCaseTest extends TestCase
         $this->assertTrue($this->invokeMethod($this->object, "classUseTrait", $objUseOptionAndAttributeTrait, OptionAwareTrait::class));
         $this->assertFalse($this->invokeMethod($this->object, "classUseTrait", $objUseNoTrait, AttributeAwareTrait::class));
     }
-
 }

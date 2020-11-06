@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /**
  * @see       https://github.com/niceshops/nice-core for the canonical source repository
  * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
@@ -75,13 +77,13 @@ class TraversableRunnerTest extends DefaultTestCase
      */
     public function runFromToDataProvider()
     {
-        $arrData = array(
-            array("key" => 0, "odd" => true),
-            array("key" => 1, "odd" => false),
-            array("key" => 2, "odd" => true),
-            array("key" => 3, "odd" => false),
-            array("key" => 4, "odd" => true),
-        );
+        $arrData = [
+            ["key" => 0, "odd" => true],
+            ["key" => 1, "odd" => false],
+            ["key" => 2, "odd" => true],
+            ["key" => 3, "odd" => false],
+            ["key" => 4, "odd" => true],
+        ];
 
         yield [$arrData, null, null, 1, $arrData];
         yield [$arrData, 2, null, 1, array_slice($arrData, 2)];
@@ -154,13 +156,13 @@ class TraversableRunnerTest extends DefaultTestCase
      */
     public function runFromDataProvider()
     {
-        $arrData = array(
-            array("key" => 0, "odd" => true),
-            array("key" => 1, "odd" => false),
-            array("key" => 2, "odd" => true),
-            array("key" => 3, "odd" => false),
-            array("key" => 4, "odd" => true),
-        );
+        $arrData = [
+            ["key" => 0, "odd" => true],
+            ["key" => 1, "odd" => false],
+            ["key" => 2, "odd" => true],
+            ["key" => 3, "odd" => false],
+            ["key" => 4, "odd" => true],
+        ];
 
         yield [$arrData, null, null, 1, $arrData];                //  all elements;
         yield [$arrData, 0, null, 1, $arrData];                   //  all elements
@@ -230,7 +232,7 @@ class TraversableRunnerTest extends DefaultTestCase
         $arrData[] = ["name" => "baz"];
 
         $arrActual = [];
-        foreach($this->object->runFrom() as $key => $val) {
+        foreach ($this->object->runFrom() as $key => $val) {
             $arrActual[$key] = $val;
         }
         $this->assertCount(count($arrData), $arrActual);
@@ -238,7 +240,7 @@ class TraversableRunnerTest extends DefaultTestCase
         //  remove an entry
         array_shift($arrData);
         $arrActual = [];
-        foreach($this->object->runFrom() as $key => $val) {
+        foreach ($this->object->runFrom() as $key => $val) {
             $arrActual[$key] = $val;
         }
         $this->assertCount(count($arrData), $arrActual);
