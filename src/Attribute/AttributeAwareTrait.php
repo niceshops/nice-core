@@ -79,7 +79,11 @@ trait AttributeAwareTrait
      */
     public function setAttribute(string $key, $value): self
     {
-        $normalizedKey = $this->getNormalizedKey($key);
+        if ($this->enableNormalization) {
+            $normalizedKey = $this->getNormalizedKey($key);
+        } else {
+            $normalizedKey = $key;
+        }
         if (!$this->isAttributeLocked($normalizedKey)) {
             if ($key !== $normalizedKey && $this->hasAttributeByNormalizedKey($normalizedKey)) {
                 if ($this->hasNormalizedKey($normalizedKey)) {
@@ -101,7 +105,12 @@ trait AttributeAwareTrait
      */
     public function hasAttribute(string $key): bool
     {
-        return $this->hasAttributeByNormalizedKey($this->getNormalizedKey($key));
+        if ($this->enableNormalization) {
+            $normalizedKey = $this->getNormalizedKey($key);
+        } else {
+            $normalizedKey = $key;
+        }
+        return $this->hasAttributeByNormalizedKey($normalizedKey);
     }
 
 
@@ -144,7 +153,11 @@ trait AttributeAwareTrait
     public function getAttribute(string $key, bool $hasDefault = false, $default = null)
     {
         $result = $default;
-        $normalizedKey = $this->getNormalizedKey($key);
+        if ($this->enableNormalization) {
+            $normalizedKey = $this->getNormalizedKey($key);
+        } else {
+            $normalizedKey = $key;
+        }
         if ($this->hasAttributeByNormalizedKey($normalizedKey)) {
             $result = $this->arrAttribute[$normalizedKey];
         } elseif (!$hasDefault) {
@@ -161,7 +174,11 @@ trait AttributeAwareTrait
      */
     public function unsetAttribute(string $key): self
     {
-        $normalizedKey = $this->getNormalizedKey($key);
+        if ($this->enableNormalization) {
+            $normalizedKey = $this->getNormalizedKey($key);
+        } else {
+            $normalizedKey = $key;
+        }
         if ($this->hasAttributeByNormalizedKey($normalizedKey)) {
             unset($this->arrAttributeKeyMap[$key]);
             unset($this->arrAttribute[$normalizedKey]);
@@ -203,6 +220,9 @@ trait AttributeAwareTrait
      */
     public function getAttribute_List(): array
     {
+        if (!$this->enableNormalization) {
+            return $this->arrAttribute;
+        }
         $arrAttribute = [];
         foreach ($this->arrAttributeKeyMap as $key => $normalizedKey) {
             if ($this->hasAttributeByNormalizedKey($normalizedKey)) {

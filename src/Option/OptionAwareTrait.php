@@ -112,7 +112,11 @@ trait OptionAwareTrait
         $option_List = [];
         foreach ($this->arrOption as $key => $option) {
             if ($option === $value) {
-                $option_List[] = $this->getOptionByNormalizedKey((string) $key);
+                if ($this->enableNormalization) {
+                    $option_List[] = $this->getOptionByNormalizedKey((string) $key);
+                } else {
+                    $option_List[] = $key;
+                }
             }
         }
         return $option_List;
