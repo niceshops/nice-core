@@ -27,6 +27,8 @@ trait OptionAwareTrait
      */
     private $arrOptionKeyMap = [];
 
+    protected $enableNormalization = false;
+
     /**
      * @param string $option
      *
@@ -34,7 +36,11 @@ trait OptionAwareTrait
      */
     private function normalizeOption(string $option): string
     {
-        $normalizedKey = (new Normalizer())->normalize($option);
+        if ($this->enableNormalization) {
+            $normalizedKey = (new Normalizer())->normalize($option);
+        } else {
+            $normalizedKey = $option;
+        }
         $this->arrOptionKeyMap[$option] = $normalizedKey;
         return $normalizedKey;
     }
@@ -156,8 +162,11 @@ trait OptionAwareTrait
         $arrOption = array_filter($arrOption, function ($value) {
             return $this->validateOption($value);
         });
-        $arrNormOptions = (new Normalizer())->normalize($arrOption);
-
+        if ($this->enableNormalization) {
+            $arrNormOptions = (new Normalizer())->normalize($arrOption);
+        } else {
+            $arrNormOptions = $arrOption;
+        }
         $this->arrOptionKeyMap = $this->arrOptionKeyMap + array_combine($arrOption, $arrNormOptions);
         $this->arrOption = $this->arrOption + array_fill_keys($arrNormOptions, true);
         return $this;

@@ -38,13 +38,22 @@ trait AttributeAwareTrait
     private $arrAttributeKeyMap = [];
 
     /**
+     * @var bool
+     */
+    protected $enableNormalization = false;
+
+    /**
      * @param string $key
      *
      * @return string
      */
     private function normalizeAttributeKey(string $key): string
     {
-        $normalizedKey = (new Normalizer())->normalize($key);
+        if ($this->enableNormalization) {
+            $normalizedKey = (new Normalizer())->normalize($key);
+        } else {
+            $normalizedKey = $key;
+        }
         $this->arrAttributeKeyMap[$key] = $normalizedKey;
         return $normalizedKey;
     }

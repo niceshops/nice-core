@@ -39,6 +39,7 @@ class AttributeAwareTraitTest extends DefaultTestCase
     protected function setUp()
     {
         $this->object = $this->getMockBuilder(AttributeAwareTrait::class)->getMockForTrait();
+        $this->invokeSetProperty($this->object, 'enableNormalization', true);
     }
 
 

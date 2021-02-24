@@ -34,6 +34,7 @@ class OptionAwareTraitTest extends DefaultTestCase
     protected function setUp()
     {
         $this->object = $this->getMockBuilder(OptionAwareTrait::class)->getMockForTrait();
+        $this->invokeSetProperty($this->object, 'enableNormalization', true);
     }
 
 
