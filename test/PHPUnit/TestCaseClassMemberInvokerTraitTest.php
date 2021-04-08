@@ -173,7 +173,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $value = "bar";
         $message = '/ReflectionException is thrown on invoking property set \- Property .+::\$foo does not exist/i';
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageRegExp($message);
+        $this->expectExceptionMessageMatches($message);
 
         $invokeMethod = new ReflectionMethod($this->object, "invokeSetProperty");
         $invokeMethod->setAccessible(true);
@@ -261,7 +261,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
         $message = '/ReflectionException is thrown on invoking property get \- Property .+::\$foo does not exist/i';
 
         $this->expectException(AssertionFailedError::class);
-        $this->expectExceptionMessageRegExp($message);
+        $this->expectExceptionMessageMatches($message);
 
         $invokeMethod = new ReflectionMethod($this->object, "invokeGetProperty");
         $invokeMethod->setAccessible(true);
