@@ -1,8 +1,8 @@
 <?php
 
-namespace Niceshops\Core\Attribute;
+namespace Pars\Patterns\Attribute;
 
-use Niceshops\Core\Exception\CoreException;
+use Pars\Patterns\Exception\CoreException;
 
 trait MagicAttributeAwareTrait
 {

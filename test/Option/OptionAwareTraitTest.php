@@ -3,19 +3,19 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Option;
+namespace Pars\Patterns\Option;
 
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 
 /**
  * Class OptionTraitTest
  * @coversDefaultClass OptionAwareTrait
- * @uses               \Niceshops\Core\Option\OptionAwareTrait
- * @package            Niceshops\Core
+ * @uses               \Pars\Patterns\Option\OptionAwareTrait
+ * @package            Pars\Patterns
  */
 class OptionAwareTraitTest extends DefaultTestCase
 {
@@ -95,7 +95,7 @@ class OptionAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \Niceshops\Core\Option\OptionAwareTrait::normalizeOption()
+     * @covers       \Pars\Patterns\Option\OptionAwareTrait::normalizeOption()
      *
      * @param string $option
      * @param string $expectedOption
@@ -111,11 +111,11 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
      *
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::removeOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::unsetOption()
      */
     public function testGetOptions()
     {
@@ -137,11 +137,11 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::getRemovedOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::getRemovedOption_List()
      *
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::removeOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::unsetOption()
      */
     public function testGetRemovedOptions()
     {
@@ -166,8 +166,8 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::clearOptions()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::clearOptions()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
      */
     public function testClearOptions()
     {
@@ -256,13 +256,13 @@ class OptionAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider addOptionDataProvider
      *
-     * @covers       \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @covers       \Pars\Patterns\Option\OptionAwareTrait::addOption()
      *
      * @param array  $arrOption
      * @param        $expectedCount
      * @param null   $expectedException
      *
-     * @uses         \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @uses         \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
      */
     public function testAddOption(array $arrOption, $expectedCount, $expectedException = null)
     {
@@ -284,13 +284,13 @@ class OptionAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider addOptionDataProvider
      *
-     * @covers       \Niceshops\Core\Option\OptionAwareTrait::addOption()
+     * @covers       \Pars\Patterns\Option\OptionAwareTrait::addOption()
      *
      * @param array  $arrOption
      * @param        $expectedCount
      * @param null   $expectedException
      *
-     * @uses         \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @uses         \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
      */
     public function testAddOption_List(array $arrOption, $expectedCount, $expectedException = null)
     {
@@ -312,9 +312,9 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::removeOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
      */
     public function testRemoveOption()
     {
@@ -344,9 +344,9 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::unsetOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
      */
     public function testResetOption()
     {
@@ -376,10 +376,10 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::hasOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::removeOption()
-     * @uses   \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::hasOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::removeOption()
+     * @uses   \Pars\Patterns\Option\OptionAwareTrait::unsetOption()
      */
     public function testHasOption()
     {
@@ -426,13 +426,13 @@ class OptionAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::clearOptions()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::getOption_List()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::getRemovedOption_List()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::addOption()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::removeOption()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::unsetOption()
-     * @covers \Niceshops\Core\Option\OptionAwareTrait::hasOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::clearOptions()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::getOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::getRemovedOption_List()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::addOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::removeOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::unsetOption()
+     * @covers \Pars\Patterns\Option\OptionAwareTrait::hasOption()
      */
     public function testOptionTraitAwareInterface()
     {

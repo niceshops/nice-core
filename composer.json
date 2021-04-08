@@ -1,6 +1,6 @@
 {
-    "name": "robertkleinschuster/nice-core",
-    "description": "Niceshops Core Components",
+    "name": "pars/pars-patterns",
+    "description": "PARS Basic Patterns",
     "license" : "BSD-3-Clause",
     "require": {
         "php": ">=7.2.0"
@@ -11,16 +11,18 @@
     },
     "autoload": {
         "psr-4": {
-            "Niceshops\\Core\\": "src/"
+            "Pars\\Patterns\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Niceshops\\Core\\": "test/"
+            "Pars\\Patterns\\": "test/"
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "classmap-authoritative": true
     },
     "scripts": {
         "cs-check": "phpcs",

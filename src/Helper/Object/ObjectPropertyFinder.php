@@ -3,16 +3,16 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Helper\Object;
+namespace Pars\Patterns\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
 use InvalidArgumentException;
-use Niceshops\Core\Exception\CoreException;
+use Pars\Patterns\Exception\CoreException;
 use stdClass;
 
 class ObjectPropertyFinder

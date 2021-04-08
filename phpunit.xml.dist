@@ -7,7 +7,7 @@
          beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
-        <testsuite name="nice-core">
+        <testsuite name="pars-patterns">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>

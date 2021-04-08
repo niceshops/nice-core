@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Observer;
+namespace Pars\Patterns\Observer;
 
 use ArrayObject;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Niceshops\Core\Observer\AbstractSubjectModifiedObserver
- * @uses                \Niceshops\Core\Observer\AbstractSubjectModifiedObserver
- * @package             Niceshops\Core
+ * @coversDefaultClass  \Pars\Patterns\Observer\AbstractSubjectModifiedObserver
+ * @uses                \Pars\Patterns\Observer\AbstractSubjectModifiedObserver
+ * @package             Pars\Patterns
  */
 class AbstractSubjectModifiedObserverTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\AbstractSubjectModifiedObserver::update
+     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::update
      */
     public function testUpdate()
     {
@@ -87,7 +87,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\AbstractSubjectModifiedObserver::reset
+     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::reset
      */
     public function testReset()
     {
@@ -107,7 +107,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
+     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
      */
     public function testGetModifiedSubject_List()
     {

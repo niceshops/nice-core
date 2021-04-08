@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Observer;
+namespace Pars\Patterns\Observer;
 
 use Generator;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplObserver;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Niceshops\Core\Observer\ObserverStorage
- * @uses                \Niceshops\Core\Observer\ObserverStorage
- * @package             Niceshops\Core
+ * @coversDefaultClass  \Pars\Patterns\Observer\ObserverStorage
+ * @uses                \Pars\Patterns\Observer\ObserverStorage
+ * @package             Pars\Patterns
  */
 class ObserverStorageTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class ObserverStorageTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverStorage::addObserver
+     * @covers \Pars\Patterns\Observer\ObserverStorage::addObserver
      */
     public function testAddObserver()
     {
@@ -84,7 +84,7 @@ class ObserverStorageTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverStorage::removeObserver
+     * @covers \Pars\Patterns\Observer\ObserverStorage::removeObserver
      */
     public function testRemoveObserver()
     {
@@ -117,7 +117,7 @@ class ObserverStorageTest extends DefaultTestCase
      *
      * @dataProvider runObserverDataProvider
      *
-     * @covers       \Niceshops\Core\Observer\ObserverStorage::runObserver
+     * @covers       \Pars\Patterns\Observer\ObserverStorage::runObserver
      *
      * @param array $arrComponent_List
      * @param array $arrExpectedComponent_List

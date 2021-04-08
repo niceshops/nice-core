@@ -3,21 +3,21 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Runner;
+namespace Pars\Patterns\Runner;
 
 use Generator;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Niceshops\Core\Runner\TraversableRunner
- * @uses                \Niceshops\Core\Runner\TraversableRunner
- * @package             Niceshops\Core
+ * @coversDefaultClass  \Pars\Patterns\Runner\TraversableRunner
+ * @uses                \Pars\Patterns\Runner\TraversableRunner
+ * @package             Pars\Patterns
  */
 class TraversableRunnerTest extends DefaultTestCase
 {
@@ -129,7 +129,7 @@ class TraversableRunnerTest extends DefaultTestCase
      *
      * @dataProvider runFromToDataProvider
      *
-     * @covers       \Niceshops\Core\Runner\TraversableRunner::runFromTo
+     * @covers       \Pars\Patterns\Runner\TraversableRunner::runFromTo
      *
      * @param array $arrData
      * @param int|null        $from
@@ -192,7 +192,7 @@ class TraversableRunnerTest extends DefaultTestCase
      *
      * @dataProvider runFromDataProvider
      *
-     * @covers       \Niceshops\Core\Runner\TraversableRunner::runFrom
+     * @covers       \Pars\Patterns\Runner\TraversableRunner::runFrom
      *
      * @param array    $arrData
      * @param int|null $from
@@ -218,7 +218,7 @@ class TraversableRunnerTest extends DefaultTestCase
      * @group unit
      * @small
      *
-     * @covers \Niceshops\Core\Runner\TraversableRunner::runFrom
+     * @covers \Pars\Patterns\Runner\TraversableRunner::runFrom
      */
     public function testDataPassedByReference()
     {

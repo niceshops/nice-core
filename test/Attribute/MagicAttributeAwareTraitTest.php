@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Attribute;
+namespace Pars\Patterns\Attribute;
 
-use Niceshops\Core\Exception\CoreException;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\Exception\CoreException;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 
 /**
  * Class AttributeTraitTest
  * @coversDefaultClass AttributeAwareTrait
- * @uses               \Niceshops\Core\Attribute\AttributeAwareTrait
- * @package            Niceshops\Core
+ * @uses               \Pars\Patterns\Attribute\AttributeAwareTrait
+ * @package            Pars\Patterns
  */
 class MagicAttributeAwareTraitTest extends DefaultTestCase
 {
@@ -64,10 +64,10 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Niceshops\Core\Attribute\MagicAttributeAwareTrait::__call()
+     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__call()
      * @throws ReflectionException
      * @throws CoreException
-     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
      * @noinspection PhpUndefinedMethodInspection
      */
     public function testMagicAttributeAccess_with_Call()
@@ -82,10 +82,10 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Niceshops\Core\Attribute\MagicAttributeAwareTrait::__get()
+     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__get()
      * @throws CoreException
-     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
-     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Get()
@@ -100,9 +100,9 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Niceshops\Core\Attribute\MagicAttributeAwareTrait::__set()
+     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__set()
      * @throws CoreException
-     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Set()

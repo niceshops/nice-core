@@ -1,6 +1,6 @@
 <?php
 
-namespace Niceshops\Core\Normalizer;
+namespace Pars\Patterns\Normalizer;
 
 class Normalizer
 {

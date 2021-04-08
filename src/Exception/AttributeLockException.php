@@ -1,6 +1,6 @@
 <?php
 
-namespace Niceshops\Core\Exception;
+namespace Pars\Patterns\Exception;
 
 use Throwable;
 

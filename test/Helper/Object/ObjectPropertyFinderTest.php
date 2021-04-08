@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Helper\Object;
+namespace Pars\Patterns\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
 use Generator;
-use Niceshops\Core\Exception\CoreException;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\Exception\CoreException;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectPropertyFinderTest extends DefaultTestCase
@@ -91,7 +91,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider getKeysDataProvider
      *
-     * @covers       \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getKeys
+     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getKeys
      *
      * @param       $object
      * @param array $arrExpectedKey
@@ -126,7 +126,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider hasKeyDataProvider
      *
-     * @covers       \Niceshops\Core\Helper\Object\ObjectPropertyFinder::hasKey
+     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::hasKey
      *
      * @param array $arrKey
      * @param       $key
@@ -144,7 +144,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_KeyNotFound()
     {
@@ -191,7 +191,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider getValueDataProvider_ArrayLikeObjects
      *
-     * @covers       \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
      *
      * @param $object
      * @param $key
@@ -218,7 +218,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_ArrayAccess()
     {
@@ -242,7 +242,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_ObjectWithGetDataMethod()
     {
@@ -276,7 +276,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_GetObjectVars()
     {
@@ -304,7 +304,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group unit
      * @small
      *
-     * @covers \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValues
+     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues
      */
     public function testGetValues()
     {
@@ -341,8 +341,8 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group integration
      * @small
      * @throws CoreException
-     *@uses \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValue()
-     * @uses \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValues()
+     *@uses \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue()
+     * @uses \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues()
      */
     public function testInvokable()
     {
@@ -362,7 +362,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group integration
      * @small
      * @throws CoreException
-     * @uses  \Niceshops\Core\Helper\Object\ObjectPropertyFinder::getValues()
+     * @uses  \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues()
      */
     public function testStaticFactoryMethods()
     {

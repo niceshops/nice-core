@@ -3,22 +3,22 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Observer;
+namespace Pars\Patterns\Observer;
 
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplObserver;
 use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Niceshops\Core\Observer\ObserverSubjectTrait
- * @uses                \Niceshops\Core\Observer\ObserverSubjectTrait
- * @package             Niceshops\Core
+ * @coversDefaultClass  \Pars\Patterns\Observer\ObserverSubjectTrait
+ * @uses                \Pars\Patterns\Observer\ObserverSubjectTrait
+ * @package             Pars\Patterns
  */
 class ObserverSubjectTraitTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::getObserverStorage
+     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::getObserverStorage
      */
     public function testGetObserverStorage()
     {
@@ -78,7 +78,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::attach
+     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::attach
      */
     public function testAttach()
     {
@@ -100,7 +100,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::detach
+     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::detach
      */
     public function testDetach()
     {
@@ -122,7 +122,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Observer\ObserverSubjectTrait::notify
+     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::notify
      */
     public function testNotify()
     {

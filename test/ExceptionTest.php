@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core;
+namespace Pars\Patterns;
 
-use Niceshops\Core\Exception\CoreException;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\Exception\CoreException;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class ExceptionTest
- * @package Core
+ * @package Patterns
  */
 class ExceptionTest extends DefaultTestCase
 {
@@ -60,8 +60,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception\CoreException::setMessage()
-     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
+     * @covers \Pars\Patterns\Exception\CoreException::setMessage()
+     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
      */
     public function testSetMessage()
     {
@@ -84,8 +84,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception\CoreException::appendToMessage()
-     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
+     * @covers \Pars\Patterns\Exception\CoreException::appendToMessage()
+     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
      */
     public function testAppendToMessage()
     {
@@ -106,8 +106,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Exception\CoreException::prependToMessage()
-     * @uses   \Niceshops\Core\Exception\CoreException::getMessage()
+     * @covers \Pars\Patterns\Exception\CoreException::prependToMessage()
+     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
      */
     public function testPrependToMessage()
     {

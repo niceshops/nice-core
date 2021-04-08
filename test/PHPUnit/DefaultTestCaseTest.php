@@ -3,20 +3,20 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\PHPUnit;
+namespace Pars\Patterns\PHPUnit;
 
-use Niceshops\Core\Attribute\AttributeAwareTrait;
-use Niceshops\Core\Option\OptionAwareTrait;
+use Pars\Patterns\Attribute\AttributeAwareTrait;
+use Pars\Patterns\Option\OptionAwareTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class DefaultTestCaseTest
- * @package Core
+ * @package Patterns
  */
 class DefaultTestCaseTest extends TestCase
 {
@@ -64,7 +64,7 @@ class DefaultTestCaseTest extends TestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\DefaultTestCase::classUseTrait
+     * @covers \Pars\Patterns\PHPUnit\DefaultTestCase::classUseTrait
      */
     public function testAssertUseTrait()
     {

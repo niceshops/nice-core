@@ -3,24 +3,24 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Attribute;
+namespace Pars\Patterns\Attribute;
 
-use Niceshops\Core\Exception\AttributeLockException;
-use Niceshops\Core\Exception\AttributeNotFoundException;
-use Niceshops\Core\Exception\CoreException;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\Exception\AttributeLockException;
+use Pars\Patterns\Exception\AttributeNotFoundException;
+use Pars\Patterns\Exception\CoreException;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use stdClass;
 
 /**
  * Class AttributeTraitTest
  * @coversDefaultClass AttributeAwareTrait
- * @uses               \Niceshops\Core\Attribute\AttributeAwareTrait
- * @package            Niceshops\Core
+ * @uses               \Pars\Patterns\Attribute\AttributeAwareTrait
+ * @package            Pars\Patterns
  */
 class AttributeAwareTraitTest extends DefaultTestCase
 {
@@ -100,7 +100,7 @@ class AttributeAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider normalizeAttributeKeyDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::normalizeAttributeKey()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::normalizeAttributeKey()
      *
      * @param string $key
      * @param string $expectedKey
@@ -252,9 +252,9 @@ class AttributeAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider getSetUnsetDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::unsetAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::unsetAttribute()
      *
      * @param array $arrAttribute
      * @param array $arrExpectedValue
@@ -310,11 +310,11 @@ class AttributeAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::lockAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::unlockAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareTrait::lockAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareTrait::unlockAttribute()
      * @throws CoreException
-     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
-     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses   \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses   \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
      */
     public function testLockUnlockAttribute()
     {
@@ -391,8 +391,8 @@ class AttributeAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider getAttributeListDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttribute_List()
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareTrait::getAttributes()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute_List()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareTrait::getAttributes()
      *
      * @param array       $arrAttribute
      * @param array       $expectedValue
@@ -400,7 +400,7 @@ class AttributeAwareTraitTest extends DefaultTestCase
      * @param string|null $expectecException
      *
      * @throws CoreException
-     * @uses         \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
      */
     public function testGetAttributeList(array $arrAttribute, array $expectedValue, string $expectecException = null)
     {
@@ -423,9 +423,9 @@ class AttributeAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Attribute\AttributeAwareTrait::hasAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareTrait::hasAttribute()
      * @throws CoreException
-     * @uses   \Niceshops\Core\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses   \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
      */
     public function testHasAttribute()
     {
@@ -443,11 +443,11 @@ class AttributeAwareTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::setAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::hasAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::unsetAttribute()
-     * @covers \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute_List()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareInterface::setAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareInterface::hasAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareInterface::getAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareInterface::unsetAttribute()
+     * @covers \Pars\Patterns\Attribute\AttributeAwareInterface::getAttribute_List()
      * @throws CoreException
      */
     public function testAttributeAwareInterface()
@@ -523,9 +523,9 @@ class AttributeAwareTraitTest extends DefaultTestCase
      *
      * @dataProvider strictAttributeAwareInterfaceDataProvider
      *
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::setAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::getAttribute()
-     * @covers       \Niceshops\Core\Attribute\AttributeAwareInterface::hasAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareInterface::setAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareInterface::getAttribute()
+     * @covers       \Pars\Patterns\Attribute\AttributeAwareInterface::hasAttribute()
      *
      * @param array       $arrAttribute
      * @param array       $arrExpectedValue

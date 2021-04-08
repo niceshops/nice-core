@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Exception;
+namespace Pars\Patterns\Exception;
 
 use Throwable;
 
 /**
  * Class Exception
- * @package Niceshops\Core
+ * @package Pars\Patterns
  */
 class CoreException extends \Exception
 {

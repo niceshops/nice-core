@@ -3,15 +3,15 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\Composite;
+namespace Pars\Patterns\Composite;
 
 use ArrayObject;
 use Countable;
-use Niceshops\Core\PHPUnit\DefaultTestCase;
+use Pars\Patterns\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;
 use stdClass;
@@ -19,8 +19,8 @@ use stdClass;
 /**
  * Class AbstractCompositeTest
  * @coversDefaultClass AbstractComposite
- * @uses               \Niceshops\Core\Composite\AbstractComposite
- * @package            Niceshops\Core
+ * @uses               \Pars\Patterns\Composite\AbstractComposite
+ * @package            Pars\Patterns
  */
 class AbstractCompositeTest extends DefaultTestCase
 {
@@ -65,7 +65,7 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
      */
     public function testGetComponent_List()
     {
@@ -78,9 +78,9 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Composite\AbstractComposite::hasComponent()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::hasComponent()
      * @throws ReflectionException
-     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
+     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
      */
     public function testHasComponent()
     {
@@ -100,8 +100,8 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Composite\AbstractComposite::addComponent()
-     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::addComponent()
+     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
      */
     public function testAddComponent()
     {
@@ -122,8 +122,8 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Composite\AbstractComposite::removeComponent()
-     * @uses   \Niceshops\Core\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::removeComponent()
+     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
      */
     public function testRemoveComponent()
     {
@@ -163,9 +163,9 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\Composite\AbstractComposite::addComponent()
-     * @covers \Niceshops\Core\Composite\AbstractComposite::hasComponent()
-     * @covers \Niceshops\Core\Composite\AbstractComposite::removeComponent()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::addComponent()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::hasComponent()
+     * @covers \Pars\Patterns\Composite\AbstractComposite::removeComponent()
      */
     public function testConcreteImplementation()
     {

@@ -3,11 +3,11 @@
 declare(strict_types=1);
 
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Niceshops\Core\PHPUnit;
+namespace Pars\Patterns\PHPUnit;
 
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
@@ -17,9 +17,9 @@ use ReflectionProperty;
 
 /**
  * Class TestCaseClassMemberInvokerTraitTest
- * @coversDefaultClass \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait
- * @uses               \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait
- * @package            Niceshops\Core
+ * @coversDefaultClass \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait
+ * @uses               \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait
+ * @package            Pars\Patterns
  */
 class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
 {
@@ -103,7 +103,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @small
      * @dataProvider invokeMethodDataProvider
      *
-     * @covers       \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeMethod
+     * @covers       \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeMethod
      *
      * @param        $obj
      * @param string $methodName
@@ -130,7 +130,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_invalidObject()
@@ -157,7 +157,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_propertyNotFound()
@@ -186,7 +186,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty()
@@ -217,7 +217,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_invalidObject()
@@ -244,7 +244,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_propertyNotFound()
@@ -274,7 +274,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Niceshops\Core\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty()

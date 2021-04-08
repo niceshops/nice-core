@@ -1,9 +1,9 @@
-# NiceCore
+# ParsPatterns
 Standard Komponenten und Basis Implementierungen von Design Pattern.
 
 ## Installation
 
 ### composer
 ```bash
-$ composer require niceshops/nice-core
+$ composer require pars/pars-patterns
 ```
