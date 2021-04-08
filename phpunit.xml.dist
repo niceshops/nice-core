@@ -13,8 +13,8 @@
     </testsuites>
 
     <coverage>
-        <whitelist processUncoveredFiles="true">
+        <include processUncoveredFiles="true">
             <directory suffix=".php">./src</directory>
-        </whitelist>
+        </include>
     </coverage>
 </phpunit>
