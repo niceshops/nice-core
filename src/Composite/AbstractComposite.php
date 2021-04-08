@@ -7,11 +7,11 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Composite;
+namespace Pars\Pattern\Composite;
 
 /**
  * Class AbstractComposite
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 abstract class AbstractComposite implements CompositeInterface
 {

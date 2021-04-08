@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Option;
+namespace Pars\Pattern\Option;
 
-use Pars\Patterns\Normalizer\Normalizer;
+use Pars\Pattern\Normalizer\Normalizer;
 
 /**
  * Trait OptionTrait
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 trait OptionAwareTrait
 {

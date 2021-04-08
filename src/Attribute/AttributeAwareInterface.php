@@ -5,11 +5,11 @@
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Attribute;
+namespace Pars\Pattern\Attribute;
 
 /**
  * Interface AttributeAwareInterface
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 interface AttributeAwareInterface
 {

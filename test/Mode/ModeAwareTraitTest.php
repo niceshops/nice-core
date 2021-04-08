@@ -7,14 +7,14 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Mode;
+namespace Pars\Pattern\Mode;
 
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class DefaultTestCaseTest
- * @package Patterns
+ * @package Pattern
  */
 class ModeAwareTraitTest extends DefaultTestCase
 {

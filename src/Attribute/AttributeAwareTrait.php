@@ -7,16 +7,16 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Attribute;
+namespace Pars\Pattern\Attribute;
 
-use Pars\Patterns\Exception\AttributeExistsException;
-use Pars\Patterns\Exception\AttributeLockException;
-use Pars\Patterns\Exception\AttributeNotFoundException;
-use Pars\Patterns\Normalizer\Normalizer;
+use Pars\Pattern\Exception\AttributeExistsException;
+use Pars\Pattern\Exception\AttributeLockException;
+use Pars\Pattern\Exception\AttributeNotFoundException;
+use Pars\Pattern\Normalizer\Normalizer;
 
 /**
  * Trait AttributeTrait
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 trait AttributeAwareTrait
 {

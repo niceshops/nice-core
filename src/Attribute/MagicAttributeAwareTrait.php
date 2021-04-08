@@ -1,8 +1,8 @@
 <?php
 
-namespace Pars\Patterns\Attribute;
+namespace Pars\Pattern\Attribute;
 
-use Pars\Patterns\Exception\CoreException;
+use Pars\Pattern\Exception\CoreException;
 
 trait MagicAttributeAwareTrait
 {

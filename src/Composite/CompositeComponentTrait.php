@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Composite;
+namespace Pars\Pattern\Composite;
 
 use ArrayObject;
 
 /**
  * Trait CompositeComponentTrait
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 trait CompositeComponentTrait
 {

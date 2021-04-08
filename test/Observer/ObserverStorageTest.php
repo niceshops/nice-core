@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Observer;
+namespace Pars\Pattern\Observer;
 
 use Generator;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplObserver;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Pars\Patterns\Observer\ObserverStorage
- * @uses                \Pars\Patterns\Observer\ObserverStorage
- * @package             Pars\Patterns
+ * @coversDefaultClass  \Pars\Pattern\Observer\ObserverStorage
+ * @uses                \Pars\Pattern\Observer\ObserverStorage
+ * @package             Pars\Pattern
  */
 class ObserverStorageTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class ObserverStorageTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverStorage::addObserver
+     * @covers \Pars\Pattern\Observer\ObserverStorage::addObserver
      */
     public function testAddObserver()
     {
@@ -84,7 +84,7 @@ class ObserverStorageTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverStorage::removeObserver
+     * @covers \Pars\Pattern\Observer\ObserverStorage::removeObserver
      */
     public function testRemoveObserver()
     {
@@ -117,7 +117,7 @@ class ObserverStorageTest extends DefaultTestCase
      *
      * @dataProvider runObserverDataProvider
      *
-     * @covers       \Pars\Patterns\Observer\ObserverStorage::runObserver
+     * @covers       \Pars\Pattern\Observer\ObserverStorage::runObserver
      *
      * @param array $arrComponent_List
      * @param array $arrExpectedComponent_List

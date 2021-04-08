@@ -1,4 +1,4 @@
-# ParsPatterns
+# ParsPattern
 Standard Komponenten und Basis Implementierungen von Design Pattern.
 
 ## Installation

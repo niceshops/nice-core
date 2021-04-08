@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\PHPUnit;
+namespace Pars\Pattern\PHPUnit;
 
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionClass;

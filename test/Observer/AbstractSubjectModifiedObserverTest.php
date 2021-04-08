@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Observer;
+namespace Pars\Pattern\Observer;
 
 use ArrayObject;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Pars\Patterns\Observer\AbstractSubjectModifiedObserver
- * @uses                \Pars\Patterns\Observer\AbstractSubjectModifiedObserver
- * @package             Pars\Patterns
+ * @coversDefaultClass  \Pars\Pattern\Observer\AbstractSubjectModifiedObserver
+ * @uses                \Pars\Pattern\Observer\AbstractSubjectModifiedObserver
+ * @package             Pars\Pattern
  */
 class AbstractSubjectModifiedObserverTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::update
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::update
      */
     public function testUpdate()
     {
@@ -87,7 +87,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::reset
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::reset
      */
     public function testReset()
     {
@@ -107,7 +107,7 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
      */
     public function testGetModifiedSubject_List()
     {

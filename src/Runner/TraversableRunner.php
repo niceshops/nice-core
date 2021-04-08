@@ -7,16 +7,16 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Runner;
+namespace Pars\Pattern\Runner;
 
 use Countable;
 use Generator;
-use Pars\Patterns\Exception\CoreException;
+use Pars\Pattern\Exception\CoreException;
 use Traversable;
 
 /**
  * Class TraversableRunner
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 class TraversableRunner implements RunnerInterface
 {

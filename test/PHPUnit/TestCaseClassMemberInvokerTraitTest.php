@@ -7,7 +7,7 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\PHPUnit;
+namespace Pars\Pattern\PHPUnit;
 
 use Generator;
 use PHPUnit\Framework\AssertionFailedError;
@@ -17,9 +17,9 @@ use ReflectionProperty;
 
 /**
  * Class TestCaseClassMemberInvokerTraitTest
- * @coversDefaultClass \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait
- * @uses               \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait
- * @package            Pars\Patterns
+ * @coversDefaultClass \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait
+ * @uses               \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait
+ * @package            Pars\Pattern
  */
 class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
 {
@@ -103,7 +103,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @small
      * @dataProvider invokeMethodDataProvider
      *
-     * @covers       \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeMethod
+     * @covers       \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeMethod
      *
      * @param        $obj
      * @param string $methodName
@@ -130,7 +130,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_invalidObject()
@@ -157,7 +157,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty_propertyNotFound()
@@ -186,7 +186,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeSetProperty()
@@ -217,7 +217,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_invalidObject()
@@ -244,7 +244,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeSetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty_propertyNotFound()
@@ -274,7 +274,7 @@ class TestCaseClassMemberInvokerTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
+     * @covers \Pars\Pattern\PHPUnit\TestCaseClassMemberInvokerTrait::invokeGetProperty
      * @throws ReflectionException
      */
     public function testInvokeGetProperty()

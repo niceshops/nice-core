@@ -7,16 +7,16 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\PHPUnit;
+namespace Pars\Pattern\PHPUnit;
 
-use Pars\Patterns\Attribute\AttributeAwareTrait;
-use Pars\Patterns\Option\OptionAwareTrait;
+use Pars\Pattern\Attribute\AttributeAwareTrait;
+use Pars\Pattern\Option\OptionAwareTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class DefaultTestCaseTest
- * @package Patterns
+ * @package Pattern
  */
 class DefaultTestCaseTest extends TestCase
 {
@@ -64,7 +64,7 @@ class DefaultTestCaseTest extends TestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\PHPUnit\DefaultTestCase::classUseTrait
+     * @covers \Pars\Pattern\PHPUnit\DefaultTestCase::classUseTrait
      */
     public function testAssertUseTrait()
     {

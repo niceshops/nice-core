@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Observer;
+namespace Pars\Pattern\Observer;
 
-use Pars\Patterns\Composite\CompositeComponentTrait;
+use Pars\Pattern\Composite\CompositeComponentTrait;
 use SplObserver;
 use SplSubject;
 
 /**
  * Class SubjectModifiedObserver
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 abstract class AbstractSubjectModifiedObserver implements SplObserver
 {

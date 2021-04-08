@@ -7,12 +7,12 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Helper\Object;
+namespace Pars\Pattern\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
 use InvalidArgumentException;
-use Pars\Patterns\Exception\CoreException;
+use Pars\Pattern\Exception\CoreException;
 use stdClass;
 
 class ObjectPropertyFinder

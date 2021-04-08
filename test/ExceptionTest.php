@@ -5,15 +5,15 @@
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns;
+namespace Pars\Pattern;
 
-use Pars\Patterns\Exception\CoreException;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\Exception\CoreException;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Class ExceptionTest
- * @package Patterns
+ * @package Pattern
  */
 class ExceptionTest extends DefaultTestCase
 {
@@ -60,8 +60,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Exception\CoreException::setMessage()
-     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
+     * @covers \Pars\Pattern\Exception\CoreException::setMessage()
+     * @uses   \Pars\Pattern\Exception\CoreException::getMessage()
      */
     public function testSetMessage()
     {
@@ -84,8 +84,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Exception\CoreException::appendToMessage()
-     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
+     * @covers \Pars\Pattern\Exception\CoreException::appendToMessage()
+     * @uses   \Pars\Pattern\Exception\CoreException::getMessage()
      */
     public function testAppendToMessage()
     {
@@ -106,8 +106,8 @@ class ExceptionTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Exception\CoreException::prependToMessage()
-     * @uses   \Pars\Patterns\Exception\CoreException::getMessage()
+     * @covers \Pars\Pattern\Exception\CoreException::prependToMessage()
+     * @uses   \Pars\Pattern\Exception\CoreException::getMessage()
      */
     public function testPrependToMessage()
     {

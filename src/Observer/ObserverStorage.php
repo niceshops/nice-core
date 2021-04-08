@@ -7,15 +7,15 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Observer;
+namespace Pars\Pattern\Observer;
 
 use Generator;
-use Pars\Patterns\Composite\AbstractComposite;
+use Pars\Pattern\Composite\AbstractComposite;
 use SplObserver;
 
 /**
  * Class ObserverStorage
- * @package Pars\Patterns\Observer
+ * @package Pars\Pattern\Observer
  */
 class ObserverStorage extends AbstractComposite
 {

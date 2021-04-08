@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Attribute;
+namespace Pars\Pattern\Attribute;
 
-use Pars\Patterns\Exception\CoreException;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\Exception\CoreException;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 
 /**
  * Class AttributeTraitTest
  * @coversDefaultClass AttributeAwareTrait
- * @uses               \Pars\Patterns\Attribute\AttributeAwareTrait
- * @package            Pars\Patterns
+ * @uses               \Pars\Pattern\Attribute\AttributeAwareTrait
+ * @package            Pars\Pattern
  */
 class MagicAttributeAwareTraitTest extends DefaultTestCase
 {
@@ -64,10 +64,10 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__call()
+     * @covers       \Pars\Pattern\Attribute\MagicAttributeAwareTrait::__call()
      * @throws ReflectionException
      * @throws CoreException
-     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Pattern\Attribute\AttributeAwareTrait::getAttribute()
      * @noinspection PhpUndefinedMethodInspection
      */
     public function testMagicAttributeAccess_with_Call()
@@ -82,10 +82,10 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__get()
+     * @covers       \Pars\Pattern\Attribute\MagicAttributeAwareTrait::__get()
      * @throws CoreException
-     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
-     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::setAttribute()
+     * @uses         \Pars\Pattern\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Pattern\Attribute\AttributeAwareTrait::setAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Get()
@@ -100,9 +100,9 @@ class MagicAttributeAwareTraitTest extends DefaultTestCase
      * @group        unit
      * @small
      *
-     * @covers       \Pars\Patterns\Attribute\MagicAttributeAwareTrait::__set()
+     * @covers       \Pars\Pattern\Attribute\MagicAttributeAwareTrait::__set()
      * @throws CoreException
-     * @uses         \Pars\Patterns\Attribute\AttributeAwareTrait::getAttribute()
+     * @uses         \Pars\Pattern\Attribute\AttributeAwareTrait::getAttribute()
      * @noinspection PhpUndefinedFieldInspection
      */
     public function testMagicAttributeAccess_with_Set()

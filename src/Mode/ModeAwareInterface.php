@@ -7,11 +7,11 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Mode;
+namespace Pars\Pattern\Mode;
 
 /**
  * Interface ModeAwareInterface
- * @package Pars\Patterns\Mode
+ * @package Pars\Pattern\Mode
  */
 interface ModeAwareInterface
 {

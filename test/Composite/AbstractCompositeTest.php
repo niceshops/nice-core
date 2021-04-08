@@ -7,11 +7,11 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Composite;
+namespace Pars\Pattern\Composite;
 
 use ArrayObject;
 use Countable;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;
 use stdClass;
@@ -19,8 +19,8 @@ use stdClass;
 /**
  * Class AbstractCompositeTest
  * @coversDefaultClass AbstractComposite
- * @uses               \Pars\Patterns\Composite\AbstractComposite
- * @package            Pars\Patterns
+ * @uses               \Pars\Pattern\Composite\AbstractComposite
+ * @package            Pars\Pattern
  */
 class AbstractCompositeTest extends DefaultTestCase
 {
@@ -65,7 +65,7 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::getComponent_List()
      */
     public function testGetComponent_List()
     {
@@ -78,9 +78,9 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Composite\AbstractComposite::hasComponent()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::hasComponent()
      * @throws ReflectionException
-     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
+     * @uses   \Pars\Pattern\Composite\AbstractComposite::getComponent_List()
      */
     public function testHasComponent()
     {
@@ -100,8 +100,8 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Composite\AbstractComposite::addComponent()
-     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::addComponent()
+     * @uses   \Pars\Pattern\Composite\AbstractComposite::getComponent_List()
      */
     public function testAddComponent()
     {
@@ -122,8 +122,8 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Composite\AbstractComposite::removeComponent()
-     * @uses   \Pars\Patterns\Composite\AbstractComposite::getComponent_List()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::removeComponent()
+     * @uses   \Pars\Pattern\Composite\AbstractComposite::getComponent_List()
      */
     public function testRemoveComponent()
     {
@@ -163,9 +163,9 @@ class AbstractCompositeTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Composite\AbstractComposite::addComponent()
-     * @covers \Pars\Patterns\Composite\AbstractComposite::hasComponent()
-     * @covers \Pars\Patterns\Composite\AbstractComposite::removeComponent()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::addComponent()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::hasComponent()
+     * @covers \Pars\Pattern\Composite\AbstractComposite::removeComponent()
      */
     public function testConcreteImplementation()
     {

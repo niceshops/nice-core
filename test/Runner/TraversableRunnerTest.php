@@ -7,17 +7,17 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Runner;
+namespace Pars\Pattern\Runner;
 
 use Generator;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Pars\Patterns\Runner\TraversableRunner
- * @uses                \Pars\Patterns\Runner\TraversableRunner
- * @package             Pars\Patterns
+ * @coversDefaultClass  \Pars\Pattern\Runner\TraversableRunner
+ * @uses                \Pars\Pattern\Runner\TraversableRunner
+ * @package             Pars\Pattern
  */
 class TraversableRunnerTest extends DefaultTestCase
 {
@@ -129,7 +129,7 @@ class TraversableRunnerTest extends DefaultTestCase
      *
      * @dataProvider runFromToDataProvider
      *
-     * @covers       \Pars\Patterns\Runner\TraversableRunner::runFromTo
+     * @covers       \Pars\Pattern\Runner\TraversableRunner::runFromTo
      *
      * @param array $arrData
      * @param int|null        $from
@@ -192,7 +192,7 @@ class TraversableRunnerTest extends DefaultTestCase
      *
      * @dataProvider runFromDataProvider
      *
-     * @covers       \Pars\Patterns\Runner\TraversableRunner::runFrom
+     * @covers       \Pars\Pattern\Runner\TraversableRunner::runFrom
      *
      * @param array    $arrData
      * @param int|null $from
@@ -218,7 +218,7 @@ class TraversableRunnerTest extends DefaultTestCase
      * @group unit
      * @small
      *
-     * @covers \Pars\Patterns\Runner\TraversableRunner::runFrom
+     * @covers \Pars\Pattern\Runner\TraversableRunner::runFrom
      */
     public function testDataPassedByReference()
     {

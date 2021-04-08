@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Helper\Object;
+namespace Pars\Pattern\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
 use Generator;
-use Pars\Patterns\Exception\CoreException;
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\Exception\CoreException;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
 class ObjectPropertyFinderTest extends DefaultTestCase
@@ -91,7 +91,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider getKeysDataProvider
      *
-     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getKeys
+     * @covers       \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getKeys
      *
      * @param       $object
      * @param array $arrExpectedKey
@@ -126,7 +126,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider hasKeyDataProvider
      *
-     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::hasKey
+     * @covers       \Pars\Pattern\Helper\Object\ObjectPropertyFinder::hasKey
      *
      * @param array $arrKey
      * @param       $key
@@ -144,7 +144,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_KeyNotFound()
     {
@@ -191,7 +191,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      *
      * @dataProvider getValueDataProvider_ArrayLikeObjects
      *
-     * @covers       \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers       \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue
      *
      * @param $object
      * @param $key
@@ -218,7 +218,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_ArrayAccess()
     {
@@ -242,7 +242,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_ObjectWithGetDataMethod()
     {
@@ -276,7 +276,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue
+     * @covers \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue
      */
     public function testGetValue_GetObjectVars()
     {
@@ -304,7 +304,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group unit
      * @small
      *
-     * @covers \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues
+     * @covers \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValues
      */
     public function testGetValues()
     {
@@ -341,8 +341,8 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group integration
      * @small
      * @throws CoreException
-     *@uses \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValue()
-     * @uses \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues()
+     *@uses \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValue()
+     * @uses \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValues()
      */
     public function testInvokable()
     {
@@ -362,7 +362,7 @@ class ObjectPropertyFinderTest extends DefaultTestCase
      * @group integration
      * @small
      * @throws CoreException
-     * @uses  \Pars\Patterns\Helper\Object\ObjectPropertyFinder::getValues()
+     * @uses  \Pars\Pattern\Helper\Object\ObjectPropertyFinder::getValues()
      */
     public function testStaticFactoryMethods()
     {

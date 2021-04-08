@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Exception;
+namespace Pars\Pattern\Exception;
 
 use Throwable;
 
 /**
  * Class Exception
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 class CoreException extends \Exception
 {

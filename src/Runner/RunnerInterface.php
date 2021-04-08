@@ -7,13 +7,13 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Runner;
+namespace Pars\Pattern\Runner;
 
 use Generator;
 
 /**
  * Interface RunnerInterface
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 interface RunnerInterface
 {

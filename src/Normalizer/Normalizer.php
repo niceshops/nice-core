@@ -1,6 +1,6 @@
 <?php
 
-namespace Pars\Patterns\Normalizer;
+namespace Pars\Pattern\Normalizer;
 
 class Normalizer
 {

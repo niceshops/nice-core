@@ -1,6 +1,6 @@
 {
     "name": "pars/pars-patterns",
-    "description": "PARS Basic Patterns",
+    "description": "PARS Basic Pattern",
     "license" : "BSD-3-Clause",
     "require": {
         "php": ">=7.2.0"
@@ -11,12 +11,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Pars\\Patterns\\": "src/"
+            "Pars\\Pattern\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Pars\\Patterns\\": "test/"
+            "Pars\\Pattern\\": "test/"
         }
     },
     "config": {

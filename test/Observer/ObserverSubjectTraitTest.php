@@ -7,18 +7,18 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Observer;
+namespace Pars\Pattern\Observer;
 
-use Pars\Patterns\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplObserver;
 use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  \Pars\Patterns\Observer\ObserverSubjectTrait
- * @uses                \Pars\Patterns\Observer\ObserverSubjectTrait
- * @package             Pars\Patterns
+ * @coversDefaultClass  \Pars\Pattern\Observer\ObserverSubjectTrait
+ * @uses                \Pars\Pattern\Observer\ObserverSubjectTrait
+ * @package             Pars\Pattern
  */
 class ObserverSubjectTraitTest extends DefaultTestCase
 {
@@ -64,7 +64,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::getObserverStorage
+     * @covers \Pars\Pattern\Observer\ObserverSubjectTrait::getObserverStorage
      */
     public function testGetObserverStorage()
     {
@@ -78,7 +78,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::attach
+     * @covers \Pars\Pattern\Observer\ObserverSubjectTrait::attach
      */
     public function testAttach()
     {
@@ -100,7 +100,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::detach
+     * @covers \Pars\Pattern\Observer\ObserverSubjectTrait::detach
      */
     public function testDetach()
     {
@@ -122,7 +122,7 @@ class ObserverSubjectTraitTest extends DefaultTestCase
      * @group  unit
      * @small
      *
-     * @covers \Pars\Patterns\Observer\ObserverSubjectTrait::notify
+     * @covers \Pars\Pattern\Observer\ObserverSubjectTrait::notify
      */
     public function testNotify()
     {

@@ -5,11 +5,11 @@
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Patterns\Option;
+namespace Pars\Pattern\Option;
 
 /**
  * Interface OptionAwareInterface
- * @package Pars\Patterns
+ * @package Pars\Pattern
  */
 interface OptionAwareInterface
 {

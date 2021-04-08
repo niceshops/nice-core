@@ -1,6 +1,6 @@
 <?php
 
-namespace Pars\Patterns\Exception;
+namespace Pars\Pattern\Exception;
 
 use Throwable;
 
