@@ -7,8 +7,10 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Pattern\Option;
+namespace ParsTest\Pattern\Option;
 
+use Pars\Pattern\Option\OptionAwareInterface;
+use Pars\Pattern\Option\OptionAwareTrait;
 use Pars\Pattern\PHPUnit\DefaultTestCase;
 
 /**

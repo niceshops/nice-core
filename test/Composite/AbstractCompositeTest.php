@@ -7,10 +7,11 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Pattern\Composite;
+namespace ParsTest\Pattern\Composite;
 
 use ArrayObject;
 use Countable;
+use Pars\Pattern\Composite\AbstractComposite;
 use Pars\Pattern\PHPUnit\DefaultTestCase;
 use ReflectionException;
 use ReflectionMethod;

@@ -7,8 +7,10 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Pattern\Attribute;
+namespace ParsTest\Pattern\Attribute;
 
+use Pars\Pattern\Attribute\AttributeAwareTrait;
+use Pars\Pattern\Attribute\MagicAttributeAwareTrait;
 use Pars\Pattern\Exception\CoreException;
 use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;

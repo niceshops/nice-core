@@ -15,7 +15,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Pars\\Pattern\\": "test/"
+            "ParsTest\\Pattern\\": "test/"
         }
     },
     "config": {

@@ -7,9 +7,10 @@ declare(strict_types=1);
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Pattern\Observer;
+namespace ParsTest\Pattern\Observer;
 
 use Generator;
+use Pars\Pattern\Observer\ObserverStorage;
 use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplObserver;

@@ -5,7 +5,7 @@
  * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace Pars\Pattern;
+namespace ParsTest\Pattern;
 
 use Pars\Pattern\Exception\CoreException;
 use Pars\Pattern\PHPUnit\DefaultTestCase;
