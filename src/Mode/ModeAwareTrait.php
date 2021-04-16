@@ -33,7 +33,7 @@ trait ModeAwareTrait
     *
     * @return $this
     */
-    public function setMode(string $mode)
+    public function setMode(?string $mode)
     {
         $this->mode = $mode;
         return $this;

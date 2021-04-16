@@ -25,7 +25,7 @@ interface ModeAwareInterface
      *
      * @return $this
      */
-    public function setMode(string $mode);
+    public function setMode(?string $mode);
 
     /**
      * @return bool
