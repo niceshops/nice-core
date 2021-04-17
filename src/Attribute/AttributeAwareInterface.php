@@ -54,4 +54,7 @@ interface AttributeAwareInterface
      * @return array
      */
     public function getAttribute_List(): array;
+
+    public function setAttributes(array $attributes);
+
 }

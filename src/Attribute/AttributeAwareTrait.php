@@ -97,6 +97,14 @@ trait AttributeAwareTrait
         return $this;
     }
 
+    public function setAttributes(array $attributes)
+    {
+        foreach ($attributes as $key => $val) {
+            $this->setAttribute($key, $val);
+        }
+        return $this;
+    }
+
 
     /**
      * @param string $key
