@@ -14,6 +14,11 @@ jobs:
           php-version: '7.4'
           extensions: mbstring, intl, json, dom, gd
           ini-values: post_max_size=256M, max_execution_time=180
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v5.5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: write version
         run: echo "<?php define('PARS_VERSION', '${{ steps.tag_version.outputs.new_tag }}');" > version.php
       - name: Validate composer.json and composer.lock
@@ -26,11 +31,6 @@ jobs:
         with:
           files: .
           dest: ${{ github.event.repository.name }}.zip
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v5.5
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Create a GitHub release
         uses: actions/create-release@v1
         id: create_release
