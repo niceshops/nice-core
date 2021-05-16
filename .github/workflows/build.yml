@@ -25,7 +25,8 @@ jobs:
         run: composer validate
       - name: Install dependencies
         run: composer install --no-dev --no-interaction
-
+      - name: Clean files
+        run: rm -rf node_modules & rm -rf yarn.lock & rm -rf composer.json & rm -rf package.json & rm -rf mkdocs.yml & rm -rf test & rm -rf docs & rm -rf phpcs.xml & rm -rf phpunit.xml.dist & rm -rf modules/*/node_modules & rm -rf modules/*/test & rm -rf modules/*/mkdocs.yml & rm -rf modules/*/mkdocs.yml & rm -rf modules/*/composer.lock & rm -rf modules/*/yarn.lock & rm -rf modules/*/package.json & rm -rf modules/*/composer.json & rm -rf modules/*/phpunit.xml.dist
       - name: Zip
         uses: papeloto/action-zip@v1
         with:
@@ -40,11 +41,6 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           release_name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
-      - name: Archive production artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.event.repository.name }}
-          path: ${{ github.event.repository.name }}.zip
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -55,3 +51,8 @@ jobs:
           asset_path: ./${{ github.event.repository.name }}.zip
           asset_name: ${{ github.event.repository.name }}_${{ steps.tag_version.outputs.new_tag }}.zip
           asset_content_type: application/zip
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.event.repository.name }}
+          path: ${{ github.event.repository.name }}.zip
