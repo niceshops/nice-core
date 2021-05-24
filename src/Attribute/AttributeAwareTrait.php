@@ -241,6 +241,11 @@ trait AttributeAwareTrait
         return $arrAttribute;
     }
 
+    public function getAttribute_Keys(): array
+    {
+        return array_keys($this->getAttribute_List());
+    }
+
 
     /**
      * Alias for AttributeTrait::getAttribute_List()
