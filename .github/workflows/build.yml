@@ -16,7 +16,7 @@ jobs:
           ini-values: post_max_size=256M, max_execution_time=180
       - name: Bump version and push tag
         id: tag_version
-        uses: hennejg/github-tag-action@v4.1.jh1
+        uses: hennejg/github-tag-action@v4.3.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: write version
