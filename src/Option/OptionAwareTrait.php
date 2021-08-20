@@ -17,17 +17,122 @@ use Pars\Pattern\Normalizer\Normalizer;
  */
 trait OptionAwareTrait
 {
+    protected $enableNormalization = false;
     /**
      * @var array
      */
     private $arrOption = [];
-
     /**
      * @var array
      */
     private $arrOptionKeyMap = [];
 
-    protected $enableNormalization = false;
+    /**
+     * @return $this
+     */
+    public function clearOptions(): self
+    {
+        $this->arrOption = [];
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getOption_List(): array
+    {
+        return $this->getOption_List_By_Value(true);
+    }
+
+    /**
+     * @return array
+     */
+    public function getRemovedOption_List(): array
+    {
+        return $this->getOption_List_By_Value(false);
+    }
+
+    /**
+     * @param string $option
+     *
+     * @return $this
+     */
+    public function addOption(string $option): self
+    {
+        $this->addNormalizedOption($this->getNormalizedOptionKey($option));
+        return $this;
+    }
+
+    /**
+     * @param array $arrOption
+     *
+     * @return $this
+     */
+    public function addOption_List(array $arrOption): self
+    {
+        $arrOption = array_filter($arrOption, function ($value) {
+            return $this->validateOption($value);
+        });
+        if ($this->enableNormalization) {
+            $arrNormOptions = (new Normalizer())->normalize($arrOption);
+        } else {
+            $arrNormOptions = $arrOption;
+        }
+        $this->arrOptionKeyMap = $this->arrOptionKeyMap + array_combine($arrOption, $arrNormOptions);
+        $this->arrOption = $this->arrOption + array_fill_keys($arrNormOptions, true);
+        return $this;
+    }
+
+    /**
+     * @param string $option
+     *
+     * @return self
+     */
+    public function removeOption(string $option): self
+    {
+        if ($this->validateOption($option)) {
+            $this->arrOption[$this->getNormalizedOptionKey($option)] = false;
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $option
+     *
+     * @return $this
+     */
+    public function unsetOption(string $option): self
+    {
+        if ($this->validateOption($option)) {
+            $normalizedKey = $this->getNormalizedOptionKey($option);
+            unset($this->arrOption[$normalizedKey]);
+            unset($this->arrOptionKeyMap[$normalizedKey]);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param string $option
+     *
+     * @return bool
+     */
+    public function hasOption(string $option): bool
+    {
+        return $this->hasNormalizedOption($this->getNormalizedOptionKey($option));
+    }
+
+    /**
+     * May be overwritten by class using this trait for customized validation.
+     *
+     * @param string $option
+     *
+     * @return bool
+     */
+    protected function validateOption(string $option): bool
+    {
+        return strlen(trim($option)) > 0;
+    }
 
     /**
      * @param string $option
@@ -64,46 +169,6 @@ trait OptionAwareTrait
     }
 
     /**
-     * May be overwritten by class using this trait for customized validation.
-     *
-     * @param string $option
-     *
-     * @return bool
-     */
-    protected function validateOption(string $option): bool
-    {
-        return strlen(trim($option)) > 0;
-    }
-
-
-    /**
-     * @return $this
-     */
-    public function clearOptions(): self
-    {
-        $this->arrOption = [];
-        return $this;
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getOption_List(): array
-    {
-        return $this->getOption_List_By_Value(true);
-    }
-
-
-    /**
-     * @return array
-     */
-    public function getRemovedOption_List(): array
-    {
-        return $this->getOption_List_By_Value(false);
-    }
-
-    /**
      * @param $value
      * @return array
      */
@@ -113,7 +178,7 @@ trait OptionAwareTrait
         foreach ($this->arrOption as $key => $option) {
             if ($option === $value) {
                 if ($this->enableNormalization) {
-                    $option_List[] = $this->getOptionByNormalizedKey((string) $key);
+                    $option_List[] = $this->getOptionByNormalizedKey((string)$key);
                 } else {
                     $option_List[] = $key;
                 }
@@ -131,18 +196,6 @@ trait OptionAwareTrait
         return array_flip($this->arrOptionKeyMap)[$normalizedKey];
     }
 
-
-    /**
-     * @param string $option
-     *
-     * @return $this
-     */
-    public function addOption(string $option): self
-    {
-        $this->addNormalizedOption($this->getNormalizedOptionKey($option));
-        return $this;
-    }
-
     /**
      * @param string $option
      * @return $this
@@ -155,59 +208,6 @@ trait OptionAwareTrait
         return $this;
     }
 
-
-    /**
-     * @param array $arrOption
-     *
-     * @return $this
-     */
-    public function addOption_List(array $arrOption): self
-    {
-        $arrOption = array_filter($arrOption, function ($value) {
-            return $this->validateOption($value);
-        });
-        if ($this->enableNormalization) {
-            $arrNormOptions = (new Normalizer())->normalize($arrOption);
-        } else {
-            $arrNormOptions = $arrOption;
-        }
-        $this->arrOptionKeyMap = $this->arrOptionKeyMap + array_combine($arrOption, $arrNormOptions);
-        $this->arrOption = $this->arrOption + array_fill_keys($arrNormOptions, true);
-        return $this;
-    }
-
-
-    /**
-     * @param string $option
-     *
-     * @return self
-     */
-    public function removeOption(string $option): self
-    {
-        if ($this->validateOption($option)) {
-            $this->arrOption[$this->getNormalizedOptionKey($option)] = false;
-        }
-        return $this;
-    }
-
-
-    /**
-     * @param string $option
-     *
-     * @return $this
-     */
-    public function unsetOption(string $option): self
-    {
-        if ($this->validateOption($option)) {
-            $normalizedKey = $this->getNormalizedOptionKey($option);
-            unset($this->arrOption[$normalizedKey]);
-            unset($this->arrOptionKeyMap[$normalizedKey]);
-        }
-
-        return $this;
-    }
-
-
     /**
      * @param string $normalizedOption
      *
@@ -216,16 +216,5 @@ trait OptionAwareTrait
     private function hasNormalizedOption(string $normalizedOption): bool
     {
         return $this->hasNormalizedOptionKey($normalizedOption) && isset($this->arrOption[$normalizedOption]) && $this->arrOption[$normalizedOption] === true;
-    }
-
-
-    /**
-     * @param string $option
-     *
-     * @return bool
-     */
-    public function hasOption(string $option): bool
-    {
-        return $this->hasNormalizedOption($this->getNormalizedOptionKey($option));
     }
 }

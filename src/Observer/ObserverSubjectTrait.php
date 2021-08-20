@@ -24,17 +24,6 @@ trait ObserverSubjectTrait
      */
     private $observerStorage;
 
-
-    private function getObserverStorage()
-    {
-        if (!$this->observerStorage) {
-            $this->observerStorage = new ObserverStorage();
-        }
-
-        return $this->observerStorage;
-    }
-
-
     /**
      * @param SplObserver $observer
      *
@@ -47,6 +36,14 @@ trait ObserverSubjectTrait
         return $this;
     }
 
+    private function getObserverStorage()
+    {
+        if (!$this->observerStorage) {
+            $this->observerStorage = new ObserverStorage();
+        }
+
+        return $this->observerStorage;
+    }
 
     /**
      * @param SplObserver $observer

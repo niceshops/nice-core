@@ -40,37 +40,42 @@ class ObjectPropertyFinder
         $this->object = $object;
     }
 
-
     /**
-     * @return array|object
+     * @param array $arr
+     *
+     * @return ObjectPropertyFinder
+     * @throws CoreException
      */
-    public function getObject()
+    public static function createFromArray(array $arr)
     {
-        return $this->object;
+        return new self($arr);
     }
 
+    /**
+     * @param object $object
+     *
+     * @return ObjectPropertyFinder
+     * @throws CoreException
+     */
+    public static function createFromObject(object $object)
+    {
+        return new self($object);
+    }
 
     /**
-     * @return array
+     * @param null $key
+     * @param null $defaultValue
+     *
+     * @return mixed
      */
-    public function getKeys(): array
+    public function __invoke($key = null, $defaultValue = null)
     {
-        $object = $this->getObject();
-        if (is_array($object)) {
-            $arrKey = array_keys($object);
-        } elseif ($object instanceof stdClass) {
-            $arrKey = array_keys((array)$object);
-        } elseif ($object instanceof ArrayObject) {
-            $arrKey = array_keys($object->getArrayCopy());
-        } elseif (method_exists($object, "toArray")) {
-            $arrKey = array_keys($object->toArray());
-        } else {
-            $arrKey = array_keys(get_object_vars($object));
+        if (null === $key) {
+            return $this->getValues();
         }
 
-        return $arrKey;
+        return $this->getValue($key, $defaultValue);
     }
-
 
     /**
      * @return array
@@ -86,21 +91,9 @@ class ObjectPropertyFinder
         return $arrValue;
     }
 
-
     /**
      * @param int|string $key
-     *
-     * @return bool
-     */
-    public function hasKey($key): bool
-    {
-        return in_array($key, $this->getKeys(), true);
-    }
-
-
-    /**
-     * @param int|string $key
-     * @param null       $defaultValue
+     * @param null $defaultValue
      *
      * @return mixed
      */
@@ -127,43 +120,42 @@ class ObjectPropertyFinder
         return get_object_vars($object)[$key] ?? $defaultValue;
     }
 
+    /**
+     * @param int|string $key
+     *
+     * @return bool
+     */
+    public function hasKey($key): bool
+    {
+        return in_array($key, $this->getKeys(), true);
+    }
 
     /**
-     * @param null $key
-     * @param null $defaultValue
-     *
-     * @return mixed
+     * @return array
      */
-    public function __invoke($key = null, $defaultValue = null)
+    public function getKeys(): array
     {
-        if (null === $key) {
-            return $this->getValues();
+        $object = $this->getObject();
+        if (is_array($object)) {
+            $arrKey = array_keys($object);
+        } elseif ($object instanceof stdClass) {
+            $arrKey = array_keys((array)$object);
+        } elseif ($object instanceof ArrayObject) {
+            $arrKey = array_keys($object->getArrayCopy());
+        } elseif (method_exists($object, "toArray")) {
+            $arrKey = array_keys($object->toArray());
+        } else {
+            $arrKey = array_keys(get_object_vars($object));
         }
 
-        return $this->getValue($key, $defaultValue);
+        return $arrKey;
     }
 
-
     /**
-     * @param array $arr
-     *
-     * @return ObjectPropertyFinder
-     * @throws CoreException
+     * @return array|object
      */
-    public static function createFromArray(array $arr)
+    public function getObject()
     {
-        return new self($arr);
-    }
-
-
-    /**
-     * @param object $object
-     *
-     * @return ObjectPropertyFinder
-     * @throws CoreException
-     */
-    public static function createFromObject(object $object)
-    {
-        return new self($object);
+        return $this->object;
     }
 }

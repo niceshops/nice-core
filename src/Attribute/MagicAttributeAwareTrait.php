@@ -25,6 +25,16 @@ trait MagicAttributeAwareTrait
         return null;
     }
 
+    /**
+     * @param $name
+     *
+     * @return mixed
+     * @throws CoreException
+     */
+    public function __get($name)
+    {
+        return $this->getAttribute($name);
+    }
 
     /**
      * @param $name
@@ -36,17 +46,5 @@ trait MagicAttributeAwareTrait
     public function __set($name, $value)
     {
         return $this->setAttribute($name, $value);
-    }
-
-
-    /**
-     * @param $name
-     *
-     * @return mixed
-     * @throws CoreException
-     */
-    public function __get($name)
-    {
-        return $this->getAttribute($name);
     }
 }

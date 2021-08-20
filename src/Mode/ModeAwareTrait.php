@@ -21,18 +21,18 @@ trait ModeAwareTrait
     private $mode = null;
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getMode(): string
     {
         return $this->mode;
     }
 
     /**
-    * @param string $mode
-    *
-    * @return $this
-    */
+     * @param string $mode
+     *
+     * @return $this
+     */
     public function setMode(?string $mode)
     {
         $this->mode = $mode;
@@ -40,8 +40,8 @@ trait ModeAwareTrait
     }
 
     /**
-    * @return bool
-    */
+     * @return bool
+     */
     public function hasMode(): bool
     {
         return $this->mode !== null;

@@ -24,19 +24,19 @@ trait CompositeComponentTrait
      */
     private $arrComponent;
 
-
     /**
-     * @return ArrayObject
+     * @param $component
+     *
+     * @return $this
      */
-    protected function getComponent_List()
+    protected function addComponent($component)
     {
-        if (is_null($this->arrComponent)) {
-            $this->arrComponent = new ArrayObject();
+        if (!$this->hasComponent($component)) {
+            $this->getComponent_List()->append($component);
         }
 
-        return $this->arrComponent;
+        return $this;
     }
-
 
     /**
      * @param $component
@@ -54,21 +54,17 @@ trait CompositeComponentTrait
         return false;
     }
 
-
     /**
-     * @param $component
-     *
-     * @return $this
+     * @return ArrayObject
      */
-    protected function addComponent($component)
+    protected function getComponent_List()
     {
-        if (!$this->hasComponent($component)) {
-            $this->getComponent_List()->append($component);
+        if (is_null($this->arrComponent)) {
+            $this->arrComponent = new ArrayObject();
         }
 
-        return $this;
+        return $this->arrComponent;
     }
-
 
     /**
      * @param $component

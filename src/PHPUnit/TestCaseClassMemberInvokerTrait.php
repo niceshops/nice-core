@@ -21,9 +21,9 @@ trait TestCaseClassMemberInvokerTrait
     /**
      * @param object $object
      * @param string $methodName Private or protected method
-     * @param array  $parameter
+     * @param array $parameter
      *
-     * @param array  $anotherParams
+     * @param array $anotherParams
      *
      * @return mixed
      */
@@ -55,27 +55,6 @@ trait TestCaseClassMemberInvokerTrait
         return null;
     }
 
-
-    /**
-     * @param object $object
-     *
-     * @param string $name
-     *
-     * @return ReflectionProperty
-     * @throws ReflectionException
-     */
-    protected function getReflectionProperty_for_Object(object $object, string $name): ReflectionProperty
-    {
-        if ($object instanceof MockObject) {
-            $property = new ReflectionProperty(get_parent_class($object), $name);
-        } else {
-            $property = new ReflectionProperty($object, $name);
-        }
-
-        return $property;
-    }
-
-
     /**
      * @param        $object
      * @param string $name
@@ -97,6 +76,24 @@ trait TestCaseClassMemberInvokerTrait
         }
     }
 
+    /**
+     * @param object $object
+     *
+     * @param string $name
+     *
+     * @return ReflectionProperty
+     * @throws ReflectionException
+     */
+    protected function getReflectionProperty_for_Object(object $object, string $name): ReflectionProperty
+    {
+        if ($object instanceof MockObject) {
+            $property = new ReflectionProperty(get_parent_class($object), $name);
+        } else {
+            $property = new ReflectionProperty($object, $name);
+        }
+
+        return $property;
+    }
 
     /**
      * @param        $object

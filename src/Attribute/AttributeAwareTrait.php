@@ -21,54 +21,29 @@ use Pars\Pattern\Normalizer\Normalizer;
 trait AttributeAwareTrait
 {
     /**
+     * @var bool
+     */
+    protected $enableNormalization = false;
+    /**
      * @var array
      */
     private $arrAttribute = [];
-
-
     /**
      * @var array
      */
     private $arrLockedAttribute = [];
-
-
     /**
      * @var array
      */
     private $arrAttributeKeyMap = [];
 
-    /**
-     * @var bool
-     */
-    protected $enableNormalization = false;
-
-    /**
-     * @param string $key
-     *
-     * @return string
-     */
-    private function normalizeAttributeKey(string $key): string
+    public function setAttributes(array $attributes)
     {
-        if ($this->enableNormalization) {
-            $normalizedKey = (new Normalizer())->normalize($key);
-        } else {
-            $normalizedKey = $key;
+        foreach ($attributes as $key => $val) {
+            $this->setAttribute($key, $val);
         }
-        $this->arrAttributeKeyMap[$key] = $normalizedKey;
-        return $normalizedKey;
+        return $this;
     }
-
-
-    /**
-     * @param $normalizedKey
-     *
-     * @return bool
-     */
-    private function isAttributeLocked($normalizedKey): bool
-    {
-        return isset($this->arrLockedAttribute[$normalizedKey]);
-    }
-
 
     /**
      * @param string $key
@@ -97,14 +72,59 @@ trait AttributeAwareTrait
         return $this;
     }
 
-    public function setAttributes(array $attributes)
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function getNormalizedKey(string $key): string
     {
-        foreach ($attributes as $key => $val) {
-            $this->setAttribute($key, $val);
-        }
-        return $this;
+        return $this->hasNormalizedKey($key) ? $this->arrAttributeKeyMap[$key] : $this->normalizeAttributeKey($key);
     }
 
+    /**
+     * @param string $normalizedKey
+     * @return bool
+     */
+    private function hasNormalizedKey(string $normalizedKey): bool
+    {
+        return isset($this->arrAttributeKeyMap[$normalizedKey]);
+    }
+
+    /**
+     * @param string $key
+     *
+     * @return string
+     */
+    private function normalizeAttributeKey(string $key): string
+    {
+        if ($this->enableNormalization) {
+            $normalizedKey = (new Normalizer())->normalize($key);
+        } else {
+            $normalizedKey = $key;
+        }
+        $this->arrAttributeKeyMap[$key] = $normalizedKey;
+        return $normalizedKey;
+    }
+
+    /**
+     * @param $normalizedKey
+     *
+     * @return bool
+     */
+    private function isAttributeLocked($normalizedKey): bool
+    {
+        return isset($this->arrLockedAttribute[$normalizedKey]);
+    }
+
+    /**
+     * @param string $normalizedKey
+     *
+     * @return mixed
+     */
+    private function hasAttributeByNormalizedKey(string $normalizedKey)
+    {
+        return isset($this->arrAttribute[$normalizedKey]);
+    }
 
     /**
      * @param string $key
@@ -119,35 +139,6 @@ trait AttributeAwareTrait
             $normalizedKey = $key;
         }
         return $this->hasAttributeByNormalizedKey($normalizedKey);
-    }
-
-
-    /**
-     * @param string $normalizedKey
-     *
-     * @return mixed
-     */
-    private function hasAttributeByNormalizedKey(string $normalizedKey)
-    {
-        return isset($this->arrAttribute[$normalizedKey]);
-    }
-
-    /**
-     * @param string $normalizedKey
-     * @return bool
-     */
-    private function hasNormalizedKey(string $normalizedKey): bool
-    {
-        return isset($this->arrAttributeKeyMap[$normalizedKey]);
-    }
-
-    /**
-     * @param string $key
-     * @return string
-     */
-    private function getNormalizedKey(string $key): string
-    {
-        return $this->hasNormalizedKey($key) ? $this->arrAttributeKeyMap[$key] : $this->normalizeAttributeKey($key);
     }
 
     /**
@@ -222,6 +213,10 @@ trait AttributeAwareTrait
         return $this;
     }
 
+    public function getAttribute_Keys(): array
+    {
+        return array_keys($this->getAttribute_List());
+    }
 
     /**
      * @return array
@@ -240,12 +235,6 @@ trait AttributeAwareTrait
 
         return $arrAttribute;
     }
-
-    public function getAttribute_Keys(): array
-    {
-        return array_keys($this->getAttribute_List());
-    }
-
 
     /**
      * Alias for AttributeTrait::getAttribute_List()

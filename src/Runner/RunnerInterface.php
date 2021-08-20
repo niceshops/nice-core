@@ -20,9 +20,9 @@ interface RunnerInterface
 
 
     /**
-     * @param int  $from
+     * @param int $from
      * @param null $length
-     * @param int  $stepWidth
+     * @param int $stepWidth
      *
      * @return Generator
      */
@@ -30,9 +30,9 @@ interface RunnerInterface
 
 
     /**
-     * @param int  $from
+     * @param int $from
      * @param null $to
-     * @param int  $stepWidth
+     * @param int $stepWidth
      *
      * @return Generator
      */

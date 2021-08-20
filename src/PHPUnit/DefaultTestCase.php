@@ -17,6 +17,16 @@ class DefaultTestCase extends TestCase
 
 
     /**
+     * @param string $expected trait classname
+     * @param string|object $actual object or classname
+     * @param string $message
+     */
+    public static function assertUseTrait(string $expected, $actual, string $message = '')
+    {
+        self::assertTrue(self::classUseTrait($actual, $expected), $message);
+    }
+
+    /**
      * @param        $object
      * @param string $trait
      *
@@ -36,16 +46,5 @@ class DefaultTestCase extends TestCase
         }
 
         return $classUseTrait;
-    }
-
-
-    /**
-     * @param string        $expected trait classname
-     * @param string|object $actual   object or classname
-     * @param string        $message
-     */
-    public static function assertUseTrait(string $expected, $actual, string $message = '')
-    {
-        self::assertTrue(self::classUseTrait($actual, $expected), $message);
     }
 }

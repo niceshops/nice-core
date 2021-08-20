@@ -42,6 +42,39 @@ class TraversableRunner implements RunnerInterface
         $this->traversable =& $traversable;
     }
 
+    /**
+     * @param int $from
+     * @param int $length
+     * @param int $stepWidth
+     *
+     * @return Generator
+     */
+    public function runFrom($from = 0, $length = null, $stepWidth = 1)
+    {
+        $count = $this->getCount();
+        $from = $this->normalizeRunFrom($from);
+        if ($stepWidth < 1) {
+            $stepWidth = 1;
+        }
+
+        if (is_null($length)) {
+            $length = $count;
+        } else {
+            if ($length < 0) {
+                $length = $count + ($length % $count);
+            }
+        }
+        if ($length > $count - $from) {
+            $length = $count - $from;
+        }
+
+        $to = $from + ($length * $stepWidth - 1);
+        if ($stepWidth > 1 && $to > $count - 1) {
+            $to = null;
+        }
+
+        return $this->runFromTo($from, $to, $stepWidth);
+    }
 
     /**
      * @return int
@@ -68,7 +101,6 @@ class TraversableRunner implements RunnerInterface
 
         return $count;
     }
-
 
     /**
      * @param $from
@@ -97,7 +129,6 @@ class TraversableRunner implements RunnerInterface
 
         return $from;
     }
-
 
     /**
      * @param int $from
@@ -151,40 +182,5 @@ class TraversableRunner implements RunnerInterface
 
             yield $val;
         }
-    }
-
-
-    /**
-     * @param int $from
-     * @param int $length
-     * @param int $stepWidth
-     *
-     * @return Generator
-     */
-    public function runFrom($from = 0, $length = null, $stepWidth = 1)
-    {
-        $count = $this->getCount();
-        $from = $this->normalizeRunFrom($from);
-        if ($stepWidth < 1) {
-            $stepWidth = 1;
-        }
-
-        if (is_null($length)) {
-            $length = $count;
-        } else {
-            if ($length < 0) {
-                $length = $count + ($length % $count);
-            }
-        }
-        if ($length > $count - $from) {
-            $length = $count - $from;
-        }
-
-        $to = $from + ($length * $stepWidth - 1);
-        if ($stepWidth > 1 && $to > $count - 1) {
-            $to = null;
-        }
-
-        return $this->runFromTo($from, $to, $stepWidth);
     }
 }

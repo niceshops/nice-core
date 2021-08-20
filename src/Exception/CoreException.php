@@ -9,13 +9,14 @@ declare(strict_types=1);
 
 namespace Pars\Pattern\Exception;
 
+use Exception;
 use Throwable;
 
 /**
  * Class Exception
  * @package Pars\Pattern
  */
-class CoreException extends \Exception
+class CoreException extends Exception
 {
     const BASIC_EXCEPTION_CODE = 1000;
     const API_EXCEPTION_CODE = 2000;
