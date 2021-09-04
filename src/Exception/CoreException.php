@@ -36,6 +36,14 @@ class CoreException extends Exception
         parent::__construct($message, $code, $previous);
     }
 
+    /**
+     * @param Throwable $e
+     * @return static
+     */
+    public static function fromException(Throwable $e)
+    {
+        return new static($e->getMessage(), $e->getCode(), $e);
+    }
 
     /**
      * @param string $message
