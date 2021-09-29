@@ -48,6 +48,11 @@ interface OptionAwareInterface
      */
     public function removeOption(string $option);
 
+    /**
+     * @param string $option
+     * @return mixed
+     */
+    public function restoreOption(string $option);
 
     /**
      * @param string $option

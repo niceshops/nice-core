@@ -16,12 +16,12 @@ namespace Pars\Pattern\Mode;
 interface ModeAwareInterface
 {
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMode(): string;
+    public function getMode(): ?string;
 
     /**
-     * @param string $mode
+     * @param string|null $mode
      *
      * @return $this
      */

@@ -99,6 +99,19 @@ trait OptionAwareTrait
     /**
      * @param string $option
      *
+     * @return self
+     */
+    public function restoreOption(string $option): self
+    {
+        if ($this->validateOption($option) && isset($this->arrOption[$this->getNormalizedOptionKey($option)])) {
+            $this->arrOption[$this->getNormalizedOptionKey($option)] = true;
+        }
+        return $this;
+    }
+
+    /**
+     * @param string $option
+     *
      * @return $this
      */
     public function unsetOption(string $option): self

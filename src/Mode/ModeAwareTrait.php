@@ -16,20 +16,20 @@ namespace Pars\Pattern\Mode;
 trait ModeAwareTrait
 {
     /**
-     * @var string
+     * @var string|null
      */
-    private $mode = null;
+    private ?string $mode = null;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getMode(): string
+    public function getMode(): ?string
     {
         return $this->mode;
     }
 
     /**
-     * @param string $mode
+     * @param string|null $mode
      *
      * @return $this
      */
