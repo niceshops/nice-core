@@ -25,8 +25,6 @@ jobs:
         run: composer validate
       - name: Install dependencies
         run: composer install --no-dev --no-interaction
-      - name: Clean files
-        run: rm -rf node_modules & rm -rf yarn.lock & rm -rf composer.json & rm -rf package.json & rm -rf mkdocs.yml & rm -rf test & rm -rf docs & rm -rf phpcs.xml & rm -rf phpunit.xml.dist & rm -rf modules/*/node_modules & rm -rf modules/*/test & rm -rf modules/*/mkdocs.yml & rm -rf modules/*/mkdocs.yml & rm -rf modules/*/composer.lock & rm -rf modules/*/yarn.lock & rm -rf modules/*/package.json & rm -rf modules/*/composer.json & rm -rf modules/*/phpunit.xml.dist
       - name: Zip
         uses: papeloto/action-zip@v1
         with:
@@ -56,3 +54,14 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}
           path: ${{ github.event.repository.name }}.zip
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.dispatch_token }}
+          repository: PARS-Framework/pars-master
+          event-type: push-submodule
+          client-payload: '{
+          "repo": "${{ github.event.repository.name }}",
+          "tag": "${{ steps.tag_version.outputs.new_tag }}",
+          "msg": "${{ github.event.head_commit.message }}"
+          }'
