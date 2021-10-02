@@ -269,13 +269,6 @@ class AttributeAwareTraitTest extends DefaultTestCase
     {
         if ($arrException) {
             $this->expectException($arrException[0]);
-            if (!empty($arrException[1])) {
-                if (substr($arrException[1], 0, 1) === substr($arrException[1], -1)) {
-                    $this->expectExceptionMessageMatches($arrException[1]);
-                } else {
-                    $this->expectExceptionMessage($arrException[1]);
-                }
-            }
         }
 
         foreach ($arrAttribute as $arrVal) {
