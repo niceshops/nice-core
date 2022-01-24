@@ -251,7 +251,7 @@ class AbstractCompositeTest extends DefaultTestCase
             {
                 foreach ($this->getComponent_List() as $bean) {
                     if (method_exists($bean, "setData")) {
-                        $bean->setDataAttribute($name, $value);
+                        $bean->setData($name, $value);
                     }
                 }
 
