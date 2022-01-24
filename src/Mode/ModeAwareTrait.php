@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+/**
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
+ */
+
+namespace Pars\Pattern\Mode;
+
+/**
+ * Class ModeAwareTrait
+ * @package Pars\Pattern\Mode
+ */
+trait ModeAwareTrait
+{
+    /**
+     * @var string|null
+     */
+    private ?string $mode = null;
+
+    /**
+     * @return string|null
+     */
+    public function getMode(): ?string
+    {
+        return $this->mode;
+    }
+
+    /**
+     * @param string|null $mode
+     *
+     * @return $this
+     */
+    public function setMode(?string $mode)
+    {
+        $this->mode = $mode;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMode(): bool
+    {
+        return $this->mode !== null;
+    }
+}

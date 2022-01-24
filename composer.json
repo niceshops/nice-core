@@ -1,29 +1,38 @@
 {
-    "name": "niceshops/nice-core",
-    "description": "Niceshops Core Components",
+    "name": "pars/pars-patterns",
+    "description": "PARS Basic Pattern",
     "license" : "BSD-3-Clause",
     "require": {
         "php": ">=7.2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.2"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "NiceshopsDev\\NiceCore\\": "src/"
+            "Pars\\Pattern\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NiceshopsDev\\NiceCore\\": "test/"
+            "ParsTest\\Pattern\\": "test/"
         }
+    },
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "classmap-authoritative": true
     },
     "scripts": {
-        "test" : "vendor/bin/phpunit"
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "check": [
+            "@cs-check",
+            "@test"
+        ]
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
     }
 }

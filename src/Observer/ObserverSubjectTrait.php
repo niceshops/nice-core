@@ -1,39 +1,29 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Observer;
+namespace Pars\Pattern\Observer;
 
-
-use NiceshopsDev\NiceCore\Composite\AbstractComposite;
+use Pars\Pattern\Composite\AbstractComposite;
 use SplObserver;
 
 /**
  * Trait ObserverSubjectTrait
- * @package NiceshopsDev\NiceCore\Observer
+ * @package Pars\Pattern\Observer
  */
 trait ObserverSubjectTrait
 {
-    
+
     /**
      * @var AbstractComposite
      */
     private $observerStorage;
-    
-    
-    private function getObserverStorage()
-    {
-        if (!$this->observerStorage) {
-            $this->observerStorage = new ObserverStorage();
-        }
-        
-        return $this->observerStorage;
-    }
-    
-    
+
     /**
      * @param SplObserver $observer
      *
@@ -42,11 +32,19 @@ trait ObserverSubjectTrait
     public function attach(SplObserver $observer)
     {
         $this->getObserverStorage()->addObserver($observer);
-        
+
         return $this;
     }
-    
-    
+
+    private function getObserverStorage()
+    {
+        if (!$this->observerStorage) {
+            $this->observerStorage = new ObserverStorage();
+        }
+
+        return $this->observerStorage;
+    }
+
     /**
      * @param SplObserver $observer
      *
@@ -55,11 +53,11 @@ trait ObserverSubjectTrait
     public function detach(SplObserver $observer)
     {
         $this->getObserverStorage()->removeObserver($observer);
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @return $this
      */
@@ -72,7 +70,7 @@ trait ObserverSubjectTrait
             /** @noinspection PhpParamsInspection */
             $observer->update($this);
         }
-        
+
         return $this;
     }
 }

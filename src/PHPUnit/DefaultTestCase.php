@@ -1,20 +1,31 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\PHPUnit;
+namespace Pars\Pattern\PHPUnit;
 
 use PHPUnit\Framework\TestCase;
 
 class DefaultTestCase extends TestCase
 {
-    
     use TestCaseClassMemberInvokerTrait;
-    
-    
+
+
+    /**
+     * @param string $expected trait classname
+     * @param string|object $actual object or classname
+     * @param string $message
+     */
+    public static function assertUseTrait(string $expected, $actual, string $message = '')
+    {
+        self::assertTrue(self::classUseTrait($actual, $expected), $message);
+    }
+
     /**
      * @param        $object
      * @param string $trait
@@ -33,18 +44,7 @@ class DefaultTestCase extends TestCase
                 break;
             }
         }
-        
+
         return $classUseTrait;
-    }
-    
-    
-    /**
-     * @param string        $expected trait classname
-     * @param string|object $actual   object or classname
-     * @param string        $message
-     */
-    public static function assertUseTrait(string $expected, $actual, string $message = '')
-    {
-        self::assertTrue(self::classUseTrait($actual, $expected), $message);
     }
 }

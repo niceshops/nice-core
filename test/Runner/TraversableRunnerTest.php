@@ -1,51 +1,54 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Runner;
+namespace ParsTest\Pattern\Runner;
 
 use Generator;
-use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
+use Pars\Pattern\Runner\TraversableRunner;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  TraversableRunner
- * @uses                TraversableRunner
- * @package             NiceshopsDev\NiceCore
+ * @coversDefaultClass  \Pars\Pattern\Runner\TraversableRunner
+ * @uses                \Pars\Pattern\Runner\TraversableRunner
+ * @package             Pars\Pattern
  */
 class TraversableRunnerTest extends DefaultTestCase
 {
-    
-    
+
+
     /**
      * @var TraversableRunner|MockObject
      */
     protected $object;
-    
-    
+
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->getMockBuilder(TraversableRunner::class)->disableOriginalConstructor()->getMockForAbstractClass();
     }
-    
-    
+
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
-    
-    
+
+
     /**
      * @group integration
      * @small
@@ -55,8 +58,8 @@ class TraversableRunnerTest extends DefaultTestCase
         $this->assertTrue(class_exists(TraversableRunner::class), "Class Exists");
         $this->assertTrue(is_a($this->object, TraversableRunner::class), "Mock Object is set");
     }
-    
-    
+
+
     /**
      * @param            $data
      *
@@ -68,21 +71,21 @@ class TraversableRunnerTest extends DefaultTestCase
     {
         return $this->getMockBuilder(TraversableRunner::class)->setConstructorArgs([&$data])->setMethods($arrMethod)->getMockForAbstractClass();
     }
-    
-    
+
+
     /**
      * @return Generator
      */
     public function runFromToDataProvider()
     {
-        $arrData = array(
-            array("key" => 0, "odd" => true),
-            array("key" => 1, "odd" => false),
-            array("key" => 2, "odd" => true),
-            array("key" => 3, "odd" => false),
-            array("key" => 4, "odd" => true),
-        );
-        
+        $arrData = [
+            ["key" => 0, "odd" => true],
+            ["key" => 1, "odd" => false],
+            ["key" => 2, "odd" => true],
+            ["key" => 3, "odd" => false],
+            ["key" => 4, "odd" => true],
+        ];
+
         yield [$arrData, null, null, 1, $arrData];
         yield [$arrData, 2, null, 1, array_slice($arrData, 2)];
         yield [$arrData, 7, null, 1, array_slice($arrData, 2)];
@@ -104,14 +107,14 @@ class TraversableRunnerTest extends DefaultTestCase
         yield [$arrData, 5, -5, 1, array_slice($arrData, 0, 1)];      //  just the first element
         yield [$arrData, 4, 4, 1, array_slice($arrData, -1)];         //  just the last element
         yield [$arrData, -1, null, 1, array_slice($arrData, -1)];     //  just the last element
-        
+
         // stepWith = 2
         yield [$arrData, null, null, 2, [$arrData[0], $arrData[2], $arrData[4]]];
         yield [$arrData, 2, null, 2, [$arrData[2], $arrData[4]]];
         yield [$arrData, null, 2, 2, [$arrData[0], $arrData[2]]];
         yield [$arrData, 2, 2, 2, [$arrData[2]]];
         yield [$arrData, 2, 4, 2, [$arrData[2], $arrData[4]]];
-        
+
         // stepWith = 3
         yield [$arrData, null, null, 3, [$arrData[0], $arrData[3]]];
         yield [$arrData, 2, null, 3, [$arrData[2]]];
@@ -119,15 +122,15 @@ class TraversableRunnerTest extends DefaultTestCase
         yield [$arrData, 2, 2, 3, [$arrData[2]]];
         yield [$arrData, 2, 4, 3, [$arrData[2]]];
     }
-    
-    
+
+
     /**
      * @group        unit
      * @small
      *
      * @dataProvider runFromToDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Runner\TraversableRunner::runFromTo
+     * @covers       \Pars\Pattern\Runner\TraversableRunner::runFromTo
      *
      * @param array $arrData
      * @param int|null        $from
@@ -138,30 +141,30 @@ class TraversableRunnerTest extends DefaultTestCase
     public function testRunFromTo(array $arrData, ?int $from, ?int $to, int $stepWidth, $expectedValue)
     {
         $this->object = $this->createRunnerMock($arrData);
-        
+
         $arrActual = [];
-        
+
         foreach ($this->object->runFromTo($from, $to, $stepWidth) as $key => $bean) {
             $arrActual[$key] = $bean;
         }
-        
+
         $this->assertSame($expectedValue, $arrActual);
     }
-    
-    
+
+
     /**
      * @return Generator
      */
     public function runFromDataProvider()
     {
-        $arrData = array(
-            array("key" => 0, "odd" => true),
-            array("key" => 1, "odd" => false),
-            array("key" => 2, "odd" => true),
-            array("key" => 3, "odd" => false),
-            array("key" => 4, "odd" => true),
-        );
-        
+        $arrData = [
+            ["key" => 0, "odd" => true],
+            ["key" => 1, "odd" => false],
+            ["key" => 2, "odd" => true],
+            ["key" => 3, "odd" => false],
+            ["key" => 4, "odd" => true],
+        ];
+
         yield [$arrData, null, null, 1, $arrData];                //  all elements;
         yield [$arrData, 0, null, 1, $arrData];                   //  all elements
         yield [$arrData, 5, null, 1, $arrData];                   //  all elements
@@ -172,7 +175,7 @@ class TraversableRunnerTest extends DefaultTestCase
         yield [$arrData, 0, -7, 1, array_slice($arrData, 0, -2)];
         yield [$arrData, 0, 7, 1, $arrData];
         yield [$arrData, 0, 10, 1, $arrData];
-        
+
         yield [$arrData, null, null, 2, [$arrData[0], $arrData[2], $arrData[4]]];
         yield [$arrData, null, 2, 2, [$arrData[0], $arrData[2]]];
         yield [$arrData, null, 20, 2, [$arrData[0], $arrData[2], $arrData[4]]];
@@ -182,15 +185,15 @@ class TraversableRunnerTest extends DefaultTestCase
         yield [$arrData, 0, -2, 2, [$arrData[0], $arrData[2], $arrData[4]]];
         yield [$arrData, 0, -3, 2, [$arrData[0], $arrData[2]]];
     }
-    
-    
+
+
     /**
      * @group        unit
      * @small
      *
      * @dataProvider runFromDataProvider
      *
-     * @covers       \NiceshopsDev\NiceCore\Runner\TraversableRunner::runFrom
+     * @covers       \Pars\Pattern\Runner\TraversableRunner::runFrom
      *
      * @param array    $arrData
      * @param int|null $from
@@ -201,22 +204,22 @@ class TraversableRunnerTest extends DefaultTestCase
     public function testRunFrom(array $arrData, ?int $from, ?int $length, ?int $stepWidth, $expectedValue)
     {
         $this->object = $this->createRunnerMock($arrData);
-        
+
         $arrActual = [];
-        
+
         foreach ($this->object->runFrom($from, $length, $stepWidth) as $key => $bean) {
             $arrActual[$key] = $bean;
         }
-        
+
         $this->assertSame($expectedValue, $arrActual);
     }
-    
-    
+
+
     /**
      * @group unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Runner\TraversableRunner::runFrom
+     * @covers \Pars\Pattern\Runner\TraversableRunner::runFrom
      */
     public function testDataPassedByReference()
     {
@@ -225,20 +228,20 @@ class TraversableRunnerTest extends DefaultTestCase
             ["name" => "bar"],
         ];
         $this->object = $this->createRunnerMock($arrData);
-        
+
         //  add an entry
         $arrData[] = ["name" => "baz"];
-        
+
         $arrActual = [];
-        foreach($this->object->runFrom() as $key => $val) {
+        foreach ($this->object->runFrom() as $key => $val) {
             $arrActual[$key] = $val;
         }
         $this->assertCount(count($arrData), $arrActual);
-        
+
         //  remove an entry
         array_shift($arrData);
         $arrActual = [];
-        foreach($this->object->runFrom() as $key => $val) {
+        foreach ($this->object->runFrom() as $key => $val) {
             $arrActual[$key] = $val;
         }
         $this->assertCount(count($arrData), $arrActual);

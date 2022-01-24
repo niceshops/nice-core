@@ -1,28 +1,27 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Observer;
+namespace Pars\Pattern\Observer;
 
-
-use NiceshopsDev\NiceCore\Composite\CompositeComponentTrait;
+use Pars\Pattern\Composite\CompositeComponentTrait;
 use SplObserver;
 use SplSubject;
 
 /**
  * Class SubjectModifiedObserver
- * @package NiceshopsDev\NiceCore
+ * @package Pars\Pattern
  */
 abstract class AbstractSubjectModifiedObserver implements SplObserver
 {
-    
-    
     use CompositeComponentTrait;
-    
-    
+
+
     /**
      * @param SplSubject $subject
      *
@@ -35,19 +34,19 @@ abstract class AbstractSubjectModifiedObserver implements SplObserver
          */
         return $this->addComponent($subject);
     }
-    
-    
+
+
     /**
      * @return $this
      */
     public function reset()
     {
         $this->getComponent_List()->exchangeArray([]);
-        
+
         return $this;
     }
-    
-    
+
+
     /**
      * @return SplSubject[]
      */

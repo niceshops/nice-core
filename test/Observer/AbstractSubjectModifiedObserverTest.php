@@ -1,52 +1,55 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Observer;
+namespace ParsTest\Pattern\Observer;
 
 use ArrayObject;
-use NiceshopsDev\NiceCore\PHPUnit\DefaultTestCase;
+use Pars\Pattern\Observer\AbstractSubjectModifiedObserver;
+use Pars\Pattern\PHPUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SplSubject;
 
 /**
  * UnitTest class for TraversableRunner
- * @coversDefaultClass  AbstractSubjectModifiedObserver
- * @uses                AbstractSubjectModifiedObserver
- * @package             NiceshopsDev\NiceCore
+ * @coversDefaultClass  \Pars\Pattern\Observer\AbstractSubjectModifiedObserver
+ * @uses                \Pars\Pattern\Observer\AbstractSubjectModifiedObserver
+ * @package             Pars\Pattern
  */
 class AbstractSubjectModifiedObserverTest extends DefaultTestCase
 {
-    
-    
+
+
     /**
      * @var AbstractSubjectModifiedObserver|MockObject
      */
     protected $object;
-    
-    
+
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->getMockBuilder(AbstractSubjectModifiedObserver::class)->disableOriginalConstructor()->getMockForAbstractClass();
     }
-    
-    
+
+
     /**
      * Tears down the fixture, for example, closes a network connection.
      * This method is called after a test is executed.
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
     }
-    
-    
+
+
     /**
      * @group integration
      * @small
@@ -56,36 +59,36 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
         $this->assertTrue(class_exists(AbstractSubjectModifiedObserver::class), "Class Exists");
         $this->assertTrue(is_a($this->object, AbstractSubjectModifiedObserver::class), "Mock Object is set");
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Observer\AbstractSubjectModifiedObserver::update
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::update
      */
     public function testUpdate()
     {
         $this->object = $this->getMockBuilder(AbstractSubjectModifiedObserver::class)->disableOriginalConstructor()->setMethods(
             ["addComponent"]
         )->getMockForAbstractClass();
-    
+
         /**
          * @var SplSubject|MockObject $subject
          */
         $subject = $this->getMockBuilder(SplSubject::class)->getMock();
-        
+
         $this->object->expects($this->once())->method("addComponent")->with(...[$subject])->willReturn($this->object);
-        
+
         $this->assertSame($this->object, $this->object->update($subject));
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Observer\AbstractSubjectModifiedObserver::reset
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::reset
      */
     public function testReset()
     {
@@ -93,19 +96,19 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
             ["getComponent_List"]
         )->getMockForAbstractClass();
         $componentList = $this->getMockBuilder(ArrayObject::class)->setMethods(["exchangeArray"])->getMock();
-        
+
         $this->object->expects($this->once())->method("getComponent_List")->willReturn($componentList);
         $componentList->expects($this->once())->method("exchangeArray")->with(...[[]]);
-        
+
         $this->assertSame($this->object, $this->object->reset());
     }
-    
-    
+
+
     /**
      * @group  unit
      * @small
      *
-     * @covers \NiceshopsDev\NiceCore\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
+     * @covers \Pars\Pattern\Observer\AbstractSubjectModifiedObserver::getModifiedSubject_List
      */
     public function testGetModifiedSubject_List()
     {
@@ -114,10 +117,10 @@ class AbstractSubjectModifiedObserverTest extends DefaultTestCase
         )->getMockForAbstractClass();
         $componentList = $this->getMockBuilder(ArrayObject::class)->setMethods(["getArrayCopy"])->getMock();
         $arrComponentList = ["foo", "bar", "baz"];
-        
+
         $this->object->expects($this->once())->method("getComponent_List")->willReturn($componentList);
         $componentList->expects($this->once())->method("getArrayCopy")->willReturn($arrComponentList);
-        
+
         $this->assertSame($arrComponentList, $this->invokeMethod($this->object, "getModifiedSubject_List"));
     }
 }

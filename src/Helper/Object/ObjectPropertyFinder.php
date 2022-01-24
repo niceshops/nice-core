@@ -1,53 +1,135 @@
 <?php
+
 declare(strict_types=1);
+
 /**
- * @see       https://github.com/niceshops/nice-core for the canonical source repository
- * @license   https://github.com/niceshops/nice-core/blob/master/LICENSE BSD 3-Clause License
+ * @see       https://github.com/Pars/pars-patterns for the canonical source repository
+ * @license   https://github.com/Pars/pars-patterns/blob/master/LICENSE BSD 3-Clause License
  */
 
-namespace NiceshopsDev\NiceCore\Helper\Object;
-
+namespace Pars\Pattern\Helper\Object;
 
 use ArrayAccess;
 use ArrayObject;
-use NiceshopsDev\NiceCore\Exception;
+use InvalidArgumentException;
+use Pars\Pattern\Exception\CoreException;
 use stdClass;
 
 class ObjectPropertyFinder
 {
-    
+
     /**
      * @var array|object
      */
     private $object;
-    
-    
+
+
     /**
      * ObjectPropertyFinder constructor.
      *
      * @param array|object $object
      *
-     * @throws Exception    passed value is not an object or array
+     * @throws CoreException    passed value is not an object or array
      */
     public function __construct($object)
     {
         if (!is_object($object) && !is_array($object)) {
-            throw new Exception("Passed value is not an object or array!");
+            throw new InvalidArgumentException("Passed value is not an object or array!");
         }
-        
+
         $this->object = $object;
     }
-    
-    
+
     /**
-     * @return array|object
+     * @param array $arr
+     *
+     * @return ObjectPropertyFinder
+     * @throws CoreException
      */
-    public function getObject()
+    public static function createFromArray(array $arr)
     {
-        return $this->object;
+        return new self($arr);
     }
-    
-    
+
+    /**
+     * @param object $object
+     *
+     * @return ObjectPropertyFinder
+     * @throws CoreException
+     */
+    public static function createFromObject(object $object)
+    {
+        return new self($object);
+    }
+
+    /**
+     * @param null $key
+     * @param null $defaultValue
+     *
+     * @return mixed
+     */
+    public function __invoke($key = null, $defaultValue = null)
+    {
+        if (null === $key) {
+            return $this->getValues();
+        }
+
+        return $this->getValue($key, $defaultValue);
+    }
+
+    /**
+     * @return array
+     */
+    public function getValues(): array
+    {
+        $arrValue = [];
+
+        foreach ($this->getKeys() as $key) {
+            $arrValue[$key] = $this->getValue($key);
+        }
+
+        return $arrValue;
+    }
+
+    /**
+     * @param int|string $key
+     * @param null $defaultValue
+     *
+     * @return mixed
+     */
+    public function getValue($key, $defaultValue = null)
+    {
+        $object = $this->getObject();
+
+        if (!$this->hasKey($key)) {
+            return $defaultValue;
+        }
+
+        if ((is_array($object) || $object instanceof ArrayObject || $object instanceof stdClass)) {
+            return ((array)$object)[$key] ?? $defaultValue;
+        }
+
+        if ($object instanceof ArrayAccess) {
+            return $object->offsetGet($key) ?? $defaultValue;
+        }
+
+        if (method_exists($object, "getData")) {
+            return $object->getData($key) ?? $defaultValue;
+        }
+
+        return get_object_vars($object)[$key] ?? $defaultValue;
+    }
+
+    /**
+     * @param int|string $key
+     *
+     * @return bool
+     */
+    public function hasKey($key): bool
+    {
+        return in_array($key, $this->getKeys(), true);
+    }
+
     /**
      * @return array
      */
@@ -65,104 +147,15 @@ class ObjectPropertyFinder
         } else {
             $arrKey = array_keys(get_object_vars($object));
         }
-        
+
         return $arrKey;
     }
-    
-    
+
     /**
-     * @return array
+     * @return array|object
      */
-    public function getValues(): array
+    public function getObject()
     {
-        $arrValue = [];
-        
-        foreach ($this->getKeys() as $key) {
-            $arrValue[$key] = $this->getValue($key);
-        }
-        
-        return $arrValue;
+        return $this->object;
     }
-    
-    
-    /**
-     * @param int|string $key
-     *
-     * @return bool
-     */
-    public function hasKey($key): bool
-    {
-        return in_array($key, $this->getKeys(), true);
-    }
-    
-    
-    /**
-     * @param int|string $key
-     * @param null       $defaultValue
-     *
-     * @return mixed
-     */
-    public function getValue($key, $defaultValue = null)
-    {
-        $object = $this->getObject();
-        
-        if (!$this->hasKey($key)) {
-            return $defaultValue;
-        }
-        
-        if ((is_array($object) || $object instanceof ArrayObject || $object instanceof stdClass)) {
-            return ((array)$object)[$key] ?? $defaultValue;
-        }
-        
-        if ($object instanceof ArrayAccess) {
-            return $object->offsetGet($key) ?? $defaultValue;
-        }
-        
-        if (method_exists($object, "getData")) {
-            return $object->getData($key) ?? $defaultValue;
-        }
-        
-        return get_object_vars($object)[$key] ?? $defaultValue;
-    }
-    
-    
-    /**
-     * @param null $key
-     * @param null $defaultValue
-     *
-     * @return mixed
-     */
-    public function __invoke($key = null, $defaultValue = null)
-    {
-        if (null === $key) {
-            return $this->getValues();
-        }
-        
-        return $this->getValue($key, $defaultValue);
-    }
-    
-    
-    /**
-     * @param array $arr
-     *
-     * @return ObjectPropertyFinder
-     * @throws Exception
-     */
-    public static function createFromArray(array $arr)
-    {
-        return new self($arr);
-    }
-    
-    
-    /**
-     * @param object $object
-     *
-     * @return ObjectPropertyFinder
-     * @throws Exception
-     */
-    public static function createFromObject(object $object)
-    {
-        return new self($object);
-    }
-    
 }

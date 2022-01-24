@@ -7,14 +7,14 @@
          beStrictAboutChangesToGlobalState="true"
 >
     <testsuites>
-        <testsuite name="nice-core">
+        <testsuite name="pars-patterns">
             <directory>./test/</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist>
-            <directory>./src/</directory>
-        </whitelist>
-    </filter>
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </coverage>
 </phpunit>
